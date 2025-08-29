@@ -2,6 +2,24 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
 
+## 🎨 Styling with Tailwind CSS
+
+This project is configured with **Tailwind CSS v3.4** for utility-first styling, along with:
+
+- **Prettier with Tailwind plugin** for automatic class sorting
+- **VS Code intellisense support** for Tailwind classes
+- **Typography plugin** for beautiful prose styling
+
+### Using Tailwind Classes
+
+Simply add Tailwind utility classes to your HTML templates:
+
+```html
+<div class="rounded-lg bg-blue-500 p-4 text-white">Hello Tailwind!</div>
+```
+
+The VS Code extension will provide autocompletion and class suggestions as you type.
+
 ## Development server
 
 To start a local development server, run:
