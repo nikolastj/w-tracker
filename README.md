@@ -2,23 +2,70 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
 
-## 🎨 Styling with Tailwind CSS
+## 🎨 Styling Framework
 
-This project is configured with **Tailwind CSS v3.4** for utility-first styling, along with:
+This project combines the best of both worlds with **Angular Material** and **Tailwind CSS**:
 
-- **Prettier with Tailwind plugin** for automatic class sorting
-- **VS Code intellisense support** for Tailwind classes
+### 🔴 Angular Material (Angular-First Theme)
+
+- **Material Design 3** components with Angular's signature red/blue color palette
+- **Complete component library** (buttons, cards, toolbars, icons, etc.)
+- **Built-in animations** and responsive design
+- **Accessibility features** built-in
+
+### 🎯 Tailwind CSS v3.4
+
+- **Utility-first CSS** for custom layouts and spacing
+- **Prettier plugin** for automatic class sorting
+- **VS Code intellisense** support for autocompletion
 - **Typography plugin** for beautiful prose styling
+- **Configured to work seamlessly** with Angular Material
 
-### Using Tailwind Classes
+### Using Both Together
 
-Simply add Tailwind utility classes to your HTML templates:
+**Angular Material Components:**
 
 ```html
-<div class="rounded-lg bg-blue-500 p-4 text-white">Hello Tailwind!</div>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Material Card</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>Content here</mat-card-content>
+</mat-card>
 ```
 
-The VS Code extension will provide autocompletion and class suggestions as you type.
+**Tailwind Utilities:**
+
+```html
+<div class="rounded-lg bg-blue-500 p-4 text-white">Custom styling</div>
+```
+
+**Combined Approach:**
+
+```html
+<mat-card class="mb-6 transform transition hover:scale-105">
+  <mat-card-content class="text-center"> Best of both worlds! </mat-card-content>
+</mat-card>
+```
+
+The project uses Tailwind with `preflight: false` to avoid conflicts with Material's base styles.
+
+### 📦 Available Material Components
+
+The following Material modules are ready to use:
+
+- `MatButtonModule` - Buttons (raised, stroked, fab, icon)
+- `MatCardModule` - Cards with headers, content, actions
+- `MatIconModule` - Material icons from Google Fonts
+- `MatToolbarModule` - Navigation toolbars
+
+To add more components, import the needed modules in your component:
+
+```typescript
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+// Add to component imports array
+```
 
 ## Development server
 

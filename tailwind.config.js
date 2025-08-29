@@ -5,4 +5,8 @@ module.exports = {
     extend: {},
   },
   plugins: [require('@tailwindcss/typography')],
+  corePlugins: {
+    // Disable Tailwind's preflight to avoid conflicts with Angular Material
+    preflight: false,
+  },
 };
