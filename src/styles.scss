@@ -19,10 +19,10 @@ html {
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
+  // Color scheme will be automatically set by ColorSchemeService based on browser preference
+  // You can manually override by uncommenting one of these lines:
+  // color-scheme: light;  // Force light theme
+  // color-scheme: dark;   // Force dark theme
 
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these
@@ -68,6 +68,30 @@ body {
 
 .dashboard-text {
   color: light-dark(#6b7280, #d1d5db);
+}
+
+/* Animation system migration - CSS-based animations for Material components */
+/* Basic transitions for Material Design components */
+// mat-card,
+// mat-form-field,
+// mat-button,
+// .mat-mdc-button,
+// .mat-mdc-form-field {
+//   transition:
+//     box-shadow 0.3s ease,
+//     background-color 0.3s ease,
+//     color 0.3s ease;
+// }
+
+// mat-card:hover {
+//   transition: box-shadow 0.3s ease;
+// }
+
+/* Global animation disable utility class for testing/bootstrapping */
+.no-animation,
+.no-animation * {
+  animation: none !important;
+  transition: none !important;
 }
 /* You can add global styles to this file, and also import other style files */
 
