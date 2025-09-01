@@ -3,10 +3,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [MatButtonModule, MatCardModule, MatIconModule, MatToolbarModule],
+  imports: [MatButtonModule, MatCardModule, MatIconModule, MatToolbarModule, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
