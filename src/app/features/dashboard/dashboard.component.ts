@@ -23,7 +23,7 @@ import { User } from '../../auth/models/auth.models';
     MatMenuModule,
   ],
   template: `
-    <div class="min-h-screen bg-gray-50">
+    <div class="dashboard-background min-h-screen">
       <mat-toolbar color="primary" class="shadow-sm">
         <span class="flex-1">W-Tracker Dashboard</span>
 
@@ -33,10 +33,10 @@ import { User } from '../../auth/models/auth.models';
 
         <mat-menu #userMenu="matMenu">
           <div class="border-b px-4 py-2">
-            <p class="text-sm font-medium text-gray-900" *ngIf="currentUser$ | async as user">
+            <p class="dashboard-heading text-sm font-medium" *ngIf="currentUser$ | async as user">
               {{ user.firstName }} {{ user.lastName }}
             </p>
-            <p class="text-xs text-gray-500" *ngIf="currentUser$ | async as user">
+            <p class="dashboard-text text-xs" *ngIf="currentUser$ | async as user">
               {{ user.email }}
             </p>
           </div>
@@ -49,30 +49,30 @@ import { User } from '../../auth/models/auth.models';
 
       <div class="container mx-auto px-4 py-8">
         <div class="mb-8">
-          <h1 class="mb-2 text-3xl font-bold text-gray-900">
+          <h1 class="dashboard-heading mb-2 text-3xl font-bold">
             Welcome back<span *ngIf="currentUser$ | async as user">, {{ user.firstName }}!</span>
           </h1>
-          <p class="text-gray-600">
+          <p class="dashboard-text">
             This is your dashboard. Here you can manage your work tracking activities.
           </p>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <mat-card class="p-6">
-            <h3 class="mb-2 text-lg font-semibold text-gray-900">Quick Stats</h3>
-            <p class="text-gray-600">View your work tracking statistics and progress.</p>
+          <mat-card class="dashboard-card p-6">
+            <h3 class="dashboard-heading mb-2 text-lg font-semibold">Quick Stats</h3>
+            <p class="dashboard-text">View your work tracking statistics and progress.</p>
             <button mat-raised-button color="primary" class="mt-4">View Stats</button>
           </mat-card>
 
-          <mat-card class="p-6">
-            <h3 class="mb-2 text-lg font-semibold text-gray-900">Recent Activity</h3>
-            <p class="text-gray-600">Check your latest work tracking entries.</p>
+          <mat-card class="dashboard-card p-6">
+            <h3 class="dashboard-heading mb-2 text-lg font-semibold">Recent Activity</h3>
+            <p class="dashboard-text">Check your latest work tracking entries.</p>
             <button mat-raised-button color="primary" class="mt-4">View Activity</button>
           </mat-card>
 
-          <mat-card class="p-6">
-            <h3 class="mb-2 text-lg font-semibold text-gray-900">Start Tracking</h3>
-            <p class="text-gray-600">Begin tracking your work time for today.</p>
+          <mat-card class="dashboard-card p-6">
+            <h3 class="dashboard-heading mb-2 text-lg font-semibold">Start Tracking</h3>
+            <p class="dashboard-text">Begin tracking your work time for today.</p>
             <button mat-raised-button color="primary" class="mt-4">Start Timer</button>
           </mat-card>
         </div>

@@ -30,19 +30,17 @@ import { AuthService } from '../../services/auth.service';
   ],
   template: `
     <div
-      class="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8"
+      class="auth-background flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
     >
       <div class="w-full max-w-md space-y-8">
         <div>
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Reset your password
-          </h2>
-          <p class="mt-2 text-center text-sm text-gray-600">
+          <h2 class="auth-heading mt-6 text-center text-3xl font-extrabold">Reset your password</h2>
+          <p class="auth-text mt-2 text-center text-sm">
             Enter your email address and we'll send you a link to reset your password.
           </p>
         </div>
 
-        <mat-card class="p-6" *ngIf="!emailSent">
+        <mat-card class="auth-card p-6" *ngIf="!emailSent">
           <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit()" class="space-y-6">
             <div>
               <mat-form-field appearance="outline" class="w-full">
@@ -86,12 +84,12 @@ import { AuthService } from '../../services/auth.service';
         </mat-card>
 
         <!-- Success message card -->
-        <mat-card class="p-6 text-center" *ngIf="emailSent">
+        <mat-card class="auth-card p-6 text-center" *ngIf="emailSent">
           <div class="mb-4">
             <mat-icon class="text-6xl text-green-500">check_circle</mat-icon>
           </div>
-          <h3 class="mb-2 text-lg font-medium text-gray-900">Reset link sent!</h3>
-          <p class="mb-6 text-sm text-gray-600">
+          <h3 class="auth-heading mb-2 text-lg font-medium">Reset link sent!</h3>
+          <p class="auth-text mb-6 text-sm">
             We've sent a password reset link to <strong>{{ submittedEmail }}</strong
             >. Please check your email and follow the instructions to reset your password.
           </p>

@@ -31,14 +31,14 @@ import { LoginRequest } from '../../models/auth.models';
   ],
   template: `
     <div
-      class="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8"
+      class="auth-background flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
     >
       <div class="w-full max-w-md space-y-8">
         <div>
-          <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 class="auth-heading mt-6 text-center text-3xl font-extrabold">
             Sign in to your account
           </h2>
-          <p class="mt-2 text-center text-sm text-gray-600">
+          <p class="auth-text mt-2 text-center text-sm">
             Or
             <a
               routerLink="/auth/register"
@@ -49,7 +49,7 @@ import { LoginRequest } from '../../models/auth.models';
           </p>
         </div>
 
-        <mat-card class="p-6">
+        <mat-card class="auth-card p-6">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
             <div>
               <mat-form-field appearance="outline" class="w-full">
