@@ -43,7 +43,12 @@ export class AuthService {
       tap((response) => {
         if (response.token) {
           this.setAuthState({
-            ...response.user,
+            id: response.user.id,
+            username: response.user.username,
+            email: response.user.email,
+            firstName: response.user.firstName,
+            lastName: response.user.lastName,
+            bio: response.user.bio,
             token: response.token,
           });
         }
@@ -129,9 +134,9 @@ export class AuthService {
         id: authData.id,
         username: authData.username,
         email: authData.email,
-        firstName: authData.firstName,
-        lastName: authData.lastName,
-        bio: authData.bio,
+        firstName: authData.firstName || '',
+        lastName: authData.lastName || '',
+        bio: authData.bio || '',
       },
       token: authData.token,
       isAuthenticated: true,

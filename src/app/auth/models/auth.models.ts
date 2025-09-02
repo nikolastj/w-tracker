@@ -16,6 +16,9 @@ export interface LoginResponse {
   id: number;
   username: string;
   email: string;
+  firstName?: string;
+  lastName?: string;
+  bio?: string;
   token: string;
 }
 
@@ -32,7 +35,7 @@ export interface RegisterRequest {
 
 export interface RegisterResponse {
   user: User;
-  token?: string;
+  token: string;
 }
 
 export interface AuthState {
