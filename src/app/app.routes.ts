@@ -2,25 +2,30 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/guards/auth.guard';
 
 export const routes: Routes = [
-  // Default route redirect to login
   {
     path: '',
-    redirectTo: '/auth/login',
+    redirectTo: '/dashboard',
     pathMatch: 'full',
   },
 
-  // Lazy loaded authentication module
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
 
-  // Protected routes (will add dashboard and other features later)
+  // Protected routes with shared layout
   {
-    path: 'dashboard',
+    path: '',
     canActivate: [AuthGuard],
     loadComponent: () =>
-      import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      import('./shared/components/app-layout.component').then((m) => m.AppLayoutComponent),
+    children: [
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+      },
+    ],
   },
 
   // Wildcard route - should be last
