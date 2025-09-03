@@ -29,89 +29,85 @@ import { AuthService } from '../../services/auth.service';
     MatSnackBarModule,
   ],
   template: `
-    <div
-      class="auth-background flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
-    >
-      <div class="w-full max-w-md space-y-8">
-        <div>
-          <h2 class="auth-heading mt-6 text-center text-3xl font-extrabold">Reset your password</h2>
-          <p class="auth-text mt-2 text-center text-sm">
-            Enter your email address and we'll send you a link to reset your password.
-          </p>
-        </div>
+    <div class="w-full max-w-md space-y-8">
+      <div>
+        <h2 class="auth-heading mt-6 text-center text-3xl font-extrabold">Reset your password</h2>
+        <p class="auth-text mt-2 text-center text-sm">
+          Enter your email address and we'll send you a link to reset your password.
+        </p>
+      </div>
 
-        <mat-card class="auth-card p-6" *ngIf="!emailSent">
-          <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit()" class="space-y-6">
-            <div>
-              <mat-form-field appearance="outline" class="w-full">
-                <mat-label>Email Address</mat-label>
-                <input
-                  matInput
-                  type="email"
-                  formControlName="email"
-                  placeholder="Enter your email address"
-                  autocomplete="email"
-                />
-                <mat-icon matSuffix>email</mat-icon>
-                <mat-error *ngIf="forgotPasswordForm.get('email')?.hasError('required')">
-                  Email is required
-                </mat-error>
-                <mat-error *ngIf="forgotPasswordForm.get('email')?.hasError('email')">
-                  Please enter a valid email address
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div>
-              <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                class="w-full"
-                [disabled]="forgotPasswordForm.invalid || isLoading"
-              >
-                <mat-spinner *ngIf="isLoading" diameter="20" class="mr-2"></mat-spinner>
-                Send Reset Link
-              </button>
-            </div>
-
-            <div class="text-center">
-              <a routerLink="/auth/login" class="font-medium text-indigo-600 hover:text-indigo-500">
-                Back to sign in
-              </a>
-            </div>
-          </form>
-        </mat-card>
-
-        <!-- Success message card -->
-        <mat-card class="auth-card p-6 text-center" *ngIf="emailSent">
-          <div class="mb-4">
-            <mat-icon class="text-6xl text-green-500">check_circle</mat-icon>
+      <mat-card class="auth-card p-6" *ngIf="!emailSent">
+        <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          <div>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                placeholder="Enter your email address"
+                autocomplete="email"
+              />
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="forgotPasswordForm.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="forgotPasswordForm.get('email')?.hasError('email')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
           </div>
-          <h3 class="auth-heading mb-2 text-lg font-medium">Reset link sent!</h3>
-          <p class="auth-text mb-6 text-sm">
-            We've sent a password reset link to <strong>{{ submittedEmail }}</strong
-            >. Please check your email and follow the instructions to reset your password.
-          </p>
-          <div class="space-y-3">
+
+          <div>
             <button
               mat-raised-button
               color="primary"
-              (click)="resendEmail()"
-              [disabled]="isLoading"
+              type="submit"
               class="w-full"
+              [disabled]="forgotPasswordForm.invalid || isLoading"
             >
               <mat-spinner *ngIf="isLoading" diameter="20" class="mr-2"></mat-spinner>
-              Resend Email
+              Send Reset Link
             </button>
-            <div>
-              <a routerLink="/auth/login" class="font-medium text-indigo-600 hover:text-indigo-500">
-                Back to sign in
-              </a>
-            </div>
           </div>
-        </mat-card>
-      </div>
+
+          <div class="text-center">
+            <a routerLink="/auth/login" class="font-medium text-indigo-600 hover:text-indigo-500">
+              Back to sign in
+            </a>
+          </div>
+        </form>
+      </mat-card>
+
+      <!-- Success message card -->
+      <mat-card class="auth-card p-6 text-center" *ngIf="emailSent">
+        <div class="mb-4">
+          <mat-icon class="text-6xl text-green-500">check_circle</mat-icon>
+        </div>
+        <h3 class="auth-heading mb-2 text-lg font-medium">Reset link sent!</h3>
+        <p class="auth-text mb-6 text-sm">
+          We've sent a password reset link to <strong>{{ submittedEmail }}</strong
+          >. Please check your email and follow the instructions to reset your password.
+        </p>
+        <div class="space-y-3">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="resendEmail()"
+            [disabled]="isLoading"
+            class="w-full"
+          >
+            <mat-spinner *ngIf="isLoading" diameter="20" class="mr-2"></mat-spinner>
+            Resend Email
+          </button>
+          <div>
+            <a routerLink="/auth/login" class="font-medium text-indigo-600 hover:text-indigo-500">
+              Back to sign in
+            </a>
+          </div>
+        </div>
+      </mat-card>
     </div>
   `,
 })

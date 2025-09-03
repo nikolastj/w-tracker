@@ -9,9 +9,11 @@ import { AppHeaderComponent } from './app-header.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, AppHeaderComponent],
   template: `
-    <div class="dashboard-background min-h-screen">
+    <div class="dashboard-background flex h-screen flex-col">
       <app-header></app-header>
-      <router-outlet></router-outlet>
+      <div class="flex-1 overflow-y-auto">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   `,
   styles: [],

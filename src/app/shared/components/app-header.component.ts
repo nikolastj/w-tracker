@@ -41,8 +41,6 @@ import { User } from '../../auth/models/auth.models';
   styles: [
     `
       mat-toolbar {
-        position: sticky;
-        top: 0;
         z-index: 10;
       }
     `,
