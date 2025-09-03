@@ -154,19 +154,9 @@ export class ForgotPasswordComponent implements OnDestroy {
           this.isLoading = false;
           this.emailSent = true;
           this.submittedEmail = email;
-          this.snackBar.open('Password reset email sent successfully!', 'Close', {
-            duration: 3000,
-            panelClass: ['success-snackbar'],
-          });
         },
-        error: (error) => {
+        error: () => {
           this.isLoading = false;
-          const errorMessage =
-            error.error?.message || 'Failed to send reset email. Please try again.';
-          this.snackBar.open(errorMessage, 'Close', {
-            duration: 5000,
-            panelClass: ['error-snackbar'],
-          });
         },
       });
   }

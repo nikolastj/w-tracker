@@ -10,6 +10,7 @@ import {
   RegisterResponse,
   AuthState,
 } from '../models/auth.models';
+import { handleNotifications } from '../../core';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,11 @@ export class AuthService {
       tap((response) => {
         this.setAuthState(response);
       }),
+      handleNotifications({
+        successMessage: 'Login successful!',
+        errorMessage: 'Login failed. Please try again.',
+        redirectOnSuccess: '/dashboard',
+      }),
     );
   }
 
@@ -52,6 +58,11 @@ export class AuthService {
             token: response.token,
           });
         }
+      }),
+      handleNotifications({
+        successMessage: 'Account created successfully!',
+        errorMessage: 'Registration failed. Please try again.',
+        redirectOnSuccess: '/auth/login',
       }),
     );
   }
@@ -73,7 +84,12 @@ export class AuthService {
   }
 
   requestPasswordReset(email: string): Observable<any> {
-    return this.http.post(`${this.API_URL}/auth/forgot-password`, { email });
+    return this.http.post(`${this.API_URL}/auth/forgot-password`, { email }).pipe(
+      handleNotifications({
+        successMessage: 'Password reset email sent successfully!',
+        errorMessage: 'Failed to send reset email. Please try again.',
+      }),
+    );
   }
 
   private setAuthState(authData: any): void {

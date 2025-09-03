@@ -1,14 +1,13 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
@@ -27,7 +26,6 @@ import { LoginUserForm } from '../models/login-user.form';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule,
   ],
   template: `
     <div class="w-full max-w-md space-y-8">
@@ -120,8 +118,6 @@ import { LoginUserForm } from '../models/login-user.form';
 })
 export class LoginComponent implements OnDestroy {
   private authService = inject(AuthService);
-  private router = inject(Router);
-  private snackBar = inject(MatSnackBar);
   private destroy$ = new Subject<void>();
 
   hidePassword = true;
@@ -143,21 +139,11 @@ export class LoginComponent implements OnDestroy {
         .login(credentials)
         .pipe(takeUntil(this.destroy$))
         .subscribe({
-          next: (response) => {
+          next: () => {
             this.isLoading = false;
-            this.snackBar.open('Login successful!', 'Close', {
-              duration: 3000,
-              panelClass: ['success-snackbar'],
-            });
-            this.router.navigate(['/dashboard']);
           },
-          error: (error) => {
+          error: () => {
             this.isLoading = false;
-            const errorMessage = error.error?.message || 'Login failed. Please try again.';
-            this.snackBar.open(errorMessage, 'Close', {
-              duration: 5000,
-              panelClass: ['error-snackbar'],
-            });
           },
         });
     }
