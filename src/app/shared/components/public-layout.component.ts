@@ -18,6 +18,6 @@ import { PublicHeaderComponent } from './public-header.component';
       </div>
     </div>
   `,
-  styles: [],
+  styleUrl: './shared-layout.component.scss',
 })
 export class PublicLayoutComponent {}

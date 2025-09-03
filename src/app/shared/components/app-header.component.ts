@@ -15,36 +15,34 @@ import { User } from '../../auth/models/auth.models';
   standalone: true,
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule],
   template: `
-    <mat-toolbar color="primary" class="shadow-sm">
-      <span class="flex-1">Workout-Tracker</span>
+    <div class="header-container">
+      <mat-toolbar color="primary" class="shadow-sm">
+        <span class="header-title flex-1">Workout-Tracker</span>
 
-      <button mat-icon-button [matMenuTriggerFor]="userMenu">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-
-      <mat-menu #userMenu="matMenu">
-        <div class="border-b px-4 py-2">
-          <p class="dashboard-heading text-sm font-medium" *ngIf="currentUser$ | async as user">
-            {{ user.firstName }} {{ user.lastName }}
-          </p>
-          <p class="dashboard-text text-xs" *ngIf="currentUser$ | async as user">
-            {{ user.email }}
-          </p>
+        <div class="header-actions">
+          <button mat-icon-button [matMenuTriggerFor]="userMenu">
+            <mat-icon>account_circle</mat-icon>
+          </button>
         </div>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Logout</span>
-        </button>
-      </mat-menu>
-    </mat-toolbar>
+
+        <mat-menu #userMenu="matMenu">
+          <div class="border-b px-4 py-2">
+            <p class="dashboard-heading text-sm font-medium" *ngIf="currentUser$ | async as user">
+              {{ user.firstName }} {{ user.lastName }}
+            </p>
+            <p class="dashboard-text text-xs" *ngIf="currentUser$ | async as user">
+              {{ user.email }}
+            </p>
+          </div>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </mat-toolbar>
+    </div>
   `,
-  styles: [
-    `
-      mat-toolbar {
-        z-index: 10;
-      }
-    `,
-  ],
+  styleUrl: './shared-header.component.scss',
 })
 export class AppHeaderComponent {
   private authService = inject(AuthService);

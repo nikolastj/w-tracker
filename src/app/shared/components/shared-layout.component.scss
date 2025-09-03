@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+  app-header,
+  app-public-header {
+    flex-shrink: 0;
+    height: 0;
+  }
+
+  .flex-1 {
+    height: 100vh;
+  }
+}

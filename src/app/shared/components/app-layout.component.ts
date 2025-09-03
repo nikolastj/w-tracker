@@ -16,6 +16,6 @@ import { AppHeaderComponent } from './app-header.component';
       </div>
     </div>
   `,
-  styles: [],
+  styleUrl: './shared-layout.component.scss',
 })
 export class AppLayoutComponent {}
