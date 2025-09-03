@@ -1,4 +1,8 @@
 export * from './components';
+//services
 export * from './services/muscle-data.service';
 export * from './services/cache-response.service';
+export * from './services/exercise-types.service';
+//models
 export * from './models/muscle.model';
+export * from './models/exercise-type.model';

@@ -1,5 +1,7 @@
 // Auth barrel exports
 export * from './models/auth.models';
+export * from './models/login-user.form';
+export * from './models/register-user.form';
 export * from './services/auth.service';
 export * from './guards/auth.guard';
 export * from './components/login/login.component';

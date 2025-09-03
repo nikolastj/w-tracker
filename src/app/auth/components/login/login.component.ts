@@ -1,6 +1,6 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from '../../models/auth.models';
+import { LoginUserForm } from '../../models/login-user.form';
 
 @Component({
   selector: 'app-login',
@@ -119,7 +120,6 @@ import { LoginRequest } from '../../models/auth.models';
   `,
 })
 export class LoginComponent implements OnDestroy {
-  private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
@@ -128,10 +128,7 @@ export class LoginComponent implements OnDestroy {
   hidePassword = true;
   isLoading = false;
 
-  loginForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-  });
+  loginForm = new LoginUserForm();
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -141,7 +138,7 @@ export class LoginComponent implements OnDestroy {
   onSubmit(): void {
     if (this.loginForm.valid && !this.isLoading) {
       this.isLoading = true;
-      const credentials: LoginRequest = this.loginForm.value;
+      const credentials = this.loginForm.getSubmitValue();
 
       this.authService
         .login(credentials)

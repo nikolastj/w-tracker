@@ -1,6 +1,6 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +12,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
 import { AuthService } from '../../services/auth.service';
-import { RegisterRequest } from '../../models/auth.models';
+import { RegisterUserForm } from '../../models/register-user.form';
 
 @Component({
   selector: 'app-register',
@@ -199,7 +199,6 @@ import { RegisterRequest } from '../../models/auth.models';
   `,
 })
 export class RegisterComponent implements OnDestroy {
-  private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
@@ -209,54 +208,17 @@ export class RegisterComponent implements OnDestroy {
   hideConfirmPassword = true;
   isLoading = false;
 
-  registerForm: FormGroup = this.fb.group(
-    {
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      bio: [''],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]],
-    },
-    { validators: this.passwordMatchValidator },
-  );
+  registerForm = new RegisterUserForm();
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      confirmPassword.setErrors({ passwordMismatch: true });
-      return { passwordMismatch: true };
-    } else {
-      if (confirmPassword?.hasError('passwordMismatch')) {
-        confirmPassword.setErrors(null);
-      }
-      return null;
-    }
-  }
-
   onSubmit(): void {
     if (this.registerForm.valid && !this.isLoading) {
       this.isLoading = true;
-      const formValue = this.registerForm.value;
-
-      const registerData: RegisterRequest = {
-        user: {
-          firstName: formValue.firstName,
-          lastName: formValue.lastName,
-          username: formValue.username,
-          bio: formValue.bio || '',
-          password: formValue.password,
-          email: formValue.email,
-        },
-      };
+      const registerData = this.registerForm.getSubmitValue();
 
       this.authService
         .register(registerData)
