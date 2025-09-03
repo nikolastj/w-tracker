@@ -57,10 +57,6 @@ export class AuthService {
   }
 
   logout(): void {
-    const currentUser = this.getCurrentUser();
-    if (currentUser?.username) {
-      this.clearUserCache(currentUser.username);
-    }
     this.clearAuthState();
   }
 
@@ -74,54 +70,6 @@ export class AuthService {
 
   getToken(): string | null {
     return this.authState.value.token;
-  }
-
-  getUser(): Observable<User | null> {
-    if (!this.isAuthenticated()) {
-      return of(null);
-    }
-
-    const currentUser = this.getCurrentUser();
-    if (!currentUser?.username) {
-      return of(null);
-    }
-
-    return this.getUserByUsername(currentUser.username);
-  }
-
-  getUserByUsername(username: string): Observable<User> {
-    const cachedUser = this.getCachedUser(username);
-    if (cachedUser) {
-      return of(cachedUser);
-    }
-
-    return this.http.get<User>(`${this.API_URL}/users`).pipe(
-      tap((user) => {
-        const cacheKey = `${username}_wt`;
-        localStorage.setItem(cacheKey, JSON.stringify(user));
-      }),
-    );
-  }
-
-  getCachedUser(username: string): User | null {
-    const cacheKey = `${username}_wt`;
-    const cachedData = localStorage.getItem(cacheKey);
-
-    if (cachedData) {
-      try {
-        return JSON.parse(cachedData) as User;
-      } catch (error) {
-        console.error('Failed to parse cached user data:', error);
-        localStorage.removeItem(cacheKey);
-      }
-    }
-
-    return null;
-  }
-
-  clearUserCache(username: string): void {
-    const cacheKey = `${username}_wt`;
-    localStorage.removeItem(cacheKey);
   }
 
   requestPasswordReset(email: string): Observable<any> {
