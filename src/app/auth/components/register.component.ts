@@ -11,8 +11,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
-import { AuthService } from '../../services/auth.service';
-import { RegisterUserForm } from '../../models/register-user.form';
+import { AuthService } from '../services/auth.service';
+import { RegisterUserForm } from '../models/register-user.form';
 
 @Component({
   selector: 'app-register',

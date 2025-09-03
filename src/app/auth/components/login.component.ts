@@ -11,9 +11,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
-import { AuthService } from '../../services/auth.service';
-import { LoginRequest } from '../../models/auth.models';
-import { LoginUserForm } from '../../models/login-user.form';
+import { AuthService } from '../services/auth.service';
+import { LoginUserForm } from '../models/login-user.form';
 
 @Component({
   selector: 'app-login',
