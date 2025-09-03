@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
+import { Observable } from 'rxjs';
+
+import { ColorSchemeService } from '../../core/services/color-scheme.service';
 
 @Component({
   selector: 'app-public-header',
@@ -16,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    MatDividerModule,
   ],
   template: `
     <div class="header-container">
@@ -29,6 +34,13 @@ import { MatMenuModule } from '@angular/material/menu';
         </div>
 
         <mat-menu #publicMenu="matMenu">
+          <button mat-menu-item (click)="toggleTheme()">
+            <mat-icon>{{
+              (currentTheme$ | async) === 'dark' ? 'light_mode' : 'dark_mode'
+            }}</mat-icon>
+            <span>{{ (currentTheme$ | async) === 'dark' ? 'Light Mode' : 'Dark Mode' }}</span>
+          </button>
+          <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/auth/login">
             <mat-icon>login</mat-icon>
             <span>Sign In</span>
@@ -43,4 +55,15 @@ import { MatMenuModule } from '@angular/material/menu';
   `,
   styleUrl: './shared-header.component.scss',
 })
-export class PublicHeaderComponent {}
+export class PublicHeaderComponent {
+  protected colorSchemeService = inject(ColorSchemeService);
+  protected currentTheme$: Observable<'light' | 'dark'>;
+
+  constructor() {
+    this.currentTheme$ = this.colorSchemeService.getCurrentTheme$();
+  }
+
+  toggleTheme(): void {
+    this.colorSchemeService.toggleTheme();
+  }
+}
