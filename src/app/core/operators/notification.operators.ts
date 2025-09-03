@@ -37,6 +37,8 @@ export function handleNotifications<T>(config: NotificationHandlerConfig = {}) {
         }
       }),
       catchError((error) => {
+        console.error('API Error:', error);
+
         if (showNotifications) {
           const message = extractErrorMessage(error);
           notificationService.error(message);

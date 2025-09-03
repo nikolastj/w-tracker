@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ExerciseType } from '../models/exercise-type.model';
 import { CacheResponseService } from './cache-response.service';
+import { handleNotifications } from '../../core';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,11 @@ export class ExerciseTypesService extends CacheResponseService {
 
   getExerciseTypes(): Observable<ExerciseType[]> {
     return this.getWithCache('exercise-types', {}, () =>
-      this.http.get<ExerciseType[]>(`${this.API_URL}/exercise-types`),
+      this.http.get<ExerciseType[]>(`${this.API_URL}/exercise-types`).pipe(
+        handleNotifications({
+          errorMessage: 'Failed to load exercise types. Please try again.',
+        }),
+      ),
     );
   }
 }
