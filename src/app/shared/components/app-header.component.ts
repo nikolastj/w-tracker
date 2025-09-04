@@ -8,7 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { Observable, map } from 'rxjs';
 
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthStateService } from '../../auth/services/auth-state.service';
 import { User } from '../../auth/models/auth.models';
 import { PublicHeaderComponent } from './public-header.component';
 
@@ -62,18 +62,18 @@ import { PublicHeaderComponent } from './public-header.component';
   styleUrl: './shared-header.component.scss',
 })
 export class AppHeaderComponent extends PublicHeaderComponent {
-  private authService = inject(AuthService);
+  private authStateService = inject(AuthStateService);
   private router = inject(Router);
 
   currentUser$: Observable<User | null>;
 
   constructor() {
     super();
-    this.currentUser$ = this.authService.authState$.pipe(map((authState) => authState.user));
+    this.currentUser$ = this.authStateService.authState$.pipe(map((authState) => authState.user));
   }
 
   logout(): void {
-    this.authService.logout();
+    this.authStateService.clearAuthState();
     this.router.navigate(['/auth/login']);
   }
 }

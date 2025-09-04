@@ -8,10 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import { AuthStateService } from '../services/auth-state.service';
+import { AuthApiService } from '../services/auth-api.service';
 import { LoginUserForm } from '../models/login-user.form';
+import { LoginResponse } from '../models/auth.models';
 
 @Component({
   selector: 'app-login',
@@ -117,7 +119,8 @@ import { LoginUserForm } from '../models/login-user.form';
   `,
 })
 export class LoginComponent implements OnDestroy {
-  private authService = inject(AuthService);
+  private authStateService = inject(AuthStateService);
+  private authApiService = inject(AuthApiService);
   private router = inject(Router);
   private destroy$ = new Subject<void>();
 
@@ -136,9 +139,14 @@ export class LoginComponent implements OnDestroy {
       this.isLoading = true;
       const credentials = this.loginForm.getSubmitValue();
 
-      this.authService
+      this.authApiService
         .login(credentials)
-        .pipe(takeUntil(this.destroy$))
+        .pipe(
+          tap((response: LoginResponse) => {
+            this.authStateService.setAuthState(response);
+          }),
+          takeUntil(this.destroy$),
+        )
         .subscribe({
           next: () => {
             this.isLoading = false;

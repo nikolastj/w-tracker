@@ -8,10 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import { AuthStateService } from '../services/auth-state.service';
+import { AuthApiService } from '../services/auth-api.service';
 import { RegisterUserForm } from '../models/register-user.form';
+import { RegisterResponse } from '../models/auth.models';
 
 @Component({
   selector: 'app-register',
@@ -197,7 +199,8 @@ import { RegisterUserForm } from '../models/register-user.form';
   `,
 })
 export class RegisterComponent implements OnDestroy {
-  private authService = inject(AuthService);
+  private authStateService = inject(AuthStateService);
+  private authApiService = inject(AuthApiService);
   private destroy$ = new Subject<void>();
 
   hidePassword = true;
@@ -216,9 +219,19 @@ export class RegisterComponent implements OnDestroy {
       this.isLoading = true;
       const registerData = this.registerForm.getSubmitValue();
 
-      this.authService
+      this.authApiService
         .register(registerData)
-        .pipe(takeUntil(this.destroy$))
+        .pipe(
+          tap((response: RegisterResponse) => {
+            if (response.token) {
+              this.authStateService.setAuthState({
+                ...response.user,
+                token: response.token,
+              });
+            }
+          }),
+          takeUntil(this.destroy$),
+        )
         .subscribe({
           next: () => {
             this.isLoading = false;

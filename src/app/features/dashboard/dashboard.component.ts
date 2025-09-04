@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Observable, map } from 'rxjs';
 
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthStateService } from '../../auth/services/auth-state.service';
 import { User } from '../../auth/models/auth.models';
 import { WorkoutsTimelineComponent } from './workouts-timeline.component';
 
@@ -47,11 +47,11 @@ import { WorkoutsTimelineComponent } from './workouts-timeline.component';
   `,
 })
 export class DashboardComponent {
-  private authService = inject(AuthService);
+  private authStateService = inject(AuthStateService);
 
   currentUser$: Observable<User | null>;
 
   constructor() {
-    this.currentUser$ = this.authService.authState$.pipe(map((authState) => authState.user));
+    this.currentUser$ = this.authStateService.authState$.pipe(map((authState) => authState.user));
   }
 }

@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import { AuthApiService } from '../services/auth-api.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -113,7 +113,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class ForgotPasswordComponent implements OnDestroy {
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
+  private authApiService = inject(AuthApiService);
   private snackBar = inject(MatSnackBar);
   private destroy$ = new Subject<void>();
 
@@ -146,7 +146,7 @@ export class ForgotPasswordComponent implements OnDestroy {
     this.isLoading = true;
     const email = this.forgotPasswordForm.get('email')?.value || this.submittedEmail;
 
-    this.authService
+    this.authApiService
       .requestPasswordReset(email)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
