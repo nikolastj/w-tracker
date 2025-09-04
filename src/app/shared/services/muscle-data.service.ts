@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Muscle } from '../models/muscle.model';
 import { CacheResponseService } from './cache-response.service';
 import { handleNotifications } from '../../core';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,10 @@ import { handleNotifications } from '../../core';
 export class MuscleDataService extends CacheResponseService {
   private readonly API_URL = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -21,6 +25,7 @@ export class MuscleDataService extends CacheResponseService {
       this.http.get<Muscle[]>(`${this.API_URL}/muscles`).pipe(
         handleNotifications({
           errorMessage: 'Failed to load muscle data. Please try again.',
+          notificationService: this.notificationService,
         }),
       ),
     );

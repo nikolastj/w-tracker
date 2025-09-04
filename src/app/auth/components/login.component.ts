@@ -1,7 +1,7 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -118,6 +118,7 @@ import { LoginUserForm } from '../models/login-user.form';
 })
 export class LoginComponent implements OnDestroy {
   private authService = inject(AuthService);
+  private router = inject(Router);
   private destroy$ = new Subject<void>();
 
   hidePassword = true;
@@ -141,6 +142,7 @@ export class LoginComponent implements OnDestroy {
         .subscribe({
           next: () => {
             this.isLoading = false;
+            this.router.navigate(['/dashboard']);
           },
           error: () => {
             this.isLoading = false;

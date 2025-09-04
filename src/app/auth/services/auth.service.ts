@@ -11,6 +11,7 @@ import {
   AuthState,
 } from '../models/auth.models';
 import { handleNotifications } from '../../core';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,10 @@ export class AuthService {
 
   public authState$ = this.authState.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationService,
+  ) {
     // Check for existing token on service initialization
     this.loadAuthFromStorage();
   }
@@ -39,7 +43,7 @@ export class AuthService {
       handleNotifications({
         successMessage: 'Login successful!',
         errorMessage: 'Login failed. Please try again.',
-        redirectOnSuccess: '/dashboard',
+        notificationService: this.notificationService,
       }),
     );
   }
@@ -62,7 +66,7 @@ export class AuthService {
       handleNotifications({
         successMessage: 'Account created successfully!',
         errorMessage: 'Registration failed. Please try again.',
-        redirectOnSuccess: '/auth/login',
+        notificationService: this.notificationService,
       }),
     );
   }
@@ -88,6 +92,7 @@ export class AuthService {
       handleNotifications({
         successMessage: 'Password reset email sent successfully!',
         errorMessage: 'Failed to send reset email. Please try again.',
+        notificationService: this.notificationService,
       }),
     );
   }

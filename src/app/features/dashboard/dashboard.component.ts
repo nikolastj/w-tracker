@@ -6,15 +6,15 @@ import { Observable, map } from 'rxjs';
 
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../auth/models/auth.models';
-import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
+import { WorkoutsTimelineComponent } from './workouts-timeline.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, TimelineCalendarComponent],
+  imports: [CommonModule, MatButtonModule, MatCardModule, WorkoutsTimelineComponent],
   template: `
     <div class="h-full w-full">
-      <app-timeline-calendar></app-timeline-calendar>
+      <app-workouts-timeline></app-workouts-timeline>
       <!-- <div class="mb-8">
         <h1 class="dashboard-heading mb-2 text-3xl font-bold">
           Welcome back<span *ngIf="currentUser$ | async as user">, {{ user.firstName }}!</span>

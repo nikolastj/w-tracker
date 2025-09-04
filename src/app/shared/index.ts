@@ -9,3 +9,5 @@ export * from './services/workouts.service';
 //models
 export * from './models/muscle.model';
 export * from './models/exercise-type.model';
+export * from './models/page.model';
+export * from './models/workout.model';

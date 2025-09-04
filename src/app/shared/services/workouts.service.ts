@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Page, PageResponse } from '../models/page.model';
 import { handleNotifications } from '../../core';
+import { NotificationService } from '../../core/services/notification.service';
 import { Workout } from '../models/workout.model';
 
 @Injectable({
@@ -12,7 +13,10 @@ import { Workout } from '../models/workout.model';
 export class WorkoutsService {
   private readonly API_URL = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationService,
+  ) {}
 
   getPaginatedWorkouts(pageRequest: Page): Observable<PageResponse<Workout[]>> {
     return this.http
@@ -20,6 +24,7 @@ export class WorkoutsService {
       .pipe(
         handleNotifications({
           errorMessage: 'Failed to load workouts. Please try again.',
+          notificationService: this.notificationService,
         }),
       );
   }
