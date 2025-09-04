@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, Injectable, OnInit, ViewChild, ElementRef, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
@@ -44,7 +44,7 @@ export class TimelineCalendarComponent implements OnInit {
   calendarMonths: Date[] = [];
   numberOfCalendars: number = 4;
   private monthsToLoadOnScroll: number = 4;
-  @Input() loading = false;
+  loading = input<boolean>(false);
 
   ngOnInit() {
     this.generateCalendarMonths();
@@ -57,12 +57,11 @@ export class TimelineCalendarComponent implements OnInit {
   }
 
   onScrolledToTop() {
-    this.loading = true;
     this.loadMoreHistoricalMonths();
   }
 
   private loadMoreHistoricalMonths() {
-    if (this.calendarMonths.length === 0 || !this.timelineBody || this.loading) {
+    if (this.calendarMonths.length === 0 || !this.timelineBody || this.loading()) {
       return;
     }
 

@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+
+use best coding practices and Angular way of doing things.
+try to use angular components and elements as much as possible.
+when styling use tailwind especially for utility classes as much as possible do not add scss, only when really needed.

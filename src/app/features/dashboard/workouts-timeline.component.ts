@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
 import { WorkoutsService, Page, PageResponse, Workout } from '../../shared';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-workouts-timeline',
@@ -9,13 +10,13 @@ import { WorkoutsService, Page, PageResponse, Workout } from '../../shared';
   imports: [CommonModule, TimelineCalendarComponent],
   template: `
     <div class="h-full w-full">
-      <app-timeline-calendar></app-timeline-calendar>
+      <app-timeline-calendar [loading]="loading()"></app-timeline-calendar>
     </div>
   `,
 })
 export class WorkoutsTimelineComponent implements OnInit {
   workoutsData: PageResponse<Workout[]> | null = null;
-
+  loading = signal(true);
   constructor(private workoutsService: WorkoutsService) {}
 
   ngOnInit() {
@@ -32,13 +33,17 @@ export class WorkoutsTimelineComponent implements OnInit {
       toDate: today.toISOString().split('T')[0],
     };
 
-    this.workoutsService.getPaginatedWorkouts(pageRequest).subscribe({
-      next: (data) => {
-        this.workoutsData = data;
-      },
-      error: (error) => {
-        console.error('Failed to load workouts:', error);
-      },
-    });
+    this.workoutsService
+      .getPaginatedWorkouts(pageRequest)
+      .pipe(delay(1000))
+      .subscribe({
+        next: (data) => {
+          this.workoutsData = data;
+          this.loading.set(false);
+        },
+        error: (error) => {
+          console.error('Failed to load workouts:', error);
+        },
+      });
   }
 }

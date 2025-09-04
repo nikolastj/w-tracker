@@ -1,0 +1,13 @@
+// Global animations
+.appear {
+  animation: appear 0.8s ease-in;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

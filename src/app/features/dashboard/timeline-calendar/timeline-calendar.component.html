@@ -1,6 +1,8 @@
 <div class="relative flex h-full flex-col overflow-hidden">
   <!-- Loader overlay -->
-  <app-loader *ngIf="loading" class="absolute inset-0 z-50"></app-loader>
+  @if (loading()) {
+    <app-loader class="absolute inset-0 z-50"></app-loader>
+  }
 
   <!-- Fixed top calendar days of the week -->
   <div class="timeline-header flex-shrink-0">
@@ -13,7 +15,7 @@
     appAutoScrollToBottom
     appScrollToTopDetector
     (scrolledToTop)="onScrolledToTop()"
-    class="timeline-body flex-1 overflow-y-auto"
+    class="timeline-body appear flex-1 overflow-y-auto"
   >
     <div *ngFor="let month of calendarMonths" class="flex flex-col">
       <div class="dashboard-card border-b px-6 py-4 text-center">
