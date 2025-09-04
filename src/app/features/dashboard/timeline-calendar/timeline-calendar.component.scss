@@ -1,0 +1,27 @@
+:host ::ng-deep {
+  mat-calendar {
+    mat-calendar-header {
+      display: none;
+    }
+    table tbody tr:first-child {
+      display: none;
+    }
+  }
+
+  .flex-1 mat-calendar {
+    table thead {
+      display: none;
+    }
+  }
+
+  .flex-shrink-0 mat-calendar {
+    table tbody {
+      display: none;
+    }
+  }
+
+  .mat-calendar-body-today {
+    border: none !important;
+    outline: none !important;
+  }
+}

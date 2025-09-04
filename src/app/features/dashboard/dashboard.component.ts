@@ -6,14 +6,16 @@ import { Observable, map } from 'rxjs';
 
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../auth/models/auth.models';
+import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, TimelineCalendarComponent],
   template: `
-    <div class="container mx-auto px-4 py-8">
-      <div class="mb-8">
+    <div class="h-full w-full">
+      <app-timeline-calendar></app-timeline-calendar>
+      <!-- <div class="mb-8">
         <h1 class="dashboard-heading mb-2 text-3xl font-bold">
           Welcome back<span *ngIf="currentUser$ | async as user">, {{ user.firstName }}!</span>
         </h1>
@@ -40,25 +42,9 @@ import { User } from '../../auth/models/auth.models';
           <p class="dashboard-text">Begin tracking your work time for today.</p>
           <button mat-raised-button color="primary" class="mt-4">Start Timer</button>
         </mat-card>
-      </div>
+      </div> -->
     </div>
   `,
-  styles: [
-    `
-      mat-card {
-        box-shadow:
-          0 1px 3px 0 rgba(0, 0, 0, 0.1),
-          0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      }
-
-      mat-card:hover {
-        box-shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        transition: box-shadow 0.3s ease;
-      }
-    `,
-  ],
 })
 export class DashboardComponent {
   private authService = inject(AuthService);
