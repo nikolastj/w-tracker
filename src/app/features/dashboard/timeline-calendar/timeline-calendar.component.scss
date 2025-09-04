@@ -1,27 +1,53 @@
 :host ::ng-deep {
-  mat-calendar {
-    mat-calendar-header {
+  //layout styles
+  .timeline-header mat-calendar {
+    table tbody {
       display: none;
     }
-    table tbody tr:first-child {
+    th {
+      padding-top: 4rem;
+      padding-bottom: 8px;
+    }
+    tr:first-child th {
+      width: 100%;
+      table-layout: fixed;
+    }
+    tr:first-child th {
+      width: calc(100% / 7);
+    }
+    tr:nth-child(2) {
       display: none;
     }
   }
 
-  .flex-1 mat-calendar {
+  .timeline-body mat-calendar {
     table thead {
       display: none;
     }
   }
+}
 
-  .flex-shrink-0 mat-calendar {
-    table tbody {
+:host ::ng-deep {
+  //calendar styles
+  mat-calendar {
+    mat-calendar-header {
       display: none;
+    }
+
+    td.mat-calendar-body-label {
+      padding-top: 0px !important;
+      padding-right: 0px !important;
+      padding-bottom: 0px !important;
+      visibility: hidden;
     }
   }
 
   .mat-calendar-body-today {
     border: none !important;
     outline: none !important;
+  }
+
+  .mat-calendar-content {
+    padding-bottom: 0 !important  ;
   }
 }

@@ -1,4 +1,6 @@
 export * from './components';
+//directives
+export * from './directives';
 //services
 export * from './services/muscle-data.service';
 export * from './services/cache-response.service';

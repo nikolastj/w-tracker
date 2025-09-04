@@ -1,16 +1,30 @@
-<div class="flex h-full flex-col overflow-hidden">
-  <!-- Fixed top calendar -->
-  <div class="flex-shrink-0">
-    <mat-calendar class="timeline-calendar w-full"> </mat-calendar>
+<div class="relative flex h-full flex-col overflow-hidden">
+  <!-- Loader overlay -->
+  <app-loader *ngIf="loading" class="absolute inset-0 z-50"></app-loader>
+
+  <!-- Fixed top calendar days of the week -->
+  <div class="timeline-header flex-shrink-0">
+    <mat-calendar class="w-full"> </mat-calendar>
   </div>
 
   <!-- Scrollable calendars container -->
-  <div class="flex-1 overflow-y-auto">
-    <div class="space-y-4">
-      <mat-calendar class="timeline-calendar w-full"> </mat-calendar>
-      <mat-calendar class="timeline-calendar w-full"> </mat-calendar>
-      <mat-calendar class="timeline-calendar w-full"> </mat-calendar>
-      <mat-calendar class="timeline-calendar w-full"> </mat-calendar>
+  <div
+    #timelineBody
+    appAutoScrollToBottom
+    appScrollToTopDetector
+    (scrolledToTop)="onScrolledToTop()"
+    class="timeline-body flex-1 overflow-y-auto"
+  >
+    <div *ngFor="let month of calendarMonths" class="flex flex-col">
+      <div class="dashboard-card border-b px-6 py-4 text-center">
+        <span class="dashboard-heading mr-2 text-lg font-semibold">
+          {{ getMonthName(month).month }}
+        </span>
+        <span class="dashboard-text text-base opacity-70">
+          {{ getMonthName(month).year }}
+        </span>
+      </div>
+      <mat-calendar class="w-full" [startAt]="month"> </mat-calendar>
     </div>
   </div>
 </div>
