@@ -1,12 +1,16 @@
-import { Component, Injectable, OnInit, ViewChild, ElementRef, input } from '@angular/core';
+import {
+  Component,
+  Injectable,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  input,
+  output,
+  effect,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {
-  MatNativeDateModule,
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  NativeDateAdapter,
-} from '@angular/material/core';
+import { MatNativeDateModule, DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import {
   AutoScrollToBottomDirective,
@@ -37,17 +41,24 @@ export class MondayFirstDateAdapter extends NativeDateAdapter {
   templateUrl: './timeline-calendar.component.html',
   styleUrl: './timeline-calendar.component.scss',
 })
-export class TimelineCalendarComponent implements OnInit {
+export class TimelineCalendarComponent {
   @ViewChild('timelineBody', { static: false }) timelineBody!: ElementRef;
 
-  currentMonth: Date = new Date();
   calendarMonths: Date[] = [];
-  numberOfCalendars: number = 4;
-  private monthsToLoadOnScroll: number = 4;
-  loading = input<boolean>(false);
 
-  ngOnInit() {
-    this.generateCalendarMonths();
+  loading = input<boolean>(false);
+  dateFilter = input<{ fromDate: Date; toDate: Date }>();
+  scrolledToTop = output<void>();
+
+  private previousMonthCount = 0;
+
+  constructor() {
+    effect(() => {
+      const filter = this.dateFilter();
+      if (filter?.fromDate && filter?.toDate) {
+        this.handleCalendarUpdate();
+      }
+    });
   }
 
   getMonthName(date: Date): { month: string; year: string } {
@@ -57,32 +68,32 @@ export class TimelineCalendarComponent implements OnInit {
   }
 
   onScrolledToTop() {
-    this.loadMoreHistoricalMonths();
+    if (!this.loading() && this.calendarMonths.length > 0) {
+      this.scrolledToTop.emit();
+    }
   }
 
-  private loadMoreHistoricalMonths() {
-    if (this.calendarMonths.length === 0 || !this.timelineBody || this.loading()) {
-      return;
+  private handleCalendarUpdate() {
+    const wasScrollLoad = this.calendarMonths.length > 0 && this.previousMonthCount > 0;
+
+    if (wasScrollLoad && this.timelineBody) {
+      this.preserveScrollPositionDuringUpdate();
+    } else {
+      this.generateCalendarMonths();
     }
 
-    const scrollContainer = this.timelineBody.nativeElement;
+    this.previousMonthCount = this.calendarMonths.length;
+  }
 
-    // Store current scroll state before adding new content
+  private preserveScrollPositionDuringUpdate() {
+    if (!this.timelineBody) return;
+
+    const scrollContainer = this.timelineBody.nativeElement;
     const currentScrollTop = scrollContainer.scrollTop;
     const currentScrollHeight = scrollContainer.scrollHeight;
 
-    const oldestMonth = this.calendarMonths[0];
+    this.generateCalendarMonths();
 
-    const additionalMonths: Date[] = [];
-    for (let i = 1; i <= this.monthsToLoadOnScroll; i++) {
-      const olderMonth = new Date(oldestMonth.getFullYear(), oldestMonth.getMonth() - i, 1);
-      additionalMonths.push(olderMonth);
-    }
-
-    additionalMonths.reverse();
-    this.calendarMonths = [...additionalMonths, ...this.calendarMonths];
-
-    // Wait for DOM to update, then restore scroll position
     setTimeout(() => {
       const newScrollHeight = scrollContainer.scrollHeight;
       const addedHeight = newScrollHeight - currentScrollHeight;
@@ -91,13 +102,32 @@ export class TimelineCalendarComponent implements OnInit {
   }
 
   private generateCalendarMonths() {
-    this.calendarMonths = [];
+    const filter = this.dateFilter();
+    if (!filter?.fromDate || !filter?.toDate) return;
 
-    const currentDate = new Date();
+    const startDate = filter.fromDate;
+    const endDate = filter.toDate;
 
-    for (let i = this.numberOfCalendars - 1; i >= 0; i--) {
-      const monthDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
-      this.calendarMonths.push(monthDate);
+    // Generate all months that should be in the range
+    const requiredMonths: Date[] = [];
+    const currentDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+
+    while (currentDate <= endDate) {
+      requiredMonths.push(new Date(currentDate));
+      currentDate.setMonth(currentDate.getMonth() + 1);
     }
+
+    const existingMonthKeys = new Set(
+      this.calendarMonths.map((month) => `${month.getFullYear()}-${month.getMonth()}`),
+    );
+    const newMonths = requiredMonths.filter(
+      (month) => !existingMonthKeys.has(`${month.getFullYear()}-${month.getMonth()}`),
+    );
+
+    // Keep ALL existing months (never remove previously loaded months)
+    // and add new months, then sort by date
+    this.calendarMonths = [...this.calendarMonths, ...newMonths].sort(
+      (a, b) => a.getTime() - b.getTime(),
+    );
   }
 }

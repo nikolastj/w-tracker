@@ -10,39 +10,63 @@ import { delay } from 'rxjs';
   imports: [CommonModule, TimelineCalendarComponent],
   template: `
     <div class="h-full w-full">
-      <app-timeline-calendar [loading]="loading()"></app-timeline-calendar>
+      <app-timeline-calendar
+        [loading]="loading()"
+        [dateFilter]="dateFilter()"
+        (scrolledToTop)="onScrolledToTop()"
+      >
+      </app-timeline-calendar>
     </div>
   `,
 })
 export class WorkoutsTimelineComponent implements OnInit {
-  workoutsData: PageResponse<Workout[]> | null = null;
+  workoutsData: Workout[] = [];
   loading = signal(true);
+
+  // Single filter object with Date objects
+  dateFilter = signal<{ fromDate: Date; toDate: Date }>({
+    fromDate: new Date(new Date().setMonth(new Date().getMonth() - 4)),
+    toDate: new Date(),
+  });
+
   constructor(private workoutsService: WorkoutsService) {}
 
   ngOnInit() {
-    this.loadLast4MonthsWorkouts();
+    this.loadInitData();
   }
 
-  private loadLast4MonthsWorkouts() {
-    const today = new Date();
-    const fourMonthsAgo = new Date();
-    fourMonthsAgo.setMonth(today.getMonth() - 4);
+  onScrolledToTop() {
+    if (this.loading()) return;
 
-    const pageRequest: Page = {
-      fromDate: fourMonthsAgo.toISOString().split('T')[0],
-      toDate: today.toISOString().split('T')[0],
-    };
+    const prevFromDate = this.dateFilter().fromDate;
 
+    this.dateFilter.set({
+      fromDate: new Date(prevFromDate.getFullYear(), prevFromDate.getMonth() - 4, 1),
+      toDate: prevFromDate,
+    });
+
+    this.loadWorkouts(this.dateFilter(), true);
+  }
+
+  private loadInitData() {
+    this.loadWorkouts(this.dateFilter());
+  }
+
+  private loadWorkouts(filter: Page, isPrevious = false) {
+    this.loading.set(true);
+    filter.pageSize = 90;
     this.workoutsService
-      .getPaginatedWorkouts(pageRequest)
-      .pipe(delay(1000))
+      .getPaginatedWorkouts(filter)
+      .pipe(delay(isPrevious ? 500 : 1000))
       .subscribe({
         next: (data) => {
-          this.workoutsData = data;
+          const workouts = data.data || [];
+          this.workoutsData = [...this.workoutsData, ...workouts];
           this.loading.set(false);
         },
         error: (error) => {
           console.error('Failed to load workouts:', error);
+          this.loading.set(false);
         },
       });
   }

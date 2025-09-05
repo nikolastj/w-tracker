@@ -1,8 +1,8 @@
 export interface Page {
   page?: number;
   pageSize?: number;
-  fromDate?: string;
-  toDate?: string;
+  fromDate?: string | Date;
+  toDate?: string | Date;
 }
 export interface PageResponse<T> {
   data: T[];

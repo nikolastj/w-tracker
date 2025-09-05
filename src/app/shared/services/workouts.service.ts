@@ -18,9 +18,9 @@ export class WorkoutsService {
     private notificationService: NotificationService,
   ) {}
 
-  getPaginatedWorkouts(pageRequest: Page): Observable<PageResponse<Workout[]>> {
+  getPaginatedWorkouts(pageRequest: Page): Observable<PageResponse<Workout>> {
     return this.http
-      .post<PageResponse<Workout[]>>(`${this.API_URL}/workouts/paginated`, pageRequest)
+      .post<PageResponse<Workout>>(`${this.API_URL}/workouts/paginated`, pageRequest)
       .pipe(
         handleNotifications({
           errorMessage: 'Failed to load workouts. Please try again.',
