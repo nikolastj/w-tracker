@@ -10,8 +10,8 @@ export interface ExerciseSet {
 export interface ExerciseTypeSimple {
   id: number;
   name: string;
-  description: string;
-  requisiteUsed: string;
+  description: string | null;
+  requisiteUsed: string | null;
   usesNegativeWeight: boolean;
   isCore: boolean;
 }

@@ -27,9 +27,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
           Validators.required,
         ),
         exercises: new FormArray<ExerciseInstanceForm>(
-          workout?.exercises?.map((exercise) => new ExerciseInstanceForm(exercise)) || [
-            new ExerciseInstanceForm(),
-          ],
+          workout?.exercises?.map((exercise) => new ExerciseInstanceForm(exercise)) || [],
         ),
         comment: new FormControl<string | null>(workout?.comment || ''),
         energyLevel: new FormControl<number | null>(workout?.energyLevel || null, [
