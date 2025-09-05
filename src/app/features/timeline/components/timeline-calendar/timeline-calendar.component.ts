@@ -17,7 +17,7 @@ import {
   AutoScrollToBottomDirective,
   ScrollToTopDetectorDirective,
   LoaderComponent,
-} from '../../../shared';
+} from '../../../../shared';
 
 @Injectable()
 export class MondayFirstDateAdapter extends NativeDateAdapter {
@@ -63,7 +63,6 @@ export class TimelineCalendarComponent {
     });
 
     effect(() => {
-      this.workoutDatesSet();
       if (this.calendarMonths.length > 0) {
         this.calendarMonths = [...this.calendarMonths];
       }
@@ -92,7 +91,6 @@ export class TimelineCalendarComponent {
 
   dateClass = (date: Date): string => {
     const dateStr = date.toISOString().split('T')[0];
-    console.log(this.workoutDatesSet());
     const isWorkoutDay = this.workoutDatesSet().has(dateStr);
     return isWorkoutDay ? 'workout-day' : '';
   };

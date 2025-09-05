@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
-import { WorkoutsService, Page, PageResponse, Workout } from '../../shared';
+import { WorkoutsService, Page, PageResponse, Workout } from '../../../shared';
 import { delay } from 'rxjs';
 
 @Component({
