@@ -7,10 +7,11 @@ import {
   output,
   effect,
   computed,
-  ChangeDetectorRef,
+  ViewChildren,
+  QueryList,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCalendar, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, DateAdapter, NativeDateAdapter } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import {
@@ -44,6 +45,7 @@ export class MondayFirstDateAdapter extends NativeDateAdapter {
 })
 export class TimelineCalendarComponent {
   @ViewChild('timelineBody', { static: false }) timelineBody!: ElementRef;
+  @ViewChildren(MatCalendar) calendars!: QueryList<MatCalendar<Date>>;
 
   calendarMonths: Date[] = [];
 
@@ -64,9 +66,9 @@ export class TimelineCalendarComponent {
 
     effect(() => {
       this.workoutDatesSet();
-      if (this.calendarMonths.length > 0) {
-        this.calendarMonths = [...this.calendarMonths];
-      }
+      this.calendars?.forEach((calendar) => {
+        calendar.updateTodaysDate();
+      });
     });
   }
 
@@ -92,7 +94,6 @@ export class TimelineCalendarComponent {
 
   dateClass = (date: Date): string => {
     const dateStr = date.toISOString().split('T')[0];
-    console.log(this.workoutDatesSet());
     const isWorkoutDay = this.workoutDatesSet().has(dateStr);
     return isWorkoutDay ? 'workout-day' : '';
   };
