@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectModule, NgSelectComponent } from '@ng-select/ng-select';
 import { ExerciseInstanceFormComponent } from './components/exercise-instance-form.component';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -35,7 +35,7 @@ import {
     ExerciseInstanceFormComponent,
   ],
   template: `
-    <div class="container mx-auto max-w-4xl p-6">
+    <div class="container mx-auto max-w-4xl md:p-6">
       <!-- Header -->
       <div class="mb-8 hidden md:block">
         <div class="mb-4 flex items-center gap-4">
@@ -51,7 +51,7 @@ import {
       <div class="grid gap-6">
         <!-- Workout Form -->
         @if (workoutForm) {
-          <mat-card class="p-6">
+          <mat-card class="p-3 md:p-6">
             <h2 class="mb-4 text-xl font-semibold">Exercises</h2>
 
             <!-- Exercise List -->
@@ -75,18 +75,14 @@ import {
                 @if (showExerciseSelect) {
                   <div class="flex w-full max-w-md items-center gap-2">
                     <ng-select
-                      [items]="exerciseTypes"
+                      #exerciseTypeSelect
+                      [items]="availableExerciseTypes"
                       bindLabel="name"
                       placeholder="Select an exercise type..."
                       (change)="onExerciseTypeSelected($event)"
                       [loading]="isLoading"
                       class="flex-1"
                     >
-                      @for (exerciseType of exerciseTypes; track exerciseType.id) {
-                        <ng-option [value]="exerciseType">
-                          {{ exerciseType.name }}
-                        </ng-option>
-                      }
                     </ng-select>
                     <button mat-icon-button (click)="cancelExerciseSelection()">
                       <mat-icon>close</mat-icon>
@@ -104,9 +100,6 @@ import {
                         <mat-panel-title>
                           {{ exercise.get('exerciseType')?.value?.name || 'New Exercise' }}
                         </mat-panel-title>
-                        <mat-panel-description>
-                          Click to configure this exercise
-                        </mat-panel-description>
                       </mat-expansion-panel-header>
 
                       <div class="p-4">
@@ -153,11 +146,14 @@ import {
     </div>
   `,
 })
-export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
+export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComponentDeactivate {
+  @ViewChild('exerciseTypeSelect') exerciseTypeSelect!: NgSelectComponent;
+
   exerciseTypes: ExerciseType[] = [];
   isLoading = false;
   workoutForm = new WorkoutForm();
   showExerciseSelect = false;
+  private shouldFocusSelect = false;
 
   constructor(
     private router: Router,
@@ -169,8 +165,31 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     this.loadExerciseTypes();
   }
 
+  ngAfterViewChecked(): void {
+    if (this.shouldFocusSelect && this.exerciseTypeSelect && this.showExerciseSelect) {
+      // Focus and open the dropdown
+      this.exerciseTypeSelect.focus();
+      this.exerciseTypeSelect.open();
+      this.shouldFocusSelect = false;
+    }
+  }
+
+  /**
+   * Returns exercise types that are NOT already selected in the workout
+   */
+  get availableExerciseTypes(): ExerciseType[] {
+    const selectedExerciseTypeIds = this.workoutForm.exercisesArray.controls
+      .map((exercise) => exercise.get('exerciseType')?.value?.id)
+      .filter((id) => id !== null && id !== undefined);
+
+    return this.exerciseTypes.filter(
+      (exerciseType) => !selectedExerciseTypeIds.includes(exerciseType.id),
+    );
+  }
+
   showAddExerciseDropdown(): void {
     this.showExerciseSelect = true;
+    this.shouldFocusSelect = true;
   }
 
   onExerciseTypeSelected(exerciseType: ExerciseType): void {
