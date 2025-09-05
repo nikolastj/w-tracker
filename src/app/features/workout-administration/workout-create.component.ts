@@ -12,6 +12,7 @@ import { ExerciseTypesService } from '../../shared/services/exercise-types.servi
 import { ExerciseType } from '../../shared/models/exercise-type.model';
 import { WorkoutForm } from './models/workout.form';
 import { ExerciseInstanceForm } from './models/exercise-instance.form';
+import { CanComponentDeactivate } from '../../core';
 
 @Component({
   selector: 'app-workout-create',
@@ -162,7 +163,7 @@ import { ExerciseInstanceForm } from './models/exercise-instance.form';
     </div>
   `,
 })
-export class WorkoutCreateComponent implements OnInit {
+export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   exerciseTypes: ExerciseType[] = [];
   isLoading = false;
   workoutForm = new WorkoutForm();
@@ -182,6 +183,7 @@ export class WorkoutCreateComponent implements OnInit {
   }
 
   onExerciseTypeSelected(exerciseType: ExerciseType): void {
+    this.workoutForm.markAsDirty();
     if (exerciseType) {
       const newExerciseForm = new ExerciseInstanceForm();
       newExerciseForm.patchValue({
@@ -215,5 +217,12 @@ export class WorkoutCreateComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  canDeactivate(): boolean {
+    if (!this.workoutForm.dirty) {
+      return true;
+    }
+    return false;
   }
 }

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { CanDeactivateGuard } from './core';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
       },
       {
         path: 'workout/create',
+        canDeactivate: [CanDeactivateGuard],
         loadComponent: () =>
           import('./features/workout-administration/workout-create.component').then(
             (m) => m.WorkoutCreateComponent,
