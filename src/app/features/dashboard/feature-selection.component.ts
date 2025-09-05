@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feature-selection',
@@ -47,9 +48,10 @@ import { MatIconModule } from '@angular/material/icon';
   `,
 })
 export class FeatureSelectionComponent {
+  constructor(private router: Router) {}
+
   onAddWorkout(): void {
-    // TODO: Implement navigation to add workout feature
-    console.log('Add Workout clicked');
+    this.router.navigate(['/workout/create']);
   }
 
   onViewStats(): void {

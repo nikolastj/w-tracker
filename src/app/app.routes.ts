@@ -25,6 +25,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
+      {
+        path: 'workout/create',
+        loadComponent: () =>
+          import('./features/workout-administration/workout-create.component').then(
+            (m) => m.WorkoutCreateComponent,
+          ),
+      },
     ],
   },
 

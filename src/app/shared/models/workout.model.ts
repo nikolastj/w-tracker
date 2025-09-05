@@ -31,3 +31,18 @@ export interface Workout {
   comment: string | null;
   energyLevel: number | null;
 }
+
+// Create types (with optional id properties for create/edit scenarios)
+export type CreateExerciseSet = Omit<ExerciseSet, 'id'> & {
+  id?: number;
+};
+
+export type CreateExerciseInstance = Omit<ExerciseInstance, 'id' | 'sets'> & {
+  id?: number;
+  sets: CreateExerciseSet[];
+};
+
+export type CreateWorkout = Omit<Workout, 'id' | 'exercises'> & {
+  id?: number;
+  exercises: CreateExerciseInstance[];
+};
