@@ -34,7 +34,7 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
   }
 
   get setsArray(): FormArray<ExerciseSetForm> {
-    return this.get('sets') as FormArray<ExerciseSetForm>;
+    return this.controls.sets;
   }
 
   addSet(): void {

@@ -27,31 +27,6 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
   template: `
     <div class="space-y-6">
       <!-- Exercise Info Card -->
-      <mat-card class="p-4" appearance="outlined">
-        <div class="mb-4 flex items-center justify-between">
-          <h3 class="text-lg font-medium">
-            {{ exerciseForm.get('exerciseType')?.value?.name }}
-          </h3>
-          <span class="text-sm text-gray-500"> {{ exerciseForm.setsArray.length }} sets </span>
-        </div>
-
-        <!-- Exercise Description -->
-        @if (exerciseForm.get('exerciseType')?.value?.description) {
-          <p class="mb-4 text-sm text-gray-600">
-            {{ exerciseForm.get('exerciseType')?.value?.description }}
-          </p>
-        }
-
-        <!-- Exercise Equipment -->
-        @if (exerciseForm.get('exerciseType')?.value?.requisiteUsed) {
-          <div class="mb-4 flex items-center gap-2">
-            <mat-icon class="text-gray-500">fitness_center</mat-icon>
-            <span class="text-sm text-gray-600">
-              Equipment: {{ exerciseForm.get('exerciseType')?.value?.requisiteUsed }}
-            </span>
-          </div>
-        }
-      </mat-card>
 
       <!-- Sets Section -->
       <div class="space-y-4">
@@ -83,7 +58,7 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
       </div>
 
       <!-- Exercise Comments -->
-      <div class="space-y-4">
+      <!-- <div class="space-y-4">
         <h3 class="text-lg font-medium">Comments & Notes</h3>
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Exercise Comments</mat-label>
@@ -94,10 +69,10 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
             [formControl]="exerciseForm.controls.comment"
           ></textarea>
         </mat-form-field>
-      </div>
+      </div> -->
 
       <!-- Energy Level -->
-      <div class="space-y-4">
+      <!-- <div class="space-y-4">
         <h3 class="text-lg font-medium">Energy Level</h3>
         <div class="px-4">
           <mat-slider
@@ -114,15 +89,15 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
             <span>Low Energy (1)</span>
             <span>High Energy (10)</span>
           </div>
-          @if (exerciseForm.get('energyLevel')?.value) {
+          @if (exerciseForm.controls.energyLevel.value) {
             <div class="mt-2 text-center">
               <span class="text-sm font-medium">
-                Energy Level: {{ exerciseForm.get('energyLevel')?.value }}
+                Energy Level: {{ exerciseForm.controls.energyLevel.value }}
               </span>
             </div>
           }
         </div>
-      </div>
+      </div> -->
     </div>
   `,
 })

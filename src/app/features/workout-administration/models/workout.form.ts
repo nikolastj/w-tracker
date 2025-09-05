@@ -40,7 +40,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
   }
 
   get exercisesArray(): FormArray<ExerciseInstanceForm> {
-    return this.get('exercises') as FormArray<ExerciseInstanceForm>;
+    return this.controls.exercises;
   }
 
   addExercise(): void {
@@ -65,8 +65,8 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
   }
 
   private static atLeastOneExerciseValidator: ValidatorFn = (control: AbstractControl) => {
-    const form = control as FormGroup;
-    const exercises = form.get('exercises') as FormArray;
+    const form = control as WorkoutForm;
+    const exercises = form.controls.exercises;
 
     if (!exercises || exercises.length === 0) {
       return { noExercises: true };
@@ -75,7 +75,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
     // Check if at least one exercise has a valid exercise type
     const hasValidExercise = exercises.controls.some((exerciseControl) => {
       const exerciseForm = exerciseControl as ExerciseInstanceForm;
-      return exerciseForm.get('exerciseType')?.value !== null;
+      return exerciseForm.controls.exerciseType.value !== null;
     });
 
     return hasValidExercise ? null : { noValidExercises: true };

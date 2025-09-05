@@ -8,7 +8,7 @@ export class ExerciseType {
   primaryMuscleTargeted: Muscle;
   secondaryMusclesTargeted: Muscle[];
   usesNegativeWeight: boolean;
-  variationOfExerciseId: number | null;
+  variationOfExercise: ExerciseType | null;
   isCore: boolean;
 
   constructor(
@@ -19,7 +19,7 @@ export class ExerciseType {
     primaryMuscleTargeted: Muscle,
     secondaryMusclesTargeted: Muscle[],
     usesNegativeWeight: boolean,
-    variationOfExerciseId: number | null,
+    variationOfExercise: ExerciseType | null,
     isCore: boolean,
   ) {
     this.id = id;
@@ -29,7 +29,7 @@ export class ExerciseType {
     this.primaryMuscleTargeted = primaryMuscleTargeted;
     this.secondaryMusclesTargeted = secondaryMusclesTargeted;
     this.usesNegativeWeight = usesNegativeWeight;
-    this.variationOfExerciseId = variationOfExerciseId;
+    this.variationOfExercise = variationOfExercise;
     this.isCore = isCore;
   }
 }

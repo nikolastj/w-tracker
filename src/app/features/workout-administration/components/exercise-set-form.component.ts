@@ -26,7 +26,9 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
     >
       <!-- Set Number -->
       <div class="col-span-1">
-        <span class="text-sm font-medium text-gray-600">Set {{ setForm.get('order')?.value }}</span>
+        <span class="text-sm font-medium text-gray-600"
+          >Set {{ setForm.controls.order.value }}</span
+        >
       </div>
 
       <!-- Reps -->
@@ -40,10 +42,10 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
             placeholder="0"
             [formControl]="setForm.controls.reps"
           />
-          @if (setForm.get('reps')?.hasError('required')) {
+          @if (setForm.controls.reps.hasError('required')) {
             <mat-error>Reps are required</mat-error>
           }
-          @if (setForm.get('reps')?.hasError('min')) {
+          @if (setForm.controls.reps.hasError('min')) {
             <mat-error>Must be at least 1</mat-error>
           }
         </mat-form-field>
@@ -62,10 +64,10 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
             [formControl]="setForm.controls.weight"
           />
           <span matTextSuffix>kg</span>
-          @if (setForm.get('weight')?.hasError('required')) {
+          @if (setForm.controls.weight.hasError('required')) {
             <mat-error>Weight is required</mat-error>
           }
-          @if (setForm.get('weight')?.hasError('min')) {
+          @if (setForm.controls.weight.hasError('min')) {
             <mat-error>Must be 0 or greater</mat-error>
           }
         </mat-form-field>

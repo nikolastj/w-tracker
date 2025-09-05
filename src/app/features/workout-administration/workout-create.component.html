@@ -61,7 +61,12 @@
                 <mat-expansion-panel>
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      {{ exercise.get('exerciseType')?.value?.name || 'New Exercise' }}
+                      {{ exercise.controls.exerciseType.value?.name || 'New Exercise' }}
+                      @if (hasExerciseVariation(exercise)) {
+                        <span class="ml-2 opacity-70">
+                          ({{ exercise.controls.exerciseType.value?.requisiteUsed }})
+                        </span>
+                      }
                     </mat-panel-title>
                   </mat-expansion-panel-header>
 

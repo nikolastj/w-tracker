@@ -70,7 +70,7 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
    */
   get availableExerciseTypes(): ExerciseType[] {
     const selectedExerciseTypeIds = this.workoutForm.exercisesArray.controls
-      .map((exercise) => exercise.get('exerciseType')?.value?.id)
+      .map((exercise) => exercise.controls.exerciseType.value?.id)
       .filter((id) => id !== null && id !== undefined);
 
     return this.exerciseTypes.filter(
@@ -145,6 +145,18 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
       }
       // If result is false or undefined, user cancelled - do nothing
     });
+  }
+
+  hasExerciseVariation(exerciseInstanceControl: ExerciseInstanceForm): boolean {
+    const exerciseTypeSimple = exerciseInstanceControl.controls.exerciseType.value;
+
+    if (!exerciseTypeSimple?.id) {
+      return false;
+    }
+
+    const fullExerciseType = this.exerciseTypes.find((et) => et.id === exerciseTypeSimple.id);
+
+    return !!fullExerciseType?.variationOfExercise;
   }
 
   canDeactivate(): boolean {
