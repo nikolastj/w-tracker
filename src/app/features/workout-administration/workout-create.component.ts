@@ -5,7 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ExerciseInstanceFormComponent } from './components/exercise-instance-form.component';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ExerciseTypesService } from '../../shared/services/exercise-types.service';
@@ -13,6 +15,10 @@ import { ExerciseType } from '../../shared/models/exercise-type.model';
 import { WorkoutForm } from './models/workout.form';
 import { ExerciseInstanceForm } from './models/exercise-instance.form';
 import { CanComponentDeactivate } from '../../core';
+import {
+  ConfirmActionDialogComponent,
+  ConfirmActionDialogData,
+} from '../../shared/components/confirm-action-dialog.component';
 
 @Component({
   selector: 'app-workout-create',
@@ -24,7 +30,9 @@ import { CanComponentDeactivate } from '../../core';
     MatIconModule,
     MatCardModule,
     MatExpansionModule,
+    MatDialogModule,
     NgSelectModule,
+    ExerciseInstanceFormComponent,
   ],
   template: `
     <div class="container mx-auto max-w-4xl p-6">
@@ -102,32 +110,9 @@ import { CanComponentDeactivate } from '../../core';
                       </mat-expansion-panel-header>
 
                       <div class="p-4">
-                        <p class="mb-4 opacity-70">
-                          This is where the exercise configuration will go. You can add sets, reps,
-                          weights, etc.
-                        </p>
+                        <app-exercise-instance-form [exerciseForm]="exercise" />
 
-                        <mat-card class="mb-4 p-4" appearance="outlined">
-                          <div class="space-y-2">
-                            <p>
-                              <strong>Exercise Type:</strong>
-                              {{ exercise.get('exerciseType')?.value?.name }}
-                            </p>
-                            <p>
-                              <strong>Sets:</strong> {{ exercise.get('sets')?.value?.length || 0 }}
-                            </p>
-                            <p>
-                              <strong>Comments:</strong>
-                              {{ exercise.get('comment')?.value || 'None' }}
-                            </p>
-                            <p>
-                              <strong>Energy Level:</strong>
-                              {{ exercise.get('energyLevel')?.value || 'Not set' }}
-                            </p>
-                          </div>
-                        </mat-card>
-
-                        <div class="flex justify-end">
+                        <div class="mt-6 flex justify-end">
                           <button
                             mat-stroked-button
                             color="warn"
@@ -145,8 +130,13 @@ import { CanComponentDeactivate } from '../../core';
               }
             </div>
 
-            <!-- Save Button -->
-            <div class="mt-6 flex justify-end">
+            <!-- Action Buttons -->
+            <div class="mt-6 flex justify-between">
+              <button mat-stroked-button color="warn" (click)="discardWorkout()" class="px-6">
+                <mat-icon class="mr-2">delete_outline</mat-icon>
+                Discard Workout
+              </button>
+
               <button
                 mat-stroked-button
                 color="accent"
@@ -172,6 +162,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   constructor(
     private router: Router,
     private exerciseTypesService: ExerciseTypesService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -217,6 +208,33 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
 
   goBack(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  discardWorkout(): void {
+    if (!this.workoutForm.dirty) {
+      this.router.navigate(['/dashboard']);
+      return;
+    }
+
+    const dialogRef = this.dialog.open(ConfirmActionDialogComponent, {
+      width: '450px',
+      maxWidth: '90vw',
+      disableClose: true,
+    });
+
+    dialogRef.componentInstance.data = new ConfirmActionDialogData({
+      title: 'Discard Workout',
+      message: 'Are you sure you want to discard this workout? All your progress will be lost.',
+      confirmButtonColor: 'warn',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // User confirmed - navigate to dashboard
+        this.router.navigate(['/dashboard']);
+      }
+      // If result is false or undefined, user cancelled - do nothing
+    });
   }
 
   canDeactivate(): boolean {
