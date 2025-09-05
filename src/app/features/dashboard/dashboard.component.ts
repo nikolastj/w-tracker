@@ -6,7 +6,7 @@ import { Observable, map } from 'rxjs';
 
 import { AuthStateService } from '../../auth/services/auth-state.service';
 import { User } from '../../auth/models/auth.models';
-import { WorkoutsTimelineComponent } from './workouts-timeline.component';
+import { WorkoutsTimelineComponent } from '../timeline';
 
 @Component({
   selector: 'app-dashboard',
