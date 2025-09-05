@@ -101,6 +101,10 @@ body {
 @tailwind components;
 @tailwind utilities;
 
+div {
+  border: 0 solid;
+}
+
 html,
 body {
   height: 100%;
