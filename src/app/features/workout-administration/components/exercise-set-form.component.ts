@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule, MatCheckboxChange } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ExerciseSetForm } from '../models/exercise-set.form';
@@ -21,100 +21,152 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
     MatIconModule,
   ],
   template: `
-    <div
-      class="grid grid-cols-12 items-center gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3"
-    >
-      <!-- Set Number -->
-      <div class="col-span-1">
-        <span class="text-sm font-medium text-gray-600"
-          >Set {{ setForm.controls.order.value }}</span
-        >
-      </div>
+    <div class="flex flex-col gap-2 rounded-lg border p-2">
+      <!-- Top row: Set Number, Reps, Weight, Remove Button -->
+      <div class="flex items-center gap-2">
+        <!-- Reps with increment buttons -->
+        <div class="min-w-0 flex-1">
+          <div class="mb-1 text-xs">Reps</div>
+          <div class="flex items-center gap-1">
+            <mat-form-field appearance="outline" class="min-w-0 max-w-20 flex-1">
+              <input
+                matInput
+                type="number"
+                min="1"
+                placeholder="0"
+                [formControl]="setForm.controls.reps"
+                class="text-center text-sm"
+              />
+              @if (setForm.controls.reps.touched && setForm.controls.reps.hasError('required')) {
+                <mat-error>Required</mat-error>
+              }
+              @if (setForm.controls.reps.touched && setForm.controls.reps.hasError('min')) {
+                <mat-error>Min: 1</mat-error>
+              }
+            </mat-form-field>
+            <div class="flex flex-col gap-1">
+              <button mat-mini-fab (click)="adjustReps(1)" class=" ">
+                <i class="material-icons">keyboard_arrow_up</i>
+              </button>
+              <button mat-mini-fab (click)="adjustReps(-1)" class=" ">
+                <i class="material-icons">keyboard_arrow_down</i>
+              </button>
+            </div>
+            <div class="flex flex-col gap-1">
+              <button mat-mini-fab (click)="adjustReps(10)" class=" ">
+                <i class="material-icons">keyboard_double_arrow_up</i>
+              </button>
+              <button mat-mini-fab (click)="adjustReps(-10)" class=" ">
+                <i class="material-icons">keyboard_double_arrow_down</i>
+              </button>
+            </div>
+          </div>
+        </div>
 
-      <!-- Reps -->
-      <div class="col-span-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Reps</mat-label>
-          <input
-            matInput
-            type="number"
-            min="1"
-            placeholder="0"
-            [formControl]="setForm.controls.reps"
-          />
-          @if (setForm.controls.reps.hasError('required')) {
-            <mat-error>Reps are required</mat-error>
-          }
-          @if (setForm.controls.reps.hasError('min')) {
-            <mat-error>Must be at least 1</mat-error>
-          }
-        </mat-form-field>
-      </div>
+        <!-- Weight with increment buttons -->
+        <div class="min-w-0 flex-1">
+          <div class="mb-1 text-xs">Weight (kg)</div>
+          <div class="flex items-center gap-1">
+            <mat-form-field appearance="outline" class="min-w-0 max-w-20 flex-1">
+              <input
+                matInput
+                type="number"
+                min="0"
+                step="0.5"
+                placeholder="0"
+                [formControl]="setForm.controls.weight"
+                class="text-center text-sm"
+              />
+              @if (
+                setForm.controls.weight.touched && setForm.controls.weight.hasError('required')
+              ) {
+                <mat-error>Required</mat-error>
+              }
+              @if (setForm.controls.weight.touched && setForm.controls.weight.hasError('min')) {
+                <mat-error>Min: 0</mat-error>
+              }
+            </mat-form-field>
+            <div class="flex flex-col gap-1">
+              <button mat-mini-fab (click)="adjustWeight(1)" class=" ">
+                <i class="material-icons">keyboard_arrow_up</i>
+              </button>
+              <button mat-mini-fab (click)="adjustWeight(-1)" class=" ">
+                <i class="material-icons">keyboard_arrow_down</i>
+              </button>
+            </div>
+            <div class="flex flex-col gap-1">
+              <button mat-mini-fab (click)="adjustWeight(10)" class=" ">
+                <i class="material-icons">keyboard_double_arrow_up</i>
+              </button>
+              <button mat-mini-fab (click)="adjustWeight(-10)" class=" ">
+                <i class="material-icons">keyboard_double_arrow_down</i>
+              </button>
+            </div>
+          </div>
+        </div>
 
-      <!-- Weight -->
-      <div class="col-span-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Weight</mat-label>
-          <input
-            matInput
-            type="number"
-            min="0"
-            step="0.5"
-            placeholder="0"
-            [formControl]="setForm.controls.weight"
-          />
-          <span matTextSuffix>kg</span>
-          @if (setForm.controls.weight.hasError('required')) {
-            <mat-error>Weight is required</mat-error>
-          }
-          @if (setForm.controls.weight.hasError('min')) {
-            <mat-error>Must be 0 or greater</mat-error>
-          }
-        </mat-form-field>
-      </div>
-
-      <!-- Warmup Set Checkbox -->
-      <div class="col-span-2">
-        <mat-checkbox [formControl]="setForm.controls.isWarmupSet" class="text-sm">
-          Warmup
-        </mat-checkbox>
-      </div>
-
-      <!-- Drop Set Checkbox -->
-      <div class="col-span-2">
-        <mat-checkbox [formControl]="setForm.controls.isDropSet" class="text-sm">
-          Drop Set
-        </mat-checkbox>
-      </div>
-
-      <!-- Remove Button -->
-      <div class="col-span-3 flex justify-end">
+        <!-- Remove Button -->
         @if (showRemoveButton) {
-          <button mat-icon-button color="warn" (click)="onRemove()" matTooltip="Remove this set">
-            <mat-icon>delete_outline</mat-icon>
+          <button
+            mat-icon-button
+            (click)="onRemove()"
+            class="!h-8 !w-8 flex-shrink-0"
+            matTooltip="Remove this set"
+          >
+            <mat-icon class="!text-lg">delete_outline</mat-icon>
           </button>
         }
       </div>
+
+      <!-- Bottom row: Checkboxes full width -->
+      <div class="flex items-center justify-start gap-8">
+        <mat-checkbox
+          [formControl]="setForm.controls.isWarmupSet"
+          (change)="onWarmupChange($event)"
+          class="text-xs"
+        >
+          Warmup
+        </mat-checkbox>
+        <mat-checkbox
+          [formControl]="setForm.controls.isDropSet"
+          (change)="onDropSetChange($event)"
+          class="text-xs"
+        >
+          Drop
+        </mat-checkbox>
+      </div>
     </div>
   `,
-  styles: [
-    `
-      ::ng-deep .mat-mdc-form-field {
-        .mat-mdc-text-field-wrapper {
-          .mat-mdc-form-field-flex {
-            .mat-mdc-form-field-infix {
-              padding-block: 8px;
-            }
-          }
-        }
-      }
-    `,
-  ],
+  styleUrls: ['./exercise-set-form.component.scss'],
 })
 export class ExerciseSetFormComponent {
   @Input({ required: true }) setForm!: ExerciseSetForm;
   @Input() showRemoveButton = true;
   @Output() removeSet = new EventEmitter<void>();
+
+  adjustReps(delta: number): void {
+    const currentValue = this.setForm.controls.reps.value || 0;
+    const newValue = Math.max(1, currentValue + delta);
+    this.setForm.controls.reps.setValue(newValue);
+  }
+
+  adjustWeight(delta: number): void {
+    const currentValue = this.setForm.controls.weight.value || 0;
+    const newValue = Math.max(0, currentValue + delta);
+    this.setForm.controls.weight.setValue(newValue);
+  }
+
+  onWarmupChange(event: MatCheckboxChange): void {
+    if (event.checked) {
+      this.setForm.controls.isDropSet.setValue(false);
+    }
+  }
+
+  onDropSetChange(event: MatCheckboxChange): void {
+    if (event.checked) {
+      this.setForm.controls.isWarmupSet.setValue(false);
+    }
+  }
 
   onRemove(): void {
     this.removeSet.emit();

@@ -29,10 +29,15 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
       <!-- Exercise Info Card -->
 
       <!-- Sets Section -->
-      <div class="flex flex-col">
+      <div class="flex flex-col gap-1">
         <div class="flex items-center justify-between">
-          <h3 class="text-lg font-medium">Sets</h3>
-          <button mat-raised-button color="primary" (click)="addSet()" class="px-4">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addSet()"
+            [disabled]="!areAllSetsValid"
+            class="px-4"
+          >
             <mat-icon class="mr-1">add</mat-icon>
             Add Set
           </button>
@@ -103,6 +108,10 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
 })
 export class ExerciseInstanceFormComponent {
   @Input({ required: true }) exerciseForm!: ExerciseInstanceForm;
+
+  get areAllSetsValid(): boolean {
+    return this.exerciseForm.setsArray.controls.every((setForm) => setForm.valid);
+  }
 
   addSet(): void {
     this.exerciseForm.addSet();

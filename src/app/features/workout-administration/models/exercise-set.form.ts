@@ -22,7 +22,7 @@ export class ExerciseSetForm extends FormGroup<ExerciseSetFormControls> {
         Validators.required,
         Validators.min(1),
       ]),
-      weight: new FormControl<number | null>(exerciseSet?.weight || null, [
+      weight: new FormControl<number | null>(exerciseSet?.weight || 0, [
         Validators.required,
         Validators.min(0),
       ]),
