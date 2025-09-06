@@ -106,7 +106,7 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
         </div>
 
         <!-- Remove Button -->
-        @if (showRemoveButton) {
+        <!-- @if (showRemoveButton) {
           <button
             mat-icon-button
             (click)="onRemove()"
@@ -115,25 +115,38 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
           >
             <mat-icon class="!text-lg">delete_outline</mat-icon>
           </button>
-        }
+        } -->
       </div>
 
-      <!-- Bottom row: Checkboxes full width -->
-      <div class="flex items-center justify-start gap-8">
-        <mat-checkbox
-          [formControl]="setForm.controls.isWarmupSet"
-          (change)="onWarmupChange($event)"
-          class="text-xs"
+      <!-- Bottom row: Add Set Button and Checkboxes -->
+      <div class="flex items-center justify-between gap-4">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onAddSet()"
+          [disabled]="!isSetValid"
+          class="px-4"
         >
-          Warmup
-        </mat-checkbox>
-        <mat-checkbox
-          [formControl]="setForm.controls.isDropSet"
-          (change)="onDropSetChange($event)"
-          class="text-xs"
-        >
-          Drop
-        </mat-checkbox>
+          <mat-icon class="mr-1">add</mat-icon>
+          Add Set
+        </button>
+
+        <div class="flex items-center gap-2 pr-2">
+          <mat-checkbox
+            [formControl]="setForm.controls.isWarmupSet"
+            (change)="onWarmupChange($event)"
+            class="text-xs"
+          >
+            Warmup
+          </mat-checkbox>
+          <mat-checkbox
+            [formControl]="setForm.controls.isDropSet"
+            (change)="onDropSetChange($event)"
+            class="text-xs"
+          >
+            Drop
+          </mat-checkbox>
+        </div>
       </div>
     </div>
   `,
@@ -143,6 +156,11 @@ export class ExerciseSetFormComponent {
   @Input({ required: true }) setForm!: ExerciseSetForm;
   @Input() showRemoveButton = true;
   @Output() removeSet = new EventEmitter<void>();
+  @Output() addSet = new EventEmitter<void>();
+
+  get isSetValid(): boolean {
+    return this.setForm.valid;
+  }
 
   adjustReps(delta: number): void {
     const currentValue = this.setForm.controls.reps.value || 0;
@@ -170,5 +188,11 @@ export class ExerciseSetFormComponent {
 
   onRemove(): void {
     this.removeSet.emit();
+  }
+
+  onAddSet(): void {
+    if (this.isSetValid) {
+      this.addSet.emit();
+    }
   }
 }

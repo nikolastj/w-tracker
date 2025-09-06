@@ -30,18 +30,7 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
 
       <!-- Sets Section -->
       <div class="flex flex-col gap-1">
-        <div class="flex items-center justify-between">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="addSet()"
-            [disabled]="!areAllSetsValid"
-            class="px-4"
-          >
-            <mat-icon class="mr-1">add</mat-icon>
-            Add Set
-          </button>
-        </div>
+        <!-- Sets section header -->
 
         <!-- Sets List -->
         @if (exerciseForm.setsArray.controls.length > 0) {
@@ -51,13 +40,14 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
                 [setForm]="setForm"
                 [showRemoveButton]="exerciseForm.setsArray.length > 1"
                 (removeSet)="removeSet($index)"
+                (addSet)="addSet()"
               />
             }
           </div>
         } @else {
           <div class="py-8 text-center text-gray-500">
             <mat-icon class="mb-2 text-4xl">fitness_center</mat-icon>
-            <p>No sets added yet. Click "Add Set" to get started.</p>
+            <p>No sets added yet. Fill in a set and use its "Add Set" button to add more sets.</p>
           </div>
         }
       </div>
@@ -108,10 +98,6 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
 })
 export class ExerciseInstanceFormComponent {
   @Input({ required: true }) exerciseForm!: ExerciseInstanceForm;
-
-  get areAllSetsValid(): boolean {
-    return this.exerciseForm.setsArray.controls.every((setForm) => setForm.valid);
-  }
 
   addSet(): void {
     this.exerciseForm.addSet();
