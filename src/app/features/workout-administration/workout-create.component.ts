@@ -44,6 +44,7 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
   isLoading = false;
   workoutForm = new WorkoutForm();
   showExerciseSelect = false;
+  expandedPanelIndex: number | null = null;
   private shouldFocusSelect = false;
 
   constructor(
@@ -92,6 +93,10 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
       });
 
       this.workoutForm.exercisesArray.push(newExerciseForm);
+
+      // Set the newly added exercise as expanded
+      this.expandedPanelIndex = this.workoutForm.exercisesArray.length - 1;
+
       this.showExerciseSelect = false;
     }
   }
@@ -100,8 +105,27 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
     this.showExerciseSelect = false;
   }
 
+  onPanelExpandedChange(index: number, expanded: boolean): void {
+    if (expanded) {
+      this.expandedPanelIndex = index;
+    } else if (this.expandedPanelIndex === index) {
+      this.expandedPanelIndex = null;
+    }
+  }
+
   removeExercise(index: number): void {
     this.workoutForm.removeExercise(index);
+
+    // Update expanded panel index after removal
+    if (this.expandedPanelIndex !== null) {
+      if (this.expandedPanelIndex === index) {
+        // If the expanded panel was removed, clear the expanded state
+        this.expandedPanelIndex = null;
+      } else if (this.expandedPanelIndex > index) {
+        // If the expanded panel is after the removed one, decrement the index
+        this.expandedPanelIndex--;
+      }
+    }
   }
 
   private loadExerciseTypes(): void {

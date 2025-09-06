@@ -25,11 +25,11 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
     ExerciseSetFormComponent,
   ],
   template: `
-    <div class="space-y-6">
+    <div class="flex flex-col gap-6">
       <!-- Exercise Info Card -->
 
       <!-- Sets Section -->
-      <div class="space-y-4">
+      <div class="flex flex-col">
         <div class="flex items-center justify-between">
           <h3 class="text-lg font-medium">Sets</h3>
           <button mat-raised-button color="primary" (click)="addSet()" class="px-4">
@@ -40,7 +40,7 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
 
         <!-- Sets List -->
         @if (exerciseForm.setsArray.controls.length > 0) {
-          <div class="space-y-2">
+          <div class="flex flex-col gap-1">
             @for (setForm of exerciseForm.setsArray.controls; track $index) {
               <app-exercise-set-form
                 [setForm]="setForm"
@@ -58,7 +58,7 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
       </div>
 
       <!-- Exercise Comments -->
-      <!-- <div class="space-y-4">
+      <!-- <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">Comments & Notes</h3>
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Exercise Comments</mat-label>
@@ -72,7 +72,7 @@ import { ExerciseSetFormComponent } from './exercise-set-form.component';
       </div> -->
 
       <!-- Energy Level -->
-      <!-- <div class="space-y-4">
+      <!-- <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">Energy Level</h3>
         <div class="px-4">
           <mat-slider
