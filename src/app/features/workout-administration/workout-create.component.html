@@ -1,4 +1,11 @@
-<div class="container mx-auto h-full max-w-4xl md:p-6">
+<div class="container relative mx-auto h-full max-w-4xl md:p-6">
+  <!-- Loader Overlay -->
+  @if (isSaving) {
+    <div class="absolute inset-0 z-50 h-screen w-screen">
+      <app-loader [opacity]="80"></app-loader>
+    </div>
+  }
+
   <!-- Header -->
   <div class="mb-8 hidden md:block">
     <div class="mb-4 flex items-center gap-4">
@@ -104,7 +111,13 @@
             Discard Workout
           </button>
 
-          <button mat-stroked-button color="accent" [disabled]="!workoutForm.valid" class="px-6">
+          <button
+            mat-stroked-button
+            color="accent"
+            [disabled]="!workoutForm.valid || isSaving"
+            (click)="saveWorkout()"
+            class="px-6"
+          >
             <mat-icon class="mr-2">save</mat-icon>
             Save Workout
           </button>

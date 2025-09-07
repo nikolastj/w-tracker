@@ -8,9 +8,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ExerciseInstanceFormComponent } from './components/exercise-instance-form/exercise-instance-form.component';
+import { LoaderComponent } from '../../shared/components/loader.component';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ExerciseTypesService } from '../../shared/services/exercise-types.service';
+import { WorkoutsService } from '../../shared/services/workouts.service';
 import { ExerciseType } from '../../shared/models/exercise-type.model';
 import { WorkoutForm } from './models/workout.form';
 import { ExerciseInstanceForm } from './models/exercise-instance.form';
@@ -33,6 +35,7 @@ import {
     MatDialogModule,
     NgSelectModule,
     ExerciseInstanceFormComponent,
+    LoaderComponent,
   ],
   templateUrl: './workout-create.component.html',
   styleUrl: './workout-create.component.scss',
@@ -40,13 +43,15 @@ import {
 export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   exerciseTypes: ExerciseType[] = [];
   isLoading = false;
-  workoutForm = new WorkoutForm(test);
+  isSaving = false;
+  workoutForm = new WorkoutForm();
   showExerciseSelect = false;
   expandedPanelIndex: number | null = null;
 
   constructor(
     private router: Router,
     private exerciseTypesService: ExerciseTypesService,
+    private workoutsService: WorkoutsService,
     private dialog: MatDialog,
   ) {}
 
@@ -181,298 +186,26 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     }
     return false;
   }
-}
 
-export const test = {
-  id: 29,
-  dateCreated: '2025-07-09T17:13:22.365Z',
-  exercises: [
-    {
-      id: 184,
-      order: 1,
-      sets: [
-        {
-          id: 643,
-          order: 3,
-          reps: 10,
-          weight: 20,
-          isWarmupSet: false,
-          isDropSet: false,
+  saveWorkout(): void {
+    if (!this.workoutForm.valid) {
+      return;
+    }
+
+    this.isSaving = true;
+    const workoutData = this.workoutForm.getSubmitValue();
+
+    this.workoutsService
+      .createWorkout(workoutData)
+      .pipe(finalize(() => (this.isSaving = false)))
+      .subscribe({
+        next: (savedWorkout) => {
+          // Mark form as pristine since it's been saved
+          this.workoutForm.markAsPristine();
+
+          // Navigate to dashboard or workout details
+          this.router.navigate(['/dashboard']);
         },
-        {
-          id: 642,
-          order: 2,
-          reps: 10,
-          weight: 20,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 641,
-          order: 1,
-          reps: 10,
-          weight: 20,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-      ],
-      exerciseType: {
-        id: 41,
-        name: 'Inclined Chest Press',
-        description:
-          'A variation of the Dumbbell Chest Press performed at an incline, emphasizing the upper chest.',
-        requisiteUsed: 'Dumbbells',
-        usesNegativeWeight: false,
-        isCore: false,
-      },
-      comment: null,
-      energyLevel: null,
-    },
-    {
-      id: 183,
-      order: 2,
-      sets: [
-        {
-          id: 640,
-          order: 3,
-          reps: 10,
-          weight: 132,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 639,
-          order: 2,
-          reps: 10,
-          weight: 132,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 638,
-          order: 1,
-          reps: 10,
-          weight: 132,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-      ],
-      exerciseType: {
-        id: 5,
-        name: 'Adductor',
-        description:
-          'Targets the hip adductors using a machine to isolate and strengthen the inner thighs.',
-        requisiteUsed: 'Machine',
-        usesNegativeWeight: false,
-        isCore: false,
-      },
-      comment: null,
-      energyLevel: null,
-    },
-    {
-      id: 182,
-      order: 3,
-      sets: [
-        {
-          id: 637,
-          order: 6,
-          reps: 5,
-          weight: 20,
-          isWarmupSet: false,
-          isDropSet: true,
-        },
-        {
-          id: 636,
-          order: 5,
-          reps: 4,
-          weight: 1,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 635,
-          order: 4,
-          reps: 6,
-          weight: 20,
-          isWarmupSet: false,
-          isDropSet: true,
-        },
-        {
-          id: 634,
-          order: 3,
-          reps: 6,
-          weight: 1,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 633,
-          order: 2,
-          reps: 10,
-          weight: 1,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 632,
-          order: 1,
-          reps: 10,
-          weight: 1,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-      ],
-      exerciseType: {
-        id: 31,
-        name: 'Pull-Up',
-        description:
-          'A vertical pulling exercise targeting the lats, assisted by a machine with negative weight.',
-        requisiteUsed: 'Machine',
-        usesNegativeWeight: true,
-        isCore: false,
-      },
-      comment: null,
-      energyLevel: null,
-    },
-    {
-      id: 181,
-      order: 4,
-      sets: [
-        {
-          id: 631,
-          order: 3,
-          reps: 15,
-          weight: 1,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 630,
-          order: 2,
-          reps: 15,
-          weight: 1,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 629,
-          order: 1,
-          reps: 15,
-          weight: 1,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-      ],
-      exerciseType: {
-        id: 51,
-        name: 'Roman Chair Leg Raise',
-        description:
-          'A core-focused exercise performed on a Roman chair to strengthen the lower abs and hip flexors.',
-        requisiteUsed: 'Machine',
-        usesNegativeWeight: false,
-        isCore: true,
-      },
-      comment: null,
-      energyLevel: null,
-    },
-    {
-      id: 180,
-      order: 5,
-      sets: [
-        {
-          id: 628,
-          order: 3,
-          reps: 10,
-          weight: 132,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 627,
-          order: 2,
-          reps: 10,
-          weight: 132,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 626,
-          order: 1,
-          reps: 10,
-          weight: 132,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-      ],
-      exerciseType: {
-        id: 4,
-        name: 'Abductor',
-        description:
-          'Targets the hip abductors using a machine to isolate and strengthen the outer thighs.',
-        requisiteUsed: 'Machine',
-        usesNegativeWeight: false,
-        isCore: false,
-      },
-      comment: null,
-      energyLevel: null,
-    },
-    {
-      id: 179,
-      order: 6,
-      sets: [
-        {
-          id: 625,
-          order: 5,
-          reps: 5,
-          weight: 70,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 624,
-          order: 4,
-          reps: 6,
-          weight: 70,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 623,
-          order: 3,
-          reps: 10,
-          weight: 70,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 622,
-          order: 2,
-          reps: 10,
-          weight: 70,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-        {
-          id: 621,
-          order: 1,
-          reps: 10,
-          weight: 50,
-          isWarmupSet: false,
-          isDropSet: false,
-        },
-      ],
-      exerciseType: {
-        id: 36,
-        name: 'Bench Press',
-        description: 'A compound pressing movement targeting the chest, performed with a barbell.',
-        requisiteUsed: 'Barbell',
-        usesNegativeWeight: false,
-        isCore: false,
-      },
-      comment: null,
-      energyLevel: null,
-    },
-  ],
-  comment: null,
-  energyLevel: null,
-};
+      });
+  }
+}

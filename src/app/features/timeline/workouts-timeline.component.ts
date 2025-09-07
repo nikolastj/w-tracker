@@ -27,7 +27,7 @@ export class WorkoutsTimelineComponent implements OnInit {
   // Single filter object with Date objects
   dateFilter = signal<{ fromDate: Date; toDate: Date }>({
     fromDate: new Date(new Date().setMonth(new Date().getMonth() - 4)),
-    toDate: new Date(),
+    toDate: new Date(new Date().setHours(23, 59, 59, 999)),
   });
 
   // Workout dates for calendar highlighting
@@ -58,7 +58,7 @@ export class WorkoutsTimelineComponent implements OnInit {
 
   private loadWorkouts(filter: Page, isPrevious = false) {
     this.loading.set(true);
-    filter.pageSize = 90;
+    filter.pageSize = 120;
     this.workoutsService
       .getPaginatedWorkouts(filter)
       .pipe(delay(isPrevious ? 500 : 1000))
