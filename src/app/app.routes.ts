@@ -27,12 +27,9 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
       },
       {
-        path: 'workout/create',
-        canDeactivate: [CanDeactivateGuard],
-        loadComponent: () =>
-          import('./features/workout-administration/workout-create.component').then(
-            (m) => m.WorkoutCreateComponent,
-          ),
+        path: 'workout',
+        loadChildren: () =>
+          import('./features/workout-administration').then((m) => m.workoutAdministrationRoutes),
       },
     ],
   },

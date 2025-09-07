@@ -18,7 +18,7 @@ export interface UnsavedChangesDialogData {
   template: `
     <div class="p-6">
       <div class="mb-4 flex items-center gap-3">
-        <mat-icon class="text-3xl text-amber-500">warning</mat-icon>
+        <mat-icon class="text-3xl">warning</mat-icon>
         <h2 class="text-xl font-semibold">{{ data.title || 'Unsaved Changes' }}</h2>
       </div>
 

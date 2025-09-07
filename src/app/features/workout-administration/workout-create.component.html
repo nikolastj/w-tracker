@@ -12,9 +12,15 @@
       <button mat-icon-button (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <h1 class="text-3xl font-bold">Create New Workout</h1>
+      <h1 class="text-3xl font-bold">{{ isEditMode ? 'Edit Workout' : 'Create New Workout' }}</h1>
     </div>
-    <p class="opacity-70">Design and create your custom workout routine</p>
+    <p class="opacity-70">
+      {{
+        isEditMode
+          ? 'Modify your existing workout routine'
+          : 'Design and create your custom workout routine'
+      }}
+    </p>
   </div>
 
   <!-- Main Content Area -->

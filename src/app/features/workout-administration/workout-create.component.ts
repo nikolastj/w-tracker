@@ -9,7 +9,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ExerciseInstanceFormComponent } from './components/exercise-instance-form/exercise-instance-form.component';
 import { LoaderComponent } from '../../shared/components/loader.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ExerciseTypesService } from '../../shared/services/exercise-types.service';
 import { WorkoutsService } from '../../shared/services/workouts.service';
@@ -52,6 +52,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private exerciseTypesService: ExerciseTypesService,
     private workoutsService: WorkoutsService,
     private dialog: MatDialog,
@@ -60,7 +61,14 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   ngOnInit(): void {
     this.isEditMode = !!this.workoutForm.value.id;
     this.loadExerciseTypes();
-    this.loadTodaysWorkouts();
+
+    // Check if we have an ID parameter (edit mode)
+    const workoutId = this.route.snapshot.paramMap.get('id');
+    if (workoutId) {
+      this.loadWorkoutById(+workoutId);
+    } else {
+      this.loadTodaysWorkouts();
+    }
   }
 
   /**
@@ -169,35 +177,35 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     });
   }
 
+  private loadWorkoutById(id: number): void {
+    this.isApiLoading.set(true);
+    this.workoutsService.getWorkoutById(id).subscribe({
+      next: (workout: Workout) => {
+        this.workoutForm = new WorkoutForm(workout);
+        this.isEditMode = true;
+        this.isApiLoading.set(false);
+      },
+      error: (error) => {
+        console.error('Failed to load workout:', error);
+        this.isEditMode = false;
+        this.isApiLoading.set(false);
+        // Navigate back to dashboard if workout not found
+        this.router.navigate(['/dashboard']);
+      },
+    });
+  }
+
   goBack(): void {
     this.router.navigate(['/dashboard']);
   }
 
   discardWorkout(): void {
-    if (!this.workoutForm.dirty) {
-      this.router.navigate(['/dashboard']);
-      return;
-    }
+    //canDeactivate will handle the confirmation
+    this.router.navigate(['/dashboard']);
+  }
 
-    const dialogRef = this.dialog.open(ConfirmActionDialogComponent, {
-      width: '450px',
-      maxWidth: '90vw',
-      disableClose: true,
-    });
-
-    dialogRef.componentInstance.data = new ConfirmActionDialogData({
-      title: 'Discard Workout',
-      message: 'Are you sure you want to discard this workout? All your progress will be lost.',
-      confirmButtonColor: 'warn',
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // User confirmed - navigate to dashboard
-        this.router.navigate(['/dashboard']);
-      }
-      // If result is false or undefined, user cancelled - do nothing
-    });
+  canDeactivate(): boolean {
+    return !this.workoutForm.dirty;
   }
 
   hasExerciseVariation(exerciseInstanceControl: ExerciseInstanceForm): boolean {
@@ -210,10 +218,6 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     const fullExerciseType = this.exerciseTypes.find((et) => et.id === exerciseTypeSimple.id);
 
     return !!fullExerciseType?.variationOfExercise;
-  }
-
-  canDeactivate(): boolean {
-    return !this.workoutForm.dirty;
   }
 
   saveWorkout(): void {

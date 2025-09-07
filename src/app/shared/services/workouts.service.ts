@@ -57,4 +57,13 @@ export class WorkoutsService {
       }),
     );
   }
+
+  getWorkoutById(id: number): Observable<Workout> {
+    return this.http.get<Workout>(`${this.API_URL}/workouts/${id}`).pipe(
+      handleNotifications({
+        errorMessage: 'Failed to load workout. Please try again.',
+        notificationService: this.notificationService,
+      }),
+    );
+  }
 }
