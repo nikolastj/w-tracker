@@ -18,6 +18,7 @@ export interface ExerciseTypeSimple {
 
 export interface ExerciseInstance {
   id: number;
+  order: number;
   sets: ExerciseSet[];
   exerciseType: ExerciseTypeSimple;
   comment: string | null;

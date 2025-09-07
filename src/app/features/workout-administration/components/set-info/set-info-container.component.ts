@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray } from '@angular/forms';
-import { ExerciseSetForm } from '../models/exercise-set.form';
+import { ExerciseSetForm } from '../../models/exercise-set.form';
 import { SetInfoComponent } from './set-info.component';
 
 @Component({
@@ -18,6 +18,7 @@ import { SetInfoComponent } from './set-info.component';
       </div>
     </div>
   `,
+  styleUrls: ['./set-info.scss'],
 })
 export class SetInfoContainerComponent {
   @Input({ required: true }) setsArray!: FormArray<ExerciseSetForm>;

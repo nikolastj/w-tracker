@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ExerciseInstanceForm } from '../models/exercise-instance.form';
 import { ExerciseSetForm } from '../models/exercise-set.form';
 import { ExerciseSetFormComponent } from './exercise-set-form.component';
-import { SetInfoContainerComponent } from './set-info-container.component';
+import { SetInfoContainerComponent } from './set-info/set-info-container.component';
 
 @Component({
   selector: 'app-exercise-instance-form',

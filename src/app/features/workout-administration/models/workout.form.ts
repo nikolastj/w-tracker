@@ -26,7 +26,9 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
         Validators.required,
       ),
       exercises: new FormArray<ExerciseInstanceForm>(
-        workout?.exercises?.map((exercise) => new ExerciseInstanceForm(exercise)) || [],
+        workout?.exercises
+          ?.sort((a, b) => a.order - b.order)
+          .map((exercise) => new ExerciseInstanceForm(exercise)) || [],
         [WorkoutForm.atLeastOneExerciseValidator],
       ),
       comment: new FormControl<string | null>(workout?.comment || ''),
@@ -42,11 +44,24 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
   }
 
   addExercise(): void {
-    this.exercisesArray.push(new ExerciseInstanceForm());
+    const currentExercises = this.exercisesArray.value;
+    const nextOrder =
+      currentExercises.length > 0 ? Math.max(...currentExercises.map((e) => e.order || 0)) + 1 : 1;
+
+    const newExercise = new ExerciseInstanceForm();
+    newExercise.patchValue({ order: nextOrder });
+    this.exercisesArray.push(newExercise);
   }
 
   removeExercise(index: number): void {
     this.exercisesArray.removeAt(index);
+    this.reorderExercises();
+  }
+
+  private reorderExercises(): void {
+    this.exercisesArray.controls.forEach((exerciseForm, index) => {
+      exerciseForm.patchValue({ order: index + 1 });
+    });
   }
 
   getSubmitValue(): CreateWorkout {

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { ExerciseSetForm } from '../models/exercise-set.form';
+import { ExerciseSetForm } from '../../models/exercise-set.form';
 
 @Component({
   selector: 'app-set-info',
@@ -28,6 +28,7 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
       </span>
     </div>
   `,
+  styleUrls: ['./set-info.scss'],
 })
 export class SetInfoComponent {
   @Input({ required: true }) setForm!: ExerciseSetForm;

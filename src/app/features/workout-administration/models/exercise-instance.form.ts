@@ -15,6 +15,7 @@ import { ExerciseSetForm } from './exercise-set.form';
 
 type ExerciseInstanceFormControls = {
   id: FormControl<number | null>;
+  order: FormControl<number | null>;
   sets: FormArray<ExerciseSetForm>;
   exerciseType: FormControl<ExerciseTypeSimple | null>;
   comment: FormControl<string | null>;
@@ -25,8 +26,11 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
   constructor(exerciseInstance?: ExerciseInstance) {
     super({
       id: new FormControl<number | null>(exerciseInstance?.id || null),
+      order: new FormControl<number | null>(exerciseInstance?.order || null),
       sets: new FormArray<ExerciseSetForm>(
-        exerciseInstance?.sets?.map((set) => new ExerciseSetForm(set)) || [],
+        exerciseInstance?.sets
+          ?.sort((a, b) => a.order - b.order)
+          .map((set) => new ExerciseSetForm(set)) || [],
         [ExerciseInstanceForm.atLeastOneSetValidator],
       ),
       exerciseType: new FormControl<ExerciseTypeSimple | null>(
@@ -70,6 +74,7 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
     const formValue = this.value;
     return {
       id: formValue.id || undefined,
+      order: formValue.order || 1,
       sets: this.setsArray.controls.map((setForm) => setForm.getSubmitValue()),
       exerciseType: formValue.exerciseType!,
       comment: formValue.comment || null,
