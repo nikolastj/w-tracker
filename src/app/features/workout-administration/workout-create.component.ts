@@ -76,7 +76,6 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   onExerciseTypeSelected(exerciseType: ExerciseType): void {
-    this.workoutForm.markAsDirty();
     if (exerciseType) {
       this.workoutForm.addExercise();
 

@@ -51,11 +51,13 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
     const newExercise = new ExerciseInstanceForm();
     newExercise.patchValue({ order: nextOrder });
     this.exercisesArray.push(newExercise);
+    this.markAsDirty();
   }
 
   removeExercise(index: number): void {
     this.exercisesArray.removeAt(index);
     this.reorderExercises();
+    this.markAsDirty();
   }
 
   private reorderExercises(): void {

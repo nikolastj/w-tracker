@@ -57,11 +57,13 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
     const newSet = new ExerciseSetForm();
     newSet.patchValue({ order: nextOrder });
     this.setsArray.push(newSet);
+    this.markAsDirty();
   }
 
   removeSet(index: number): void {
     this.setsArray.removeAt(index);
     this.reorderSets();
+    this.markAsDirty();
   }
 
   private reorderSets(): void {

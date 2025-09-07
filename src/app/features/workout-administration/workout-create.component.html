@@ -86,21 +86,10 @@
                       </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <div class="flex flex-col gap-2">
-                      <app-exercise-instance-form [exerciseForm]="exercise" />
-
-                      <div class="flex justify-end">
-                        <button
-                          mat-stroked-button
-                          color="warn"
-                          (click)="removeExercise($index)"
-                          class="px-4"
-                        >
-                          <mat-icon class="mr-1">delete</mat-icon>
-                          Remove Exercise
-                        </button>
-                      </div>
-                    </div>
+                    <app-exercise-instance-form
+                      [exerciseForm]="exercise"
+                      (removeExercise)="removeExercise($index)"
+                    />
                   </mat-expansion-panel>
                 }
               </mat-accordion>

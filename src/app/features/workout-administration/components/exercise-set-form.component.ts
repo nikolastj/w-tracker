@@ -124,11 +124,11 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
           mat-raised-button
           color="primary"
           (click)="onAddSet()"
-          [disabled]="!isSetValid"
+          [disabled]="!isSetValid || (isEditMode && !hasSelectedSet)"
           class="px-4"
         >
-          <mat-icon class="mr-1">add</mat-icon>
-          Add Set
+          <mat-icon class="mr-1">{{ addButtonIcon }}</mat-icon>
+          {{ addButtonText }}
         </button>
 
         <div class="flex items-center gap-2 pr-2">
@@ -155,11 +155,33 @@ import { ExerciseSetForm } from '../models/exercise-set.form';
 export class ExerciseSetFormComponent {
   @Input({ required: true }) setForm!: ExerciseSetForm;
   @Input() showRemoveButton = true;
+  @Input() isEditMode = false;
+  @Input() hasSelectedSet = false;
   @Output() removeSet = new EventEmitter<void>();
   @Output() addSet = new EventEmitter<ExerciseSetForm>();
 
   get isSetValid(): boolean {
     return this.setForm.valid;
+  }
+
+  /**
+   * Get the button text based on edit mode
+   */
+  get addButtonText(): string {
+    if (this.isEditMode && this.hasSelectedSet) {
+      return 'Update Set';
+    }
+    return 'Add Set';
+  }
+
+  /**
+   * Get the button icon based on edit mode
+   */
+  get addButtonIcon(): string {
+    if (this.isEditMode && this.hasSelectedSet) {
+      return 'save';
+    }
+    return 'add';
   }
 
   adjustReps(delta: number): void {
