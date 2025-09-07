@@ -17,7 +17,7 @@ import { ExerciseType } from '../../shared/models/exercise-type.model';
 import { Workout } from '../../shared/models/workout.model';
 import { WorkoutForm } from './models/workout.form';
 import { ExerciseInstanceForm } from './models/exercise-instance.form';
-import { CanComponentDeactivate } from '../../core';
+import { CanComponentDeactivate, CanDeactivateResult } from '../../core';
 import {
   ConfirmActionDialogComponent,
   ConfirmActionDialogData,
@@ -204,8 +204,16 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     this.router.navigate(['/dashboard']);
   }
 
-  canDeactivate(): boolean {
-    return !this.workoutForm.dirty;
+  canDeactivate(): CanDeactivateResult {
+    return {
+      canDeactivate: !this.workoutForm.dirty,
+      modalData: {
+        title: 'Discard Workout?',
+        message: 'You have unsaved changes to your workout.',
+        confirmText: 'Discard',
+        cancelText: 'Cancel',
+      },
+    };
   }
 
   hasExerciseVariation(exerciseInstanceControl: ExerciseInstanceForm): boolean {

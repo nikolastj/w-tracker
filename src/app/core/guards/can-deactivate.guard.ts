@@ -3,7 +3,10 @@ import { CanDeactivate } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of, firstValueFrom } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { CanComponentDeactivate } from '../interfaces/can-component-deactivate.interface';
+import {
+  CanComponentDeactivate,
+  CanDeactivateResult,
+} from '../interfaces/can-component-deactivate.interface';
 import {
   UnsavedChangesDialogComponent,
   UnsavedChangesDialogData,
@@ -31,20 +34,46 @@ export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate>
       return canDeactivateResult ? true : this.showConfirmationDialog();
     }
 
+    // Handle synchronous CanDeactivateResult object
+    if (
+      canDeactivateResult &&
+      typeof canDeactivateResult === 'object' &&
+      'canDeactivate' in canDeactivateResult
+    ) {
+      const result = canDeactivateResult as CanDeactivateResult;
+      return result.canDeactivate ? true : this.showConfirmationDialog(result.modalData);
+    }
+
     // Handle Promise result
     if (canDeactivateResult instanceof Promise) {
-      return canDeactivateResult.then(async (canDeactivate) => {
-        if (canDeactivate) {
-          return true;
+      return canDeactivateResult.then(async (result) => {
+        if (typeof result === 'boolean') {
+          if (result) {
+            return true;
+          }
+          const dialogResult = await firstValueFrom(this.showConfirmationDialog());
+          return !!dialogResult;
+        } else {
+          // CanDeactivateResult object
+          if (result.canDeactivate) {
+            return true;
+          }
+          const dialogResult = await firstValueFrom(this.showConfirmationDialog(result.modalData));
+          return !!dialogResult;
         }
-        const result = await firstValueFrom(this.showConfirmationDialog());
-        return !!result;
       });
     }
 
     // Handle Observable result
     return canDeactivateResult.pipe(
-      switchMap((canDeactivate) => (canDeactivate ? of(true) : this.showConfirmationDialog())),
+      switchMap((result) => {
+        if (typeof result === 'boolean') {
+          return result ? of(true) : this.showConfirmationDialog();
+        } else {
+          // CanDeactivateResult object
+          return result.canDeactivate ? of(true) : this.showConfirmationDialog(result.modalData);
+        }
+      }),
     );
   }
 
