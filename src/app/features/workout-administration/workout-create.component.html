@@ -28,6 +28,7 @@
                   mat-raised-button
                   color="primary"
                   (click)="showAddExerciseDropdown()"
+                  [disabled]="!areAllExercisesValid"
                   class="px-6"
                 >
                   <mat-icon class="mr-2">add</mat-icon>

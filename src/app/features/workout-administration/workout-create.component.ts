@@ -79,6 +79,10 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
     );
   }
 
+  get areAllExercisesValid(): boolean {
+    return this.workoutForm.exercisesArray.controls.every((exerciseForm) => exerciseForm.valid);
+  }
+
   showAddExerciseDropdown(): void {
     this.showExerciseSelect = true;
     this.shouldFocusSelect = true;

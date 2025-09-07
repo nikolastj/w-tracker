@@ -20,6 +20,7 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
       id: new FormControl<number | null>(exerciseInstance?.id || null),
       sets: new FormArray<ExerciseSetForm>(
         exerciseInstance?.sets?.map((set) => new ExerciseSetForm(set)) || [],
+        [Validators.minLength(1)],
       ),
       exerciseType: new FormControl<ExerciseTypeSimple | null>(
         exerciseInstance?.exerciseType || null,
