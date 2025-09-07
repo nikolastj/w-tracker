@@ -28,11 +28,7 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "fileReplacements": [],
-            "outputHashing": "all",
-            "extractLicenses": false,
-            "sourceMap": false,
-            "namedChunks": false
+            "fileReplacements": []
           },
           "configurations": {
             "production": {
