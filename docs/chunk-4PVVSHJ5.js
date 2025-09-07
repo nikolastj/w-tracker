@@ -446,6 +446,15 @@ var MatCardModule = class _MatCardModule {
   }], null, null);
 })();
 
+// src/environments/environment.ts
+var environment = {
+  production: true,
+  apiUrl: "https://workout-tracker-light-be-production.up.railway.app",
+  // example production API
+  href: "/w-tracker"
+  // Add other production environment variables here
+};
+
 // src/app/core/interceptors/auth.interceptor.ts
 var authInterceptor = (req, next) => {
   const token = localStorage.getItem("auth_token");
@@ -464,6 +473,7 @@ var authInterceptor = (req, next) => {
 export {
   MatCard,
   MatCardModule,
+  environment,
   authInterceptor
 };
-//# sourceMappingURL=chunk-YRE5AERI.js.map
+//# sourceMappingURL=chunk-4PVVSHJ5.js.map

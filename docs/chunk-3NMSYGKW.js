@@ -2,9 +2,11 @@ import {
   MatProgressSpinner,
   MatProgressSpinnerModule,
   NotificationService,
-  environment,
   handleNotifications
-} from "./chunk-ZGZQONXF.js";
+} from "./chunk-X7YEJBQC.js";
+import {
+  environment
+} from "./chunk-4PVVSHJ5.js";
 import {
   ChangeDetectionStrategy,
   CommonModule,
@@ -251,4 +253,4 @@ export {
   ExerciseTypesService,
   WorkoutsService
 };
-//# sourceMappingURL=chunk-DDBAPVIU.js.map
+//# sourceMappingURL=chunk-3NMSYGKW.js.map

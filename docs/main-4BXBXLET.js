@@ -1,7 +1,8 @@
 import {
   MatCardModule,
-  authInterceptor
-} from "./chunk-YRE5AERI.js";
+  authInterceptor,
+  environment
+} from "./chunk-4PVVSHJ5.js";
 import {
   MatToolbarModule
 } from "./chunk-RFCUSCJT.js";
@@ -71,7 +72,7 @@ var routes = [
   },
   {
     path: "auth",
-    loadChildren: () => import("./auth.module-W3ZJLKH6.js").then((m) => m.AuthModule)
+    loadChildren: () => import("./auth.module-YCXYJMUN.js").then((m) => m.AuthModule)
   },
   // Protected routes with shared layout
   {
@@ -81,11 +82,11 @@ var routes = [
     children: [
       {
         path: "dashboard",
-        loadComponent: () => import("./dashboard.component-6Y47KAO4.js").then((m) => m.DashboardComponent)
+        loadComponent: () => import("./dashboard.component-AUYHU25B.js").then((m) => m.DashboardComponent)
       },
       {
         path: "workout",
-        loadChildren: () => import("./workout-administration-R2BGYFUW.js").then((m) => m.workoutAdministrationRoutes)
+        loadChildren: () => import("./workout-administration-XL2WCKQO.js").then((m) => m.workoutAdministrationRoutes)
       }
     ]
   },
@@ -121,7 +122,8 @@ var App = class _App {
     if (redirectPath) {
       sessionStorage.removeItem("github-pages-redirect");
       setTimeout(() => {
-        this.router.navigateByUrl(redirectPath);
+        const cleanedRedirectPath = redirectPath.replace(environment.href, "");
+        this.router.navigateByUrl(cleanedRedirectPath);
       }, 0);
     }
   }
@@ -141,9 +143,9 @@ var App = class _App {
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(App, { className: "App", filePath: "src/app/app.ts", lineNumber: 14 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(App, { className: "App", filePath: "src/app/app.ts", lineNumber: 15 });
 })();
 
 // src/main.ts
 bootstrapApplication(App, appConfig).catch((err) => console.error(err));
-//# sourceMappingURL=main-ECFIKQEQ.js.map
+//# sourceMappingURL=main-4BXBXLET.js.map

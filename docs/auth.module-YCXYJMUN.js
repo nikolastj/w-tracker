@@ -14,15 +14,15 @@ var authRoutes = [
     children: [
       {
         path: "login",
-        loadComponent: () => import("./login.component-UNQFQREY.js").then((m) => m.LoginComponent)
+        loadComponent: () => import("./login.component-67XTN7RU.js").then((m) => m.LoginComponent)
       },
       {
         path: "register",
-        loadComponent: () => import("./register.component-Q577NP2T.js").then((m) => m.RegisterComponent)
+        loadComponent: () => import("./register.component-RAEOQSJI.js").then((m) => m.RegisterComponent)
       },
       {
         path: "forgot-password",
-        loadComponent: () => import("./forgot-password.component-BFZWIE6K.js").then((m) => m.ForgotPasswordComponent)
+        loadComponent: () => import("./forgot-password.component-ADAG3KOB.js").then((m) => m.ForgotPasswordComponent)
       }
     ]
   }
@@ -48,4 +48,4 @@ var AuthModule = class _AuthModule {
 export {
   AuthModule
 };
-//# sourceMappingURL=auth.module-W3ZJLKH6.js.map
+//# sourceMappingURL=auth.module-YCXYJMUN.js.map

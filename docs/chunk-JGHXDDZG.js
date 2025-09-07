@@ -1,8 +1,10 @@
 import {
   NotificationService,
-  environment,
   handleNotifications
-} from "./chunk-ZGZQONXF.js";
+} from "./chunk-X7YEJBQC.js";
+import {
+  environment
+} from "./chunk-4PVVSHJ5.js";
 import {
   HttpClient,
   Injectable,
@@ -64,4 +66,4 @@ var AuthApiService = class _AuthApiService {
 export {
   AuthApiService
 };
-//# sourceMappingURL=chunk-7M26THFH.js.map
+//# sourceMappingURL=chunk-JGHXDDZG.js.map

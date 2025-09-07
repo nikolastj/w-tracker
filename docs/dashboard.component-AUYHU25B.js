@@ -2,7 +2,7 @@ import {
   CacheResponseService,
   LoaderComponent,
   WorkoutsService
-} from "./chunk-DDBAPVIU.js";
+} from "./chunk-3NMSYGKW.js";
 import "./chunk-GXW27HL2.js";
 import {
   ControlContainer,
@@ -20,12 +20,12 @@ import {
   NotificationService,
   Validators,
   _ErrorStateTracker,
-  environment,
   handleNotifications
-} from "./chunk-ZGZQONXF.js";
+} from "./chunk-X7YEJBQC.js";
 import {
-  MatCardModule
-} from "./chunk-YRE5AERI.js";
+  MatCardModule,
+  environment
+} from "./chunk-4PVVSHJ5.js";
 import "./chunk-Z234J6D4.js";
 import "./chunk-H3TPSBW7.js";
 import "./chunk-RFCUSCJT.js";
@@ -8236,4 +8236,4 @@ var DashboardComponent = class _DashboardComponent {
 export {
   DashboardComponent
 };
-//# sourceMappingURL=dashboard.component-6Y47KAO4.js.map
+//# sourceMappingURL=dashboard.component-AUYHU25B.js.map

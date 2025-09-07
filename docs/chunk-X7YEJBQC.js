@@ -11511,14 +11511,6 @@ var _ErrorStateTracker = class {
   }
 };
 
-// src/environments/environment.ts
-var environment = {
-  production: true,
-  apiUrl: "https://workout-tracker-light-be-production.up.railway.app"
-  // example production API
-  // Add other production environment variables here
-};
-
 // src/app/core/services/notification.service.ts
 var NotificationService = class _NotificationService {
   snackBar = inject(MatSnackBar);
@@ -11782,7 +11774,6 @@ export {
   _ErrorStateTracker,
   MatProgressSpinner,
   MatProgressSpinnerModule,
-  environment,
   MatSnackBar,
   MatSnackBarModule,
   NotificationService,
@@ -11792,4 +11783,4 @@ export {
   MatDialogModule,
   CanDeactivateGuard
 };
-//# sourceMappingURL=chunk-ZGZQONXF.js.map
+//# sourceMappingURL=chunk-X7YEJBQC.js.map
