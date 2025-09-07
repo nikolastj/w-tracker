@@ -1,0 +1,19 @@
+.pill-drop {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -6px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;
+}
+
+.set-pill {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary)) !important;
+}
+
+.set-pill {
+  min-height: 32px;
+}
+
+.set-pill.has-drop-after {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}

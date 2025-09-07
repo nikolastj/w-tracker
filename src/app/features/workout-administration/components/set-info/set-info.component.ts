@@ -9,17 +9,17 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
   imports: [CommonModule, MatIconModule],
   template: `
     <div
-      class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium"
+      class="set-pill bg-primary text-textOnPrimary inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium"
       [ngClass]="pillClasses"
     >
       <!-- Warmup icon -->
       @if (setForm.controls.isWarmupSet.value) {
-        <mat-icon class="!text-base">local_fire_department</mat-icon>
+        <mat-icon class="opacity-50">local_fire_department</mat-icon>
       }
 
       <!-- Drop set icon -->
       @if (setForm.controls.isDropSet.value) {
-        <mat-icon class="!text-base">trending_down</mat-icon>
+        <mat-icon>trending_down</mat-icon>
       }
 
       <!-- Reps x Weight display -->
@@ -32,6 +32,7 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
 })
 export class SetInfoComponent {
   @Input({ required: true }) setForm!: ExerciseSetForm;
+  @Input() hasDropAfter = false;
 
   get displayText(): string {
     const reps = this.setForm.controls.reps.value || 0;
@@ -43,12 +44,20 @@ export class SetInfoComponent {
     const isWarmup = this.setForm.controls.isWarmupSet.value;
     const isDrop = this.setForm.controls.isDropSet.value;
 
+    let classes = '';
+
     if (isWarmup) {
-      return 'pill-warmup';
+      classes = 'pill-warmup';
     } else if (isDrop) {
-      return 'pill-drop';
+      classes = 'pill-drop';
     } else {
-      return 'pill-default';
+      classes = 'pill-default';
     }
+
+    if (this.hasDropAfter) {
+      classes += ' has-drop-after';
+    }
+
+    return classes;
   }
 }

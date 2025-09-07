@@ -9,6 +9,7 @@ module.exports = {
         secondary: 'var(--color-secondary)',
         bg: 'var(--color-bg)',
         text: 'var(--color-text)',
+        textOnPrimary: 'var(--color-text-on-primary)',
       },
     },
   },

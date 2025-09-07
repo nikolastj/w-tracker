@@ -10,10 +10,10 @@ import { SetInfoComponent } from './set-info.component';
   imports: [CommonModule, SetInfoComponent],
   template: `
     <div class="flex flex-col gap-2">
-      <h3 class="text-sm font-medium">Sets ({{ setsArray.controls.length }})</h3>
+      <h3 class="m-0 text-sm font-medium">Sets ({{ setsArray.controls.length }})</h3>
       <div class="flex flex-wrap gap-2">
         @for (setForm of setsArray.controls; track $index) {
-          <app-set-info [setForm]="setForm" />
+          <app-set-info [setForm]="setForm" [hasDropAfter]="hasDropSetAfter($index)" />
         }
       </div>
     </div>
@@ -22,4 +22,14 @@ import { SetInfoComponent } from './set-info.component';
 })
 export class SetInfoContainerComponent {
   @Input({ required: true }) setsArray!: FormArray<ExerciseSetForm>;
+
+  hasDropSetAfter(index: number): boolean {
+    const nextIndex = index + 1;
+    if (nextIndex >= this.setsArray.controls.length) {
+      return false;
+    }
+
+    const nextSet = this.setsArray.controls[nextIndex];
+    return nextSet.controls.isDropSet.value === true;
+  }
 }
