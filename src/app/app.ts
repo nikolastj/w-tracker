@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet, Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { RouterOutlet, Router } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('w-tracker');
-  
+
   private router = inject(Router);
 
   constructor() {
@@ -25,10 +26,11 @@ export class App {
     const redirectPath = sessionStorage.getItem('github-pages-redirect');
     if (redirectPath) {
       sessionStorage.removeItem('github-pages-redirect');
-      
+
       // Use setTimeout to ensure the router is ready
       setTimeout(() => {
-        this.router.navigateByUrl(redirectPath);
+        const cleanedRedirectPath = redirectPath.replace(environment.href, '');
+        this.router.navigateByUrl(cleanedRedirectPath);
       }, 0);
     }
   }

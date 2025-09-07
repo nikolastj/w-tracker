@@ -37,6 +37,6 @@ export const routes: Routes = [
   // Wildcard route - should be last
   {
     path: '**',
-    redirectTo: '/auth/login',
+    redirectTo: '/dashboard',
   },
 ];
