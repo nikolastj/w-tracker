@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ExerciseInstanceForm } from '../models/exercise-instance.form';
 import { ExerciseSetForm } from '../models/exercise-set.form';
 import { ExerciseSetFormComponent } from './exercise-set-form.component';
-import { ExerciseSetInfoComponent } from './exercise-set-info.component';
+import { SetInfoContainerComponent } from './set-info-container.component';
 
 @Component({
   selector: 'app-exercise-instance-form',
@@ -25,7 +25,7 @@ import { ExerciseSetInfoComponent } from './exercise-set-info.component';
     MatSliderModule,
     MatCardModule,
     ExerciseSetFormComponent,
-    ExerciseSetInfoComponent,
+    SetInfoContainerComponent,
   ],
   template: `
     <div class="flex flex-col gap-6">
@@ -45,16 +45,7 @@ import { ExerciseSetInfoComponent } from './exercise-set-info.component';
 
         <!-- Existing Sets Pills -->
         @if (exerciseForm.setsArray.controls.length > 0) {
-          <div class="flex flex-col gap-2">
-            <h3 class="text-sm font-medium text-gray-700">
-              Sets ({{ exerciseForm.setsArray.controls.length }})
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              @for (setForm of exerciseForm.setsArray.controls; track $index) {
-                <app-exercise-set-info [setForm]="setForm" />
-              }
-            </div>
-          </div>
+          <app-set-info-container [setsArray]="exerciseForm.setsArray" />
         } @else {
           <div class="py-4 text-center text-gray-500">
             <mat-icon class="mb-1 text-2xl">fitness_center</mat-icon>
@@ -124,7 +115,6 @@ export class ExerciseInstanceFormComponent {
       const nextOrder =
         currentSets.length > 0 ? Math.max(...currentSets.map((s) => s.order || 0)) + 1 : 1;
 
-      // Create new set form with the data and add to array
       const setForm = new ExerciseSetForm();
       setForm.patchValue({
         ...newSetData,
@@ -133,8 +123,12 @@ export class ExerciseInstanceFormComponent {
 
       this.exerciseForm.setsArray.push(setForm);
 
-      // Create a fresh form instance for the input component
-      this.newSetForm = new ExerciseSetForm();
+      const newForm = new ExerciseSetForm();
+      newForm.patchValue({
+        reps: newSetData.reps,
+        weight: newSetData.weight,
+      });
+      this.newSetForm = newForm;
     }
   }
 }
