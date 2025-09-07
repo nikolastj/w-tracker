@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Page, PageResponse } from '../models/page.model';
 import { handleNotifications } from '../../core';
 import { NotificationService } from '../../core/services/notification.service';
-import { Workout, CreateWorkout } from '../models/workout.model';
+import { Workout, CreateUpdateWorkout } from '../models/workout.model';
 
 @Injectable({
   providedIn: 'root',
@@ -29,11 +29,21 @@ export class WorkoutsService {
       );
   }
 
-  createWorkout(workout: CreateWorkout): Observable<Workout> {
+  createWorkout(workout: CreateUpdateWorkout): Observable<Workout> {
     return this.http.post<Workout>(`${this.API_URL}/workouts`, workout).pipe(
       handleNotifications({
         successMessage: 'Workout saved successfully!',
         errorMessage: 'Failed to save workout. Please try again.',
+        notificationService: this.notificationService,
+      }),
+    );
+  }
+
+  updateWorkout(id: number, workout: CreateUpdateWorkout): Observable<Workout> {
+    return this.http.put<Workout>(`${this.API_URL}/workouts/${id}`, workout).pipe(
+      handleNotifications({
+        successMessage: 'Workout updated successfully!',
+        errorMessage: 'Failed to update workout. Please try again.',
         notificationService: this.notificationService,
       }),
     );

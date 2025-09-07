@@ -43,7 +43,7 @@ export type CreateExerciseInstance = Omit<ExerciseInstance, 'id' | 'sets'> & {
   sets: CreateExerciseSet[];
 };
 
-export type CreateWorkout = Omit<Workout, 'id' | 'exercises'> & {
+export type CreateUpdateWorkout = Omit<Workout, 'id' | 'exercises'> & {
   id?: number;
   exercises: CreateExerciseInstance[];
 };

@@ -48,6 +48,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   workoutForm = new WorkoutForm();
   showExerciseSelect = false;
   expandedPanelIndex: number | null = null;
+  isEditMode = false;
 
   constructor(
     private router: Router,
@@ -57,6 +58,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit(): void {
+    this.isEditMode = !!this.workoutForm.value.id;
     this.loadExerciseTypes();
     this.loadTodaysWorkouts();
   }
@@ -151,11 +153,16 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
             dateCreated: new Date().toISOString(), // Set to current time
           };
           this.workoutForm = new WorkoutForm(workoutToClone);
+          this.isEditMode = true;
           this.isApiLoading.set(false);
-        } else this.isApiLoading.set(false);
+        } else {
+          this.isEditMode = false;
+          this.isApiLoading.set(false);
+        }
       },
       error: (error) => {
         console.error("Failed to load today's workout:", error);
+        this.isEditMode = !!this.workoutForm.value.id;
         this.isApiLoading.set(false);
         // Continue with empty form if fetching fails
       },
@@ -216,18 +223,21 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
 
     this.isApiLoading.set(true);
     const workoutData = this.workoutForm.getSubmitValue();
+    const workoutId = workoutData.id;
 
-    this.workoutsService
-      .createWorkout(workoutData)
-      .pipe(finalize(() => this.isApiLoading.set(false)))
-      .subscribe({
-        next: (savedWorkout) => {
-          // Mark form as pristine since it's been saved
-          this.workoutForm.markAsPristine();
+    // Choose create or update based on whether ID exists
+    const saveOperation = workoutId
+      ? this.workoutsService.updateWorkout(workoutId, workoutData)
+      : this.workoutsService.createWorkout(workoutData);
 
-          // Navigate to dashboard or workout details
-          this.router.navigate(['/dashboard']);
-        },
-      });
+    saveOperation.pipe(finalize(() => this.isApiLoading.set(false))).subscribe({
+      next: (savedWorkout) => {
+        // Mark form as pristine since it's been saved
+        this.workoutForm.markAsPristine();
+
+        // Navigate to dashboard or workout details
+        this.router.navigate(['/dashboard']);
+      },
+    });
   }
 }

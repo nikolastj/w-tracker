@@ -6,7 +6,7 @@ import {
   AbstractControl,
   ValidatorFn,
 } from '@angular/forms';
-import { Workout, CreateWorkout } from '../../../shared/models/workout.model';
+import { Workout, CreateUpdateWorkout } from '../../../shared/models/workout.model';
 import { ExerciseInstanceForm } from './exercise-instance.form';
 
 type WorkoutFormControls = {
@@ -66,7 +66,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
     });
   }
 
-  getSubmitValue(): CreateWorkout {
+  getSubmitValue(): CreateUpdateWorkout {
     const formValue = this.value;
     return {
       id: formValue.id || undefined,
