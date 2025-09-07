@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule, MatCheckboxChange } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ExerciseSetForm } from '../models/exercise-set.form';
+import { ExerciseSetForm } from '../../models/exercise-set.form';
 
 @Component({
   selector: 'app-exercise-set-form',
@@ -168,7 +168,7 @@ export class ExerciseSetFormComponent {
    * Get the button text based on edit mode
    */
   get addButtonText(): string {
-    if (this.isEditMode && this.hasSelectedSet) {
+    if (this.isEditMode) {
       return 'Update Set';
     }
     return 'Add Set';
@@ -178,7 +178,7 @@ export class ExerciseSetFormComponent {
    * Get the button icon based on edit mode
    */
   get addButtonIcon(): string {
-    if (this.isEditMode && this.hasSelectedSet) {
+    if (this.isEditMode) {
       return 'save';
     }
     return 'add';

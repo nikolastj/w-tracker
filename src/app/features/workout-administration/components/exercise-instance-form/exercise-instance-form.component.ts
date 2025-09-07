@@ -15,10 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
-import { ExerciseInstanceForm } from '../models/exercise-instance.form';
-import { ExerciseSetForm } from '../models/exercise-set.form';
-import { ExerciseSetFormComponent } from './exercise-set-form.component';
-import { SetInfoContainerComponent } from './set-info/set-info-container.component';
+import { ExerciseInstanceForm } from '../../models/exercise-instance.form';
+import { ExerciseSetForm } from '../../models/exercise-set.form';
+import { ExerciseSetFormComponent } from '../exercise-set-form/exercise-set-form.component';
+import { SetInfoContainerComponent } from '../set-info/set-info-container.component';
 
 @Component({
   selector: 'app-exercise-instance-form',
@@ -35,100 +35,7 @@ import { SetInfoContainerComponent } from './set-info/set-info-container.compone
     ExerciseSetFormComponent,
     SetInfoContainerComponent,
   ],
-  template: `
-    <div class="flex flex-col gap-4">
-      <!-- Exercise Info Card -->
-
-      <!-- Sets Section -->
-      <div class="flex flex-col gap-1">
-        <!-- Add Set Form -->
-        <div class="flex flex-col gap-2">
-          <app-exercise-set-form
-            [setForm]="newSetForm"
-            [showRemoveButton]="false"
-            [isEditMode]="isEditMode"
-            [hasSelectedSet]="selectedSetIndex !== null"
-            (addSet)="addSet($event)"
-          />
-        </div>
-
-        <!-- Existing Sets Pills -->
-        @if (exerciseForm.setsArray.controls.length > 0) {
-          <app-set-info-container
-            [setsArray]="exerciseForm.setsArray"
-            [isEditMode]="isEditMode"
-            [selectedSetIndex]="selectedSetIndex"
-            (setSelected)="onSetSelected($event)"
-          />
-        }
-      </div>
-
-      <!-- Exercise Comments -->
-      <!-- <div class="flex flex-col gap-4">
-        <h3 class="text-lg font-medium">Comments & Notes</h3>
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>Exercise Comments</mat-label>
-          <textarea
-            matInput
-            rows="3"
-            placeholder="Add any notes about this exercise..."
-            [formControl]="exerciseForm.controls.comment"
-          ></textarea>
-        </mat-form-field>
-      </div> -->
-
-      <!-- Energy Level -->
-      <!-- <div class="flex flex-col gap-4">
-        <h3 class="text-lg font-medium">Energy Level</h3>
-        <div class="px-4">
-          <mat-slider
-            [min]="1"
-            [max]="10"
-            [step]="1"
-            [discrete]="true"
-            [showTickMarks]="true"
-            class="w-full"
-          >
-            <input matSliderThumb [formControl]="exerciseForm.controls.energyLevel" />
-          </mat-slider>
-          <div class="mt-1 flex justify-between text-xs text-gray-500">
-            <span>Low Energy (1)</span>
-            <span>High Energy (10)</span>
-          </div>
-          @if (exerciseForm.controls.energyLevel.value) {
-            <div class="mt-2 text-center">
-              <span class="text-sm font-medium">
-                Energy Level: {{ exerciseForm.controls.energyLevel.value }}
-              </span>
-            </div>
-          }
-        </div>
-      </div> -->
-
-      <!-- Action Buttons -->
-      <div class="flex justify-between">
-        <!-- Edit/Unselect Button (visible only when there are sets) -->
-        @if (exerciseForm.setsArray.controls.length > 0) {
-          <button mat-stroked-button color="primary" (click)="onEditAction()" class="px-4">
-            <mat-icon class="mr-1">{{ editButtonIcon }}</mat-icon>
-            {{ editButtonText }}
-          </button>
-        }
-
-        <!-- Remove Button (Dynamic) -->
-        <button
-          mat-stroked-button
-          color="warn"
-          (click)="onRemoveAction()"
-          [disabled]="isRemoveButtonDisabled"
-          class="px-4"
-        >
-          <mat-icon class="mr-1">{{ removeButtonIcon }}</mat-icon>
-          {{ removeButtonText }}
-        </button>
-      </div>
-    </div>
-  `,
+  templateUrl: './exercise-instance-form.component.html',
 })
 export class ExerciseInstanceFormComponent implements OnInit, OnChanges {
   @Input({ required: true }) exerciseForm!: ExerciseInstanceForm;

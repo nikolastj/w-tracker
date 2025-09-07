@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { ExerciseInstanceFormComponent } from './components/exercise-instance-form.component';
+import { ExerciseInstanceFormComponent } from './components/exercise-instance-form/exercise-instance-form.component';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ExerciseTypesService } from '../../shared/services/exercise-types.service';
