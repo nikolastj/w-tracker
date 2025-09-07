@@ -94,6 +94,16 @@ body {
   animation: none !important;
   transition: none !important;
 }
+
+div {
+  border-width: 0;
+  border-style: solid;
+}
+
+/* Override for Material Design components */
+[class*='mat-'] {
+  border: initial;
+}
 /* You can add global styles to this file, and also import other style files */
 
 @import 'animations.scss';
@@ -107,10 +117,6 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-div {
-  border: 0 solid;
-}
 
 html,
 body {

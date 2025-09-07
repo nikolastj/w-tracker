@@ -10,6 +10,7 @@ type RegisterUserFormControls = {
   password: FormControl<string | null>;
   confirmPassword: FormControl<string | null>;
   email: FormControl<string | null>;
+  registerCode: FormControl<string | null>;
 };
 
 export class RegisterUserForm extends FormGroup<RegisterUserFormControls> {
@@ -30,6 +31,7 @@ export class RegisterUserForm extends FormGroup<RegisterUserFormControls> {
         ]),
         confirmPassword: new FormControl<string | null>('', Validators.required),
         email: new FormControl<string | null>('', [Validators.required, Validators.email]),
+        registerCode: new FormControl<string | null>('', Validators.required),
       },
       { validators: RegisterUserForm.passwordMatchValidator },
     );
@@ -45,6 +47,7 @@ export class RegisterUserForm extends FormGroup<RegisterUserFormControls> {
         bio: formValue.bio || '',
         password: formValue.password || '',
         email: formValue.email || '',
+        registerCode: formValue.registerCode || '',
       },
     };
   }

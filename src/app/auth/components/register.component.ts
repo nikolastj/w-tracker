@@ -1,7 +1,7 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -30,7 +30,7 @@ import { RegisterResponse } from '../models/auth.models';
     MatProgressSpinnerModule,
   ],
   template: `
-    <div class="w-full max-w-md space-y-8">
+    <div class="flex w-full max-w-md flex-col gap-8">
       <div>
         <h2 class="auth-heading mt-6 text-center text-3xl font-extrabold">Create your account</h2>
         <p class="auth-text mt-2 text-center text-sm">
@@ -42,7 +42,23 @@ import { RegisterResponse } from '../models/auth.models';
       </div>
 
       <mat-card class="auth-card p-6">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+          <div>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Register Code</mat-label>
+              <input
+                matInput
+                formControlName="registerCode"
+                placeholder="Enter registration code"
+                autocomplete="off"
+              />
+              <mat-icon matSuffix>vpn_key</mat-icon>
+              <mat-error *ngIf="registerForm.get('registerCode')?.hasError('required')">
+                Register code is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
           <div class="grid grid-cols-2 gap-4">
             <mat-form-field appearance="outline">
               <mat-label>First Name</mat-label>
@@ -190,7 +206,7 @@ import { RegisterResponse } from '../models/auth.models';
               [disabled]="registerForm.invalid || isLoading"
             >
               <mat-spinner *ngIf="isLoading" diameter="20" class="mr-2"></mat-spinner>
-              Create Account
+              <span *ngIf="!isLoading">Create Account</span>
             </button>
           </div>
         </form>
@@ -201,6 +217,7 @@ import { RegisterResponse } from '../models/auth.models';
 export class RegisterComponent implements OnDestroy {
   private authStateService = inject(AuthStateService);
   private authApiService = inject(AuthApiService);
+  private router = inject(Router);
   private destroy$ = new Subject<void>();
 
   hidePassword = true;
@@ -235,6 +252,8 @@ export class RegisterComponent implements OnDestroy {
         .subscribe({
           next: () => {
             this.isLoading = false;
+            // Navigate to dashboard after successful registration
+            this.router.navigate(['/dashboard']);
           },
           error: () => {
             this.isLoading = false;

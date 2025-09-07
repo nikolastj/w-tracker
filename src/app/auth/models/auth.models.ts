@@ -30,6 +30,7 @@ export interface RegisterRequest {
     bio: string;
     password: string;
     email: string;
+    registerCode: string;
   };
 }
 
