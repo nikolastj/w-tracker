@@ -72,6 +72,10 @@ export class ColorSchemeService implements OnDestroy {
 
     if (bodyElement) {
       this.renderer.setStyle(bodyElement, 'color-scheme', scheme);
+
+      // Set data-theme attribute on document element
+      document.documentElement.setAttribute('data-theme', scheme);
+
       this.currentTheme$.next(scheme);
       console.log(`Color scheme applied: ${scheme}`);
     }

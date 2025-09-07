@@ -1,0 +1,11 @@
+:root[data-theme='dark'] {
+  --color-primary: #7c3aed;
+  --color-secondary: #06b6d4;
+  --color-bg: #0b1220;
+  --color-text: #e6eef8;
+}
+
+$primary: var(--color-primary);
+$secondary: var(--color-secondary);
+$text: var(--color-text);
+$bg: var(--color-bg);

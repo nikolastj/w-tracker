@@ -100,6 +100,9 @@ body {
 /* Import ng-select theme for consistent styling */
 @import '@ng-select/ng-select/themes/default.theme.css';
 
+@import './themes/theme-light.scss';
+@import './themes/theme-dark.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

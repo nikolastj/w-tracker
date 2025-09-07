@@ -2,7 +2,15 @@
 module.exports = {
   content: ['./src/**/*.{html,ts}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        /* use CSS variables so classes pick up current theme */
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        bg: 'var(--color-bg)',
+        text: 'var(--color-text)',
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
   corePlugins: {
