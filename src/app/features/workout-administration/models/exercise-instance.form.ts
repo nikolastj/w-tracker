@@ -19,7 +19,7 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
     super({
       id: new FormControl<number | null>(exerciseInstance?.id || null),
       sets: new FormArray<ExerciseSetForm>(
-        exerciseInstance?.sets?.map((set) => new ExerciseSetForm(set)) || [new ExerciseSetForm()],
+        exerciseInstance?.sets?.map((set) => new ExerciseSetForm(set)) || [],
       ),
       exerciseType: new FormControl<ExerciseTypeSimple | null>(
         exerciseInstance?.exerciseType || null,
