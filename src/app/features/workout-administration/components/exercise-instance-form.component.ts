@@ -39,7 +39,7 @@ import { ExerciseSetInfoComponent } from './exercise-set-info.component';
           <app-exercise-set-form
             [setForm]="newSetForm"
             [showRemoveButton]="false"
-            (addSet)="addSet()"
+            (addSet)="addSet($event)"
           />
         </div>
 
@@ -114,10 +114,10 @@ export class ExerciseInstanceFormComponent {
 
   newSetForm = new ExerciseSetForm();
 
-  addSet(): void {
-    if (this.newSetForm.valid) {
+  addSet(formToAdd: ExerciseSetForm): void {
+    if (formToAdd.valid) {
       // Get the form data
-      const newSetData = this.newSetForm.getSubmitValue();
+      const newSetData = formToAdd.getSubmitValue();
 
       // Calculate the next order
       const currentSets = this.exerciseForm.setsArray.value;
@@ -133,7 +133,7 @@ export class ExerciseInstanceFormComponent {
 
       this.exerciseForm.setsArray.push(setForm);
 
-      // Create a fresh form instance to ensure clean validation state
+      // Create a fresh form instance for the input component
       this.newSetForm = new ExerciseSetForm();
     }
   }

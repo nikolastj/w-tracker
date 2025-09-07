@@ -1,4 +1,11 @@
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidatorFn,
+} from '@angular/forms';
 import {
   ExerciseInstance,
   ExerciseTypeSimple,
@@ -20,7 +27,7 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
       id: new FormControl<number | null>(exerciseInstance?.id || null),
       sets: new FormArray<ExerciseSetForm>(
         exerciseInstance?.sets?.map((set) => new ExerciseSetForm(set)) || [],
-        [Validators.minLength(1)],
+        [ExerciseInstanceForm.atLeastOneSetValidator],
       ),
       exerciseType: new FormControl<ExerciseTypeSimple | null>(
         exerciseInstance?.exerciseType || null,
@@ -71,4 +78,9 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
       energyLevel: formValue.energyLevel || null,
     };
   }
+
+  static atLeastOneSetValidator: ValidatorFn = (control: AbstractControl) => {
+    const formArray = control as FormArray;
+    return formArray.length > 0 ? null : { atLeastOneSet: true };
+  };
 }

@@ -156,7 +156,7 @@ export class ExerciseSetFormComponent {
   @Input({ required: true }) setForm!: ExerciseSetForm;
   @Input() showRemoveButton = true;
   @Output() removeSet = new EventEmitter<void>();
-  @Output() addSet = new EventEmitter<void>();
+  @Output() addSet = new EventEmitter<ExerciseSetForm>();
 
   get isSetValid(): boolean {
     return this.setForm.valid;
@@ -192,7 +192,7 @@ export class ExerciseSetFormComponent {
 
   onAddSet(): void {
     if (this.isSetValid) {
-      this.addSet.emit();
+      this.addSet.emit(this.setForm);
     }
   }
 }

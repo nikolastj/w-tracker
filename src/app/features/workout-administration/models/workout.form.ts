@@ -1,4 +1,11 @@
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidatorFn,
+} from '@angular/forms';
 import { Workout, CreateWorkout } from '../../../shared/models/workout.model';
 import { ExerciseInstanceForm } from './exercise-instance.form';
 
@@ -20,7 +27,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
       ),
       exercises: new FormArray<ExerciseInstanceForm>(
         workout?.exercises?.map((exercise) => new ExerciseInstanceForm(exercise)) || [],
-        [Validators.minLength(1)],
+        [WorkoutForm.atLeastOneExerciseValidator],
       ),
       comment: new FormControl<string | null>(workout?.comment || ''),
       energyLevel: new FormControl<number | null>(workout?.energyLevel || null, [
@@ -54,4 +61,9 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
       energyLevel: formValue.energyLevel || null,
     };
   }
+
+  static atLeastOneExerciseValidator: ValidatorFn = (control: AbstractControl) => {
+    const formArray = control as FormArray;
+    return formArray.length > 0 ? null : { atLeastOneExercise: true };
+  };
 }
