@@ -86,14 +86,19 @@ export class TimelineCalendarComponent {
     const workouts = this.workoutDates();
     return new Set(
       workouts.map((workout) => {
-        const workoutDate = new Date(workout.dateCreated);
-        return workoutDate.toISOString().split('T')[0];
+        // Extract date part directly from ISO string to avoid timezone issues
+        return workout.dateCreated.split('T')[0];
       }),
     );
   });
 
   dateClass = (date: Date): string => {
-    const dateStr = date.toISOString().split('T')[0];
+    // Format the date as YYYY-MM-DD in local timezone to match workout dates
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+
     const isWorkoutDay = this.workoutDatesSet().has(dateStr);
     return isWorkoutDay ? 'workout-day' : '';
   };
