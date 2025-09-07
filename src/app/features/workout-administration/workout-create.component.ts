@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { NgSelectModule, NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { ExerciseInstanceFormComponent } from './components/exercise-instance-form.component';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -37,15 +37,12 @@ import {
   templateUrl: './workout-create.component.html',
   styleUrl: './workout-create.component.scss',
 })
-export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComponentDeactivate {
-  @ViewChild('exerciseTypeSelect') exerciseTypeSelect!: NgSelectComponent;
-
+export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   exerciseTypes: ExerciseType[] = [];
   isLoading = false;
   workoutForm = new WorkoutForm();
   showExerciseSelect = false;
   expandedPanelIndex: number | null = null;
-  private shouldFocusSelect = false;
 
   constructor(
     private router: Router,
@@ -55,15 +52,6 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
 
   ngOnInit(): void {
     this.loadExerciseTypes();
-  }
-
-  ngAfterViewChecked(): void {
-    if (this.shouldFocusSelect && this.exerciseTypeSelect && this.showExerciseSelect) {
-      // Focus and open the dropdown
-      this.exerciseTypeSelect.focus();
-      this.exerciseTypeSelect.open();
-      this.shouldFocusSelect = false;
-    }
   }
 
   /**
@@ -85,7 +73,6 @@ export class WorkoutCreateComponent implements OnInit, AfterViewChecked, CanComp
 
   showAddExerciseDropdown(): void {
     this.showExerciseSelect = true;
-    this.shouldFocusSelect = true;
   }
 
   onExerciseTypeSelected(exerciseType: ExerciseType): void {

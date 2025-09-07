@@ -46,9 +46,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
   }
 
   removeExercise(index: number): void {
-    if (this.exercisesArray.length > 1) {
-      this.exercisesArray.removeAt(index);
-    }
+    this.exercisesArray.removeAt(index);
   }
 
   getSubmitValue(): CreateWorkout {

@@ -56,10 +56,8 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
   }
 
   removeSet(index: number): void {
-    if (this.setsArray.length > 1) {
-      this.setsArray.removeAt(index);
-      this.reorderSets();
-    }
+    this.setsArray.removeAt(index);
+    this.reorderSets();
   }
 
   private reorderSets(): void {

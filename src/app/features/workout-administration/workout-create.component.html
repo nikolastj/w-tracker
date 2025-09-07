@@ -40,12 +40,12 @@
               @if (showExerciseSelect) {
                 <div class="flex w-full max-w-md items-center gap-2">
                   <ng-select
-                    #exerciseTypeSelect
                     [items]="availableExerciseTypes"
                     bindLabel="name"
                     placeholder="Select an exercise type..."
                     (change)="onExerciseTypeSelected($event)"
                     [loading]="isLoading"
+                    [isOpen]="true"
                     class="flex-1"
                   >
                     <ng-template ng-option-tmp let-item="item">
