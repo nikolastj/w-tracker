@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import { finalize } from 'rxjs/operators';
 import { ExerciseTypesService } from '../../shared/services/exercise-types.service';
 import { WorkoutsService } from '../../shared/services/workouts.service';
 import { ExerciseType } from '../../shared/models/exercise-type.model';
+import { Workout } from '../../shared/models/workout.model';
 import { WorkoutForm } from './models/workout.form';
 import { ExerciseInstanceForm } from './models/exercise-instance.form';
 import { CanComponentDeactivate } from '../../core';
@@ -43,7 +44,7 @@ import {
 export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   exerciseTypes: ExerciseType[] = [];
   isLoading = false;
-  isSaving = false;
+  isApiLoading = signal(false);
   workoutForm = new WorkoutForm();
   showExerciseSelect = false;
   expandedPanelIndex: number | null = null;
@@ -57,6 +58,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
 
   ngOnInit(): void {
     this.loadExerciseTypes();
+    this.loadTodaysWorkouts();
   }
 
   /**
@@ -137,6 +139,29 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
       });
   }
 
+  private loadTodaysWorkouts(): void {
+    this.isApiLoading.set(true);
+    this.workoutsService.getTodaysWorkout().subscribe({
+      next: (todaysWorkout: Workout | null) => {
+        if (todaysWorkout) {
+          // Create a new form with the existing workout data but clear the ID to make it a new workout
+          const workoutToClone: Workout = {
+            ...todaysWorkout,
+            id: 0, // Clear ID so it creates a new workout
+            dateCreated: new Date().toISOString(), // Set to current time
+          };
+          this.workoutForm = new WorkoutForm(workoutToClone);
+          this.isApiLoading.set(false);
+        } else this.isApiLoading.set(false);
+      },
+      error: (error) => {
+        console.error("Failed to load today's workout:", error);
+        this.isApiLoading.set(false);
+        // Continue with empty form if fetching fails
+      },
+    });
+  }
+
   goBack(): void {
     this.router.navigate(['/dashboard']);
   }
@@ -181,10 +206,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate(): boolean {
-    if (!this.workoutForm.dirty) {
-      return true;
-    }
-    return false;
+    return !this.workoutForm.dirty;
   }
 
   saveWorkout(): void {
@@ -192,12 +214,12 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
       return;
     }
 
-    this.isSaving = true;
+    this.isApiLoading.set(true);
     const workoutData = this.workoutForm.getSubmitValue();
 
     this.workoutsService
       .createWorkout(workoutData)
-      .pipe(finalize(() => (this.isSaving = false)))
+      .pipe(finalize(() => this.isApiLoading.set(false)))
       .subscribe({
         next: (savedWorkout) => {
           // Mark form as pristine since it's been saved

@@ -38,4 +38,13 @@ export class WorkoutsService {
       }),
     );
   }
+
+  getTodaysWorkout(): Observable<Workout | null> {
+    return this.http.get<Workout | null>(`${this.API_URL}/workouts/todays-workout`).pipe(
+      handleNotifications({
+        errorMessage: "Failed to load today's workout. Please try again.",
+        notificationService: this.notificationService,
+      }),
+    );
+  }
 }

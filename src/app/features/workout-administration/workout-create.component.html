@@ -1,8 +1,8 @@
 <div class="container relative mx-auto h-full max-w-4xl md:p-6">
   <!-- Loader Overlay -->
-  @if (isSaving) {
+  @if (isApiLoading()) {
     <div class="absolute inset-0 z-50 h-screen w-screen">
-      <app-loader [opacity]="80"></app-loader>
+      <app-loader class="flex h-full w-full" [opacity]="80"></app-loader>
     </div>
   }
 
@@ -114,7 +114,7 @@
           <button
             mat-stroked-button
             color="accent"
-            [disabled]="!workoutForm.valid || isSaving"
+            [disabled]="!workoutForm.valid || isApiLoading()"
             (click)="saveWorkout()"
             class="px-6"
           >
