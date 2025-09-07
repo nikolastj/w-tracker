@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/features/workout-administration/workout-administration.routes.ts"],
+  "sourcesContent": ["import { Routes } from '@angular/router';\nimport { CanDeactivateGuard } from '../../core';\n\nexport const workoutAdministrationRoutes: Routes = [\n  {\n    path: 'create',\n    canDeactivate: [CanDeactivateGuard],\n    loadComponent: () => import('./workout-create.component').then((m) => m.WorkoutCreateComponent),\n  },\n  {\n    path: 'edit/:id',\n    canDeactivate: [CanDeactivateGuard],\n    loadComponent: () => import('./workout-create.component').then((m) => m.WorkoutCreateComponent),\n  },\n];\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;AAGO,IAAM,8BAAsC;EACjD;IACE,MAAM;IACN,eAAe,CAAC,kBAAkB;IAClC,eAAe,MAAM,OAAO,wCAA4B,EAAE,KAAK,CAAC,MAAM,EAAE,sBAAsB;;EAEhG;IACE,MAAM;IACN,eAAe,CAAC,kBAAkB;IAClC,eAAe,MAAM,OAAO,wCAA4B,EAAE,KAAK,CAAC,MAAM,EAAE,sBAAsB;;;",
+  "names": []
+}

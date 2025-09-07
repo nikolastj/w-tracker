@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/shared/components/shared-header.component.scss"],
+  "sourcesContent": [":host {\n  display: block;\n}\n\n.header-container {\n  position: relative;\n}\n\nmat-toolbar {\n  z-index: 10;\n  transition: height 0.3s ease;\n\n  @media (max-width: 768px) {\n    height: 0;\n    min-height: 0;\n    padding: 0;\n    overflow: visible;\n  }\n}\n\n.header-title {\n  @media (max-width: 768px) {\n    display: none;\n  }\n}\n\n.header-actions {\n  @media (max-width: 768px) {\n    position: fixed;\n    top: 16px;\n    right: 16px;\n    z-index: 1000;\n    background: var(--mat-toolbar-container-background-color, #1976d2);\n    border-radius: 50%;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);\n  }\n}\n"],
+  "mappings": ";AAAA;AACE,WAAA;;AAGF,CAAA;AACE,YAAA;;AAGF;AACE,WAAA;AACA,cAAA,OAAA,KAAA;;AAEA,OAAA,CAAA,SAAA,EAAA;AAJF;AAKI,YAAA;AACA,gBAAA;AACA,aAAA;AACA,cAAA;;;AAKF,OAAA,CAAA,SAAA,EAAA;AADF,GAAA;AAEI,aAAA;;;AAKF,OAAA,CAAA,SAAA,EAAA;AADF,GAAA;AAEI,cAAA;AACA,SAAA;AACA,WAAA;AACA,aAAA;AACA,gBAAA,IAAA,wCAAA,EAAA;AACA,mBAAA;AACA,gBAAA,EAAA,IAAA,IAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;;;",
+  "names": []
+}
