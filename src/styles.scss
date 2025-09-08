@@ -36,58 +36,6 @@ body {
   margin: 0;
 }
 
-/* Color-scheme responsive classes */
-.auth-background {
-  background-color: light-dark(#f9fafb, #111827);
-}
-
-.auth-card {
-  background-color: light-dark(#ffffff, #1f2937);
-  box-shadow: light-dark(0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.5));
-}
-
-.auth-heading {
-  color: light-dark(#111827, #f9fafb);
-}
-
-.auth-text {
-  color: light-dark(#6b7280, #d1d5db);
-}
-
-.dashboard-background {
-  background-color: light-dark(#f9fafb, #111827);
-}
-
-.dashboard-card {
-  background-color: light-dark(#ffffff, #1f2937);
-  box-shadow: light-dark(0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.3));
-}
-
-.dashboard-heading {
-  color: light-dark(#111827, #f9fafb);
-}
-
-.dashboard-text {
-  color: light-dark(#6b7280, #d1d5db);
-}
-
-/* Animation system migration - CSS-based animations for Material components */
-/* Basic transitions for Material Design components */
-// mat-card,
-// mat-form-field,
-// mat-button,
-// .mat-mdc-button,
-// .mat-mdc-form-field {
-//   transition:
-//     box-shadow 0.3s ease,
-//     background-color 0.3s ease,
-//     color 0.3s ease;
-// }
-
-// mat-card:hover {
-//   transition: box-shadow 0.3s ease;
-// }
-
 /* Global animation disable utility class for testing/bootstrapping */
 .no-animation,
 .no-animation * {

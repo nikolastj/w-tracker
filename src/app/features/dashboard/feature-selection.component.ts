@@ -14,7 +14,7 @@ import { Workout } from '../../shared';
       <div class="flex w-full max-w-md flex-col gap-4">
         @if (selectedWorkout()) {
           <!-- Selected Workout Actions -->
-          <div class="dashboard-card p- flex flex-col items-center gap-2 rounded-md p-1 pb-4">
+          <div class="p- flex flex-col items-center gap-2 rounded-md p-1 pb-4">
             <!-- Clear Selection Icon Button -->
             <div class="flex h-0 w-full overflow-visible">
               <button
@@ -31,7 +31,7 @@ import { Workout } from '../../shared';
             <p class="m-0 text-lg">
               {{ formatWorkoutDate(selectedWorkout()!.dateCreated) }}
             </p>
-            <p class="dashboard-text m-0">{{ selectedWorkout()!.exercises.length }} exercises</p>
+            <p class="m-0">{{ selectedWorkout()!.exercises.length }} exercises</p>
           </div>
 
           <!-- View Workout Button -->

@@ -29,6 +29,7 @@ import { RegisterResponse } from '../models/auth.models';
     MatIconModule,
     MatProgressSpinnerModule,
   ],
+  styleUrl: '../auth.scss',
   template: `
     <div class="flex w-full max-w-md flex-col gap-8">
       <div>

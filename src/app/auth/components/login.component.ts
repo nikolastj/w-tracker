@@ -29,6 +29,7 @@ import { LoginResponse } from '../models/auth.models';
     MatIconModule,
     MatProgressSpinnerModule,
   ],
+  styleUrl: '../auth.scss',
   template: `
     <div class="w-full max-w-md space-y-8">
       <div>

@@ -28,6 +28,7 @@ import { AuthApiService } from '../services/auth-api.service';
     MatProgressSpinnerModule,
     MatSnackBarModule,
   ],
+  styleUrl: '../auth.scss',
   template: `
     <div class="w-full max-w-md space-y-8">
       <div>
