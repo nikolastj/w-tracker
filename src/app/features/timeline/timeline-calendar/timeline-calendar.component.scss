@@ -51,14 +51,19 @@
     padding-bottom: 0 !important  ;
   }
 
-  // Workout day highlighting
+  // Workout day highlighting with continuous diagonal gradient
   .workout-day {
-    background-color: rgba(59, 130, 246, 0.3) !important; // Blue with opacity
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-gradient) 100%
+    ) !important;
     border-radius: 50% !important;
     font-weight: 600 !important;
+    opacity: 0.8 !important;
   }
 
   .workout-day:hover {
-    background-color: rgba(59, 130, 246, 0.5) !important;
+    opacity: 1 !important;
   }
 }

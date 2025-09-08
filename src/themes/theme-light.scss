@@ -1,7 +1,15 @@
 :root {
   --color-primary: #7c3aed;
+  --color-primary-gradient: #a871db;
   --color-secondary: #9333ea;
   --color-bg: #ffffff;
   --color-text: #0f172a;
   --color-text-on-primary: #ffffff;
 }
+
+$primary: var(--color-primary);
+$secondary: var(--color-secondary);
+$text: var(--color-text);
+$bg: var(--color-bg);
+$text-on-primary: var(--color-text-on-primary);
+$primary-gradient: var(--color-primary-gradient);

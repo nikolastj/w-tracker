@@ -2,11 +2,19 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-left: -6px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-gradient)
+  ) !important;
 }
 
 .set-pill {
-  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary)) !important;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-gradient),
+    var(--color-primary)
+  ) !important;
 }
 
 .set-pill {
