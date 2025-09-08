@@ -53,6 +53,7 @@ export class TimelineCalendarComponent {
   dateFilter = input<{ fromDate: Date; toDate: Date }>();
   workoutDates = input<{ id: number; dateCreated: string }[]>([]);
   scrolledToTop = output<void>();
+  workoutDateClicked = output<{ id: number; dateCreated: string }>();
 
   private previousMonthCount = 0;
 
@@ -102,6 +103,25 @@ export class TimelineCalendarComponent {
     const isWorkoutDay = this.workoutDatesSet().has(dateStr);
     return isWorkoutDay ? 'workout-day' : '';
   };
+
+  onDateSelected(date: Date | null): void {
+    if (!date) return;
+
+    // Format the date as YYYY-MM-DD to match workout dates
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+
+    // Find the workout for this date
+    const workoutForDate = this.workoutDates().find(
+      (workout) => workout.dateCreated.split('T')[0] === dateStr,
+    );
+
+    if (workoutForDate) {
+      this.workoutDateClicked.emit(workoutForDate);
+    }
+  }
 
   onScrolledToTop() {
     if (!this.loading() && this.calendarMonths.length > 0) {

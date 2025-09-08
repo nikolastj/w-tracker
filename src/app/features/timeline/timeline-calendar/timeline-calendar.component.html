@@ -27,7 +27,13 @@
             {{ getMonthName(month).year }}
           </span>
         </div>
-        <mat-calendar class="w-full" [startAt]="month" [dateClass]="dateClass"> </mat-calendar>
+        <mat-calendar
+          class="w-full"
+          [startAt]="month"
+          [dateClass]="dateClass"
+          (selectedChange)="onDateSelected($event)"
+        >
+        </mat-calendar>
       </div>
     }
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WorkoutsService, Page, Workout } from '../../shared';
 import { delay } from 'rxjs';
@@ -15,6 +15,7 @@ import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar
         [dateFilter]="dateFilter()"
         [workoutDates]="workoutDates()"
         (scrolledToTop)="onScrolledToTop()"
+        (workoutDateClicked)="onWorkoutDateClicked($event)"
       >
       </app-timeline-calendar>
     </div>
@@ -23,6 +24,7 @@ import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar
 export class WorkoutsTimelineComponent implements OnInit {
   workoutsData: Workout[] = [];
   loading = signal(true);
+  workoutSelected = output<Workout>();
 
   // Single filter object with Date objects
   dateFilter = signal<{ fromDate: Date; toDate: Date }>({
@@ -50,6 +52,14 @@ export class WorkoutsTimelineComponent implements OnInit {
     });
 
     this.loadWorkouts(this.dateFilter(), true);
+  }
+
+  onWorkoutDateClicked(workoutDate: { id: number; dateCreated: string }) {
+    // Find the full workout data
+    const workout = this.workoutsData.find((w) => w.id === workoutDate.id);
+    if (workout) {
+      this.workoutSelected.emit(workout);
+    }
   }
 
   private loadInitData() {
