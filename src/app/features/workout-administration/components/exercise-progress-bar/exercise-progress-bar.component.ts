@@ -23,6 +23,8 @@ export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
   showProgress = false;
   previousWorkoutDate = '';
   previousSetsArray = new FormArray<ExerciseSetForm>([]);
+  showCelebration = false;
+  hasReached100 = false;
 
   private destroy$ = new Subject<void>();
 
@@ -86,6 +88,8 @@ export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
   }
 
   private calculateTotalWeights(): void {
+    const previousPercentage = this.progressPercentage;
+
     // Calculate current total weight (excluding warmup sets)
     this.currentTotalWeight = this.calculateCurrentWeight();
 
@@ -99,10 +103,20 @@ export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
     if (this.previousTotalWeight > 0) {
       this.progressPercentage = (this.currentTotalWeight / this.previousTotalWeight) * 100;
       this.showProgress = true;
+
+      // Check if we reached 100% for the first time
+      if (this.progressPercentage >= 100 && !this.hasReached100 && previousPercentage < 100) {
+        this.triggerCelebration();
+        this.hasReached100 = true;
+      }
     } else {
       this.progressPercentage = 0;
       this.showProgress = false;
     }
+  }
+
+  private triggerCelebration(): void {
+    this.showCelebration = true;
   }
 
   private calculateCurrentWeight(): number {
