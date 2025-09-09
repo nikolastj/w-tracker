@@ -1,0 +1,39 @@
+@if (showProgress) {
+  <div class="my-2">
+    <div class="mt-1 flex items-center justify-between text-xs">
+      <span class="text-gray-600 dark:text-gray-400"
+        >Last time:&nbsp;{{ previousWorkoutDate }}</span
+      >
+      <span [ngClass]="progressColorClass">{{ progressPercentage.toFixed(1) }}%</span>
+      <span
+        >{{ currentTotalWeight
+        }}<span class="text-gray-600 dark:text-gray-400"
+          >/{{ previousTotalWeight }} (kg)</span
+        ></span
+      >
+    </div>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progressPercentage"
+      [color]="progressColor"
+      class="h-2 overflow-hidden rounded-md"
+    >
+    </mat-progress-bar>
+    <div class="mb-1 flex flex-col gap-1">
+      <div class="origin-left opacity-60">
+        <app-set-info-container
+          [setsArray]="previousSetsArray"
+          [isEditMode]="false"
+          [isSmallView]="true"
+        >
+        </app-set-info-container>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="my-2">
+    <div class="text-center text-xs text-gray-600 dark:text-gray-400">
+      No exercise record in the last month
+    </div>
+  </div>
+}

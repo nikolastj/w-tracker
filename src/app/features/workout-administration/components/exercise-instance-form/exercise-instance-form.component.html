@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-2">
   <!-- Exercise Info Card -->
 
   <!-- Sets Section -->
@@ -22,6 +22,7 @@
         [selectedSetIndex]="selectedSetIndex"
         (setSelected)="onSetSelected($event)"
       />
+      <app-exercise-progress-bar [exerciseForm]="exerciseForm"></app-exercise-progress-bar>
     }
   </div>
 

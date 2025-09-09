@@ -10,14 +10,17 @@ import { SetInfoComponent } from './set-info.component';
   imports: [CommonModule, SetInfoComponent],
   template: `
     <div class="flex flex-col gap-1">
-      <h3 class="m-0 text-sm font-medium">Sets ({{ setsArray.controls.length }})</h3>
-      <div class="flex flex-wrap gap-2">
+      @if (!isSmallView) {
+        <h3 class="m-0 text-sm font-medium">Sets ({{ setsArray.controls.length }})</h3>
+      }
+      <div class="set-info-container flex flex-wrap gap-2" [class.small-layout]="isSmallView">
         @for (setForm of setsArray.controls; track $index) {
           <app-set-info
             [setForm]="setForm"
             [hasDropAfter]="hasDropSetAfter($index)"
             [isClickable]="isEditMode"
             [isSelected]="selectedSetIndex === $index"
+            [isSmallView]="isSmallView"
             (click)="onSetClick($index)"
           />
         }
@@ -29,6 +32,7 @@ import { SetInfoComponent } from './set-info.component';
 export class SetInfoContainerComponent {
   @Input({ required: true }) setsArray!: FormArray<ExerciseSetForm>;
   @Input() isEditMode = false;
+  @Input() isSmallView = false;
   @Input() selectedSetIndex: number | null = null;
   @Output() setSelected = new EventEmitter<number>();
 

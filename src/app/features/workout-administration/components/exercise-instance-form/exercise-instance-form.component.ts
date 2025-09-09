@@ -19,6 +19,7 @@ import { ExerciseInstanceForm } from '../../models/exercise-instance.form';
 import { ExerciseSetForm } from '../../models/exercise-set.form';
 import { ExerciseSetFormComponent } from '../exercise-set-form/exercise-set-form.component';
 import { SetInfoContainerComponent } from '../set-info/set-info-container.component';
+import { ExerciseProgressBarComponent } from '../exercise-progress-bar/exercise-progress-bar.component';
 
 @Component({
   selector: 'app-exercise-instance-form',
@@ -34,6 +35,7 @@ import { SetInfoContainerComponent } from '../set-info/set-info-container.compon
     MatCardModule,
     ExerciseSetFormComponent,
     SetInfoContainerComponent,
+    ExerciseProgressBarComponent,
   ],
   templateUrl: './exercise-instance-form.component.html',
 })

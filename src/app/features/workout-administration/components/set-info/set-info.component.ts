@@ -9,11 +9,12 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
   imports: [CommonModule, MatIconModule],
   template: `
     <div
-      class="set-pill inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-sm font-medium text-textOnPrimary"
+      class="set-pill bg-primary text-textOnPrimary inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium"
       [ngClass]="pillClasses"
       [class.cursor-pointer]="isClickable"
       [class.ring-2]="isSelected"
       [class.ring-blue-400]="isSelected"
+      [class.small-layout]="isSmallView"
     >
       <!-- Warmup icon -->
       @if (setForm.controls.isWarmupSet.value) {
@@ -21,7 +22,7 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
       }
 
       <!-- Drop set icon -->
-      @if (setForm.controls.isDropSet.value) {
+      @if (setForm.controls.isDropSet.value && !isSmallView) {
         <mat-icon>trending_down</mat-icon>
       }
 
@@ -38,6 +39,7 @@ export class SetInfoComponent {
   @Input() hasDropAfter = false;
   @Input() isClickable = false;
   @Input() isSelected = false;
+  @Input() isSmallView = false;
 
   get displayText(): string {
     const reps = this.setForm.controls.reps.value || 0;

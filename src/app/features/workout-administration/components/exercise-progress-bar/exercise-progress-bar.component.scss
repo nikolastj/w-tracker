@@ -1,0 +1,10 @@
+// Material progress bar customization
+::ng-deep mat-progress-bar {
+  .mat-progress-bar-fill::after {
+    @apply rounded-md;
+  }
+
+  .mat-progress-bar-buffer {
+    @apply rounded-md;
+  }
+}

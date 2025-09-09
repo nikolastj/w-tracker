@@ -25,3 +25,12 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+// Small layout styles
+.set-info-container.small-layout {
+  @apply origin-left scale-75;
+  width: 133.33%;
+  .set-pill {
+    @apply px-1 py-0.5;
+  }
+}
