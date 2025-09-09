@@ -10,6 +10,7 @@ import {
   ExerciseInstance,
   ExerciseTypeSimple,
   CreateExerciseInstance,
+  ExerciseInstancePrevious,
 } from '../../../shared/models/workout.model';
 import { ExerciseSetForm } from './exercise-set.form';
 
@@ -43,6 +44,12 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
         Validators.max(10),
       ]),
     });
+  }
+
+  previousExercises: ExerciseInstancePrevious[] = [];
+
+  get typeId(): number | null {
+    return this.controls.exerciseType.value?.id || null;
   }
 
   get setsArray(): FormArray<ExerciseSetForm> {

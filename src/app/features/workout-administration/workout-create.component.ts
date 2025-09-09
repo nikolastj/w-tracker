@@ -13,7 +13,7 @@ import { finalize } from 'rxjs/operators';
 import { ExerciseTypesService } from '../../shared/services/exercise-types.service';
 import { WorkoutsService } from '../../shared/services/workouts.service';
 import { ExerciseType } from '../../shared/models/exercise-type.model';
-import { Workout } from '../../shared/models/workout.model';
+import { ExerciseInstancePrevious, Workout } from '../../shared/models/workout.model';
 import { WorkoutForm } from './models/workout.form';
 import { ExerciseInstanceForm } from './models/exercise-instance.form';
 import { CanComponentDeactivate, CanDeactivateResult } from '../../core';
@@ -43,6 +43,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   showExerciseSelect = false;
   expandedPanelIndex: number | null = null;
   isEditMode = false;
+  previousExercisesMap = new Map<number, ExerciseInstancePrevious[]>();
 
   constructor(
     private router: Router,
@@ -62,8 +63,8 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     } else {
       this.loadTodaysWorkouts();
       this.workoutsService.readCachedLastMonthWorkouts().subscribe((workouts) => {
-        // Handle the cached workouts
-        console.log('Cached workouts from last month:', workouts);
+        // Populate the previousExercisesMap
+        this.populatePreviousExercisesMap(workouts);
       });
     }
   }
@@ -91,7 +92,8 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
 
   onExerciseTypeSelected(exerciseType: ExerciseType): void {
     if (exerciseType) {
-      this.workoutForm.addExercise();
+      const newExercise = this.workoutForm.addExercise();
+      newExercise.previousExercises = this.previousExercisesMap.get(exerciseType.id) || [];
 
       // Get the newly added exercise form and set the exercise type
       const newExerciseIndex = this.workoutForm.exercisesArray.length - 1;
@@ -99,6 +101,12 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
       newExerciseForm.patchValue({
         exerciseType: exerciseType,
       });
+
+      // Bind previous exercise data to the new form instance
+      if (this.previousExercisesMap.has(exerciseType.id)) {
+        const previousExercises = this.previousExercisesMap.get(exerciseType.id)!;
+        newExerciseForm.previousExercises = previousExercises;
+      }
 
       // Set the newly added exercise as expanded
       this.expandedPanelIndex = newExerciseIndex;
@@ -172,8 +180,7 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
         this.isEditMode = true;
         this.workoutsService.readCachedLastMonthWorkouts(workout.dateCreated).subscribe({
           next: (workouts) => {
-            // Handle the cached workouts
-            console.log('Cached workouts from last month from existing:', workouts);
+            this.populatePreviousExercisesMap(workouts);
             this.isApiLoading.set(false);
           },
           error: () => {
@@ -186,6 +193,52 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
         this.isEditMode = false;
         this.isApiLoading.set(false);
       },
+    });
+  }
+
+  private populatePreviousExercisesMap(workouts: Workout[]): void {
+    this.previousExercisesMap.clear();
+
+    workouts.forEach((workout) => {
+      workout.exercises.forEach((exercise) => {
+        const exerciseTypeId = exercise.exerciseType.id;
+
+        const previousExercise: ExerciseInstancePrevious = {
+          ...exercise,
+          lastWorkoutDate: workout.dateCreated,
+        };
+
+        if (this.previousExercisesMap.has(exerciseTypeId)) {
+          this.previousExercisesMap.get(exerciseTypeId)!.push(previousExercise);
+        } else {
+          this.previousExercisesMap.set(exerciseTypeId, [previousExercise]);
+        }
+      });
+    });
+
+    this.previousExercisesMap.forEach((exercises, exerciseTypeId) => {
+      exercises.sort(
+        (a, b) => new Date(b.lastWorkoutDate).getTime() - new Date(a.lastWorkoutDate).getTime(),
+      );
+    });
+    this.addPreviousExerciseDataToInstanceForms();
+  }
+
+  addPreviousExerciseDataToInstanceForms(): void {
+    // Iterate through all exercise form instances
+    this.workoutForm.exercisesArray.controls.forEach((exerciseForm) => {
+      const exerciseTypeId = exerciseForm.typeId;
+
+      if (exerciseTypeId && this.previousExercisesMap.has(exerciseTypeId)) {
+        // Get previous exercises for this exercise type
+        const previousExercises = this.previousExercisesMap.get(exerciseTypeId)!;
+
+        // Bind previous exercises to the form instance
+        exerciseForm.previousExercises = previousExercises;
+      } else {
+        // Clear previous exercises if no data available
+        exerciseForm.previousExercises = [];
+      }
     });
   }
 

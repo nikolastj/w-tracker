@@ -25,6 +25,10 @@ export interface ExerciseInstance {
   energyLevel: number | null;
 }
 
+export interface ExerciseInstancePrevious extends ExerciseInstance {
+  lastWorkoutDate: string | Date;
+}
+
 export interface Workout {
   id: number;
   dateCreated: string;

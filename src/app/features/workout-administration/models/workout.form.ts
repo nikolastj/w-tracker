@@ -43,7 +43,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
     return this.controls.exercises;
   }
 
-  addExercise(): void {
+  addExercise(): ExerciseInstanceForm {
     const currentExercises = this.exercisesArray.value;
     const nextOrder =
       currentExercises.length > 0 ? Math.max(...currentExercises.map((e) => e.order || 0)) + 1 : 1;
@@ -52,6 +52,7 @@ export class WorkoutForm extends FormGroup<WorkoutFormControls> {
     newExercise.patchValue({ order: nextOrder });
     this.exercisesArray.push(newExercise);
     this.markAsDirty();
+    return newExercise;
   }
 
   removeExercise(index: number): void {
