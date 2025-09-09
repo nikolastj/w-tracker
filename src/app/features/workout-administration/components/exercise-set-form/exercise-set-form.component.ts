@@ -120,17 +120,6 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
 
       <!-- Bottom row: Add Set Button and Checkboxes -->
       <div class="flex items-center justify-between gap-4">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="onAddSet()"
-          [disabled]="!isSetValid || (isEditMode && !hasSelectedSet)"
-          class="px-4"
-        >
-          <mat-icon class="mr-1">{{ addButtonIcon }}</mat-icon>
-          {{ addButtonText }}
-        </button>
-
         <div class="flex items-center gap-2 pr-2">
           <mat-checkbox
             [formControl]="setForm.controls.isWarmupSet"
@@ -147,6 +136,15 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
             Drop
           </mat-checkbox>
         </div>
+        <button
+          mat-raised-button
+          (click)="onAddSet()"
+          [disabled]="!isSetValid || (isEditMode && !hasSelectedSet)"
+          class="!bg-primary !text-textOnPrimary px-4"
+        >
+          <mat-icon class="mr-1">{{ addButtonIcon }}</mat-icon>
+          {{ addButtonText }}
+        </button>
       </div>
     </div>
   `,

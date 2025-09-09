@@ -26,16 +26,14 @@ export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  get progressColor(): 'primary' | 'accent' | 'warn' {
-    if (this.progressPercentage >= 100) return 'primary';
-    if (this.progressPercentage >= 75) return 'accent';
-    return 'warn';
-  }
-
   get progressColorClass(): string {
     if (this.progressPercentage >= 95) return 'text-green-600 dark:text-green-400';
     if (this.progressPercentage >= 55) return 'text-blue-600 dark:text-blue-400';
     return 'text-orange-600 dark:text-orange-400';
+  }
+
+  get progressOpacity(): number {
+    return Math.max(0.2, this.progressPercentage / 100);
   }
 
   ngOnInit(): void {
