@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ExerciseInstanceFormComponent } from './components/exercise-instance-form/exercise-instance-form.component';
 import { LoaderComponent } from '../../shared/components/loader.component';
@@ -18,10 +17,6 @@ import { Workout } from '../../shared/models/workout.model';
 import { WorkoutForm } from './models/workout.form';
 import { ExerciseInstanceForm } from './models/exercise-instance.form';
 import { CanComponentDeactivate, CanDeactivateResult } from '../../core';
-import {
-  ConfirmActionDialogComponent,
-  ConfirmActionDialogData,
-} from '../../shared/components/confirm-action-dialog.component';
 
 @Component({
   selector: 'app-workout-create',
@@ -33,7 +28,6 @@ import {
     MatIconModule,
     MatCardModule,
     MatExpansionModule,
-    MatDialogModule,
     NgSelectModule,
     ExerciseInstanceFormComponent,
     LoaderComponent,
@@ -55,19 +49,22 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     private route: ActivatedRoute,
     private exerciseTypesService: ExerciseTypesService,
     private workoutsService: WorkoutsService,
-    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    this.isEditMode = !!this.workoutForm.value.id;
     this.loadExerciseTypes();
 
-    // Check if we have an ID parameter (edit mode)
     const workoutId = this.route.snapshot.paramMap.get('id');
+    this.isEditMode = !!workoutId;
+
     if (workoutId) {
       this.loadWorkoutById(+workoutId);
     } else {
       this.loadTodaysWorkouts();
+      this.workoutsService.readCachedLastMonthWorkouts().subscribe((workouts) => {
+        // Handle the cached workouts
+        console.log('Cached workouts from last month:', workouts);
+      });
     }
   }
 
@@ -154,25 +151,15 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     this.workoutsService.getTodaysWorkout().subscribe({
       next: (todaysWorkout: Workout | null) => {
         if (todaysWorkout) {
-          // Create a new form with the existing workout data but clear the ID to make it a new workout
-          const workoutToClone: Workout = {
-            ...todaysWorkout,
-            id: 0, // Clear ID so it creates a new workout
-            dateCreated: new Date().toISOString(), // Set to current time
-          };
-          this.workoutForm = new WorkoutForm(workoutToClone);
+          this.workoutForm = new WorkoutForm(todaysWorkout);
           this.isEditMode = true;
-          this.isApiLoading.set(false);
-        } else {
-          this.isEditMode = false;
-          this.isApiLoading.set(false);
         }
+        this.isApiLoading.set(false);
       },
       error: (error) => {
         console.error("Failed to load today's workout:", error);
         this.isEditMode = !!this.workoutForm.value.id;
         this.isApiLoading.set(false);
-        // Continue with empty form if fetching fails
       },
     });
   }
@@ -183,14 +170,21 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
       next: (workout: Workout) => {
         this.workoutForm = new WorkoutForm(workout);
         this.isEditMode = true;
-        this.isApiLoading.set(false);
+        this.workoutsService.readCachedLastMonthWorkouts(workout.dateCreated).subscribe({
+          next: (workouts) => {
+            // Handle the cached workouts
+            console.log('Cached workouts from last month from existing:', workouts);
+            this.isApiLoading.set(false);
+          },
+          error: () => {
+            this.isApiLoading.set(false);
+          },
+        });
       },
       error: (error) => {
         console.error('Failed to load workout:', error);
         this.isEditMode = false;
         this.isApiLoading.set(false);
-        // Navigate back to dashboard if workout not found
-        this.router.navigate(['/dashboard']);
       },
     });
   }
