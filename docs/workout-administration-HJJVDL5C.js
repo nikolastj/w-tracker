@@ -7,12 +7,12 @@ import {
   SetInfoContainerComponent,
   WorkoutCreateComponent,
   WorkoutForm
-} from "./chunk-6OYBDDSY.js";
-import "./chunk-I6GS4522.js";
-import "./chunk-3NMSYGKW.js";
+} from "./chunk-ZLCJWBZK.js";
+import "./chunk-RDXPNGMW.js";
+import "./chunk-UGFWTRIG.js";
 import {
   CanDeactivateGuard
-} from "./chunk-X7YEJBQC.js";
+} from "./chunk-FWJQQGCN.js";
 import "./chunk-4PVVSHJ5.js";
 import "./chunk-I2RYTFIL.js";
 import "./chunk-72WFIQJ2.js";
@@ -23,12 +23,12 @@ var workoutAdministrationRoutes = [
   {
     path: "create",
     canDeactivate: [CanDeactivateGuard],
-    loadComponent: () => import("./workout-create.component-M3DKVOVH.js").then((m) => m.WorkoutCreateComponent)
+    loadComponent: () => import("./workout-create.component-BEELGVFP.js").then((m) => m.WorkoutCreateComponent)
   },
   {
     path: "edit/:id",
     canDeactivate: [CanDeactivateGuard],
-    loadComponent: () => import("./workout-create.component-M3DKVOVH.js").then((m) => m.WorkoutCreateComponent)
+    loadComponent: () => import("./workout-create.component-BEELGVFP.js").then((m) => m.WorkoutCreateComponent)
   }
 ];
 export {
@@ -42,4 +42,4 @@ export {
   WorkoutForm,
   workoutAdministrationRoutes
 };
-//# sourceMappingURL=workout-administration-XL2WCKQO.js.map
+//# sourceMappingURL=workout-administration-HJJVDL5C.js.map

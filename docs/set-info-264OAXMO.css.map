@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/features/workout-administration/components/set-info/set-info.scss"],
-  "sourcesContent": [".pill-drop {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)) !important;\n}\n\n.set-pill {\n  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary)) !important;\n}\n\n.set-pill {\n  min-height: 32px;\n}\n\n.set-pill.has-drop-after {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n"],
-  "mappings": ";AAAA,CAAA;AACE,0BAAA;AACA,6BAAA;AACA,eAAA;AACA;IAAA;MAAA,MAAA;MAAA,IAAA,gBAAA;MAAA,IAAA;;AAGF,CAAA;AACE;IAAA;MAAA,MAAA;MAAA,IAAA,kBAAA;MAAA,IAAA;;AAGF,CAJA;AAKE,cAAA;;AAGF,CARA,QAQA,CAAA;AACE,2BAAA;AACA,8BAAA;;",
-  "names": []
-}

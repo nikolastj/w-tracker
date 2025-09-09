@@ -1,11 +1,11 @@
 import {
   AuthApiService
-} from "./chunk-JGHXDDZG.js";
+} from "./chunk-K5LXL5BT.js";
 import {
   MatFormFieldModule,
   MatInput,
   MatInputModule
-} from "./chunk-I6GS4522.js";
+} from "./chunk-RDXPNGMW.js";
 import {
   DefaultValueAccessor,
   FormControl,
@@ -23,7 +23,7 @@ import {
   ReactiveFormsModule,
   Validators,
   ɵNgNoValidate
-} from "./chunk-X7YEJBQC.js";
+} from "./chunk-FWJQQGCN.js";
 import {
   MatCard,
   MatCardModule
@@ -390,26 +390,22 @@ var RegisterComponent = class _RegisterComponent {
       \u0275\u0275advance();
       \u0275\u0275property("ngIf", !ctx.isLoading);
     }
-  }, dependencies: [CommonModule, NgIf, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, RouterModule, RouterLink, MatCardModule, MatCard, MatFormFieldModule, MatFormField, MatLabel, MatError, MatSuffix, MatInputModule, MatInput, MatButtonModule, MatButton, MatIconButton, MatIconModule, MatIcon, MatProgressSpinnerModule, MatProgressSpinner], encapsulation: 2 });
+  }, dependencies: [CommonModule, NgIf, ReactiveFormsModule, \u0275NgNoValidate, DefaultValueAccessor, NgControlStatus, NgControlStatusGroup, FormGroupDirective, FormControlName, RouterModule, RouterLink, MatCardModule, MatCard, MatFormFieldModule, MatFormField, MatLabel, MatError, MatSuffix, MatInputModule, MatInput, MatButtonModule, MatButton, MatIconButton, MatIconModule, MatIcon, MatProgressSpinnerModule, MatProgressSpinner], styles: ["\n\n.auth-background[_ngcontent-%COMP%] {\n  background-color: light-dark(#f9fafb, #111827);\n}\n.auth-card[_ngcontent-%COMP%] {\n  background-color: light-dark(#ffffff, #1f2937);\n  box-shadow: light-dark(0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.5));\n}\n.auth-heading[_ngcontent-%COMP%] {\n  color: light-dark(#111827, #f9fafb);\n}\n.auth-text[_ngcontent-%COMP%] {\n  color: light-dark(#6b7280, #d1d5db);\n}\n/*# sourceMappingURL=auth-TXSIPCSH.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(RegisterComponent, [{
     type: Component,
-    args: [{
-      selector: "app-register",
-      standalone: true,
-      imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatProgressSpinnerModule
-      ],
-      template: `
+    args: [{ selector: "app-register", standalone: true, imports: [
+      CommonModule,
+      ReactiveFormsModule,
+      RouterModule,
+      MatCardModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatButtonModule,
+      MatIconModule,
+      MatProgressSpinnerModule
+    ], template: `
     <div class="flex w-full max-w-md flex-col gap-8">
       <div>
         <h2 class="auth-heading mt-6 text-center text-3xl font-extrabold">Create your account</h2>
@@ -592,14 +588,13 @@ var RegisterComponent = class _RegisterComponent {
         </form>
       </mat-card>
     </div>
-  `
-    }]
+  `, styles: ["/* src/app/auth/auth.scss */\n.auth-background {\n  background-color: light-dark(#f9fafb, #111827);\n}\n.auth-card {\n  background-color: light-dark(#ffffff, #1f2937);\n  box-shadow: light-dark(0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.5));\n}\n.auth-heading {\n  color: light-dark(#111827, #f9fafb);\n}\n.auth-text {\n  color: light-dark(#6b7280, #d1d5db);\n}\n/*# sourceMappingURL=auth-TXSIPCSH.css.map */\n"] }]
   }], null, null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RegisterComponent, { className: "RegisterComponent", filePath: "src/app/auth/components/register.component.ts", lineNumber: 217 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(RegisterComponent, { className: "RegisterComponent", filePath: "src/app/auth/components/register.component.ts", lineNumber: 218 });
 })();
 export {
   RegisterComponent
 };
-//# sourceMappingURL=register.component-RAEOQSJI.js.map
+//# sourceMappingURL=register.component-BE3VUZNE.js.map

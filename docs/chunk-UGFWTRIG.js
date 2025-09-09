@@ -3,7 +3,7 @@ import {
   MatProgressSpinnerModule,
   NotificationService,
   handleNotifications
-} from "./chunk-X7YEJBQC.js";
+} from "./chunk-FWJQQGCN.js";
 import {
   environment
 } from "./chunk-4PVVSHJ5.js";
@@ -16,6 +16,7 @@ import {
   Input,
   ViewEncapsulation,
   delay,
+  map,
   of,
   setClassMetadata,
   tap,
@@ -135,25 +136,33 @@ var WorkoutsService = class _WorkoutsService {
   http;
   notificationService;
   API_URL = environment.apiUrl;
+  paginatedWorkoutsCache = /* @__PURE__ */ new Map();
   constructor(http, notificationService) {
     this.http = http;
     this.notificationService = notificationService;
   }
   getPaginatedWorkouts(pageRequest) {
-    return this.http.post(`${this.API_URL}/workouts/paginated`, pageRequest).pipe(handleNotifications({
+    return this.http.post(`${this.API_URL}/workouts/paginated`, pageRequest).pipe(tap((response) => {
+      const cacheKey = JSON.stringify(pageRequest);
+      this.paginatedWorkoutsCache.set(cacheKey, response);
+    }), handleNotifications({
       errorMessage: "Failed to load workouts. Please try again.",
       notificationService: this.notificationService
     }));
   }
   createWorkout(workout) {
-    return this.http.post(`${this.API_URL}/workouts`, workout).pipe(handleNotifications({
+    return this.http.post(`${this.API_URL}/workouts`, workout).pipe(tap(() => {
+      this.clearPaginatedWorkoutsCache();
+    }), handleNotifications({
       successMessage: "Workout saved successfully!",
       errorMessage: "Failed to save workout. Please try again.",
       notificationService: this.notificationService
     }));
   }
   updateWorkout(id, workout) {
-    return this.http.put(`${this.API_URL}/workouts/${id}`, workout).pipe(handleNotifications({
+    return this.http.put(`${this.API_URL}/workouts/${id}`, workout).pipe(tap(() => {
+      this.clearPaginatedWorkoutsCache();
+    }), handleNotifications({
       successMessage: "Workout updated successfully!",
       errorMessage: "Failed to update workout. Please try again.",
       notificationService: this.notificationService
@@ -170,6 +179,40 @@ var WorkoutsService = class _WorkoutsService {
       errorMessage: "Failed to load workout. Please try again.",
       notificationService: this.notificationService
     }));
+  }
+  readCachedLastMonthWorkouts(referenceDate) {
+    const today = referenceDate ? new Date(referenceDate) : /* @__PURE__ */ new Date();
+    const endOfYesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1, 23, 59, 59, 999);
+    const oneMonthBefore = new Date(endOfYesterday);
+    oneMonthBefore.setMonth(oneMonthBefore.getMonth() - 1);
+    if (this.paginatedWorkoutsCache.size > 0) {
+      const allWorkouts = [];
+      this.paginatedWorkoutsCache.forEach((pageResponse) => {
+        allWorkouts.push(...pageResponse.data);
+      });
+      const uniqueWorkouts = allWorkouts.filter((workout, index, self) => index === self.findIndex((w) => w.id === workout.id));
+      const sortedAndFilteredWorkouts = this.sortAndFilterWorkouts(uniqueWorkouts, oneMonthBefore, endOfYesterday);
+      if (sortedAndFilteredWorkouts.length > 2) {
+        return of(sortedAndFilteredWorkouts);
+      }
+    }
+    const pageRequest = {
+      page: 1,
+      pageSize: 31,
+      // Large page size to get all workouts in range
+      fromDate: oneMonthBefore.toISOString(),
+      toDate: endOfYesterday.toISOString()
+    };
+    return this.getPaginatedWorkouts(pageRequest).pipe(map((response) => this.sortAndFilterWorkouts(response.data, oneMonthBefore, endOfYesterday)));
+  }
+  sortAndFilterWorkouts(workouts, fromDate, toDate) {
+    return workouts.filter((workout) => {
+      const workoutDate = new Date(workout.dateCreated);
+      return workoutDate >= fromDate && workoutDate <= toDate;
+    }).sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime());
+  }
+  clearPaginatedWorkoutsCache() {
+    this.paginatedWorkoutsCache.clear();
   }
   static \u0275fac = function WorkoutsService_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _WorkoutsService)(\u0275\u0275inject(HttpClient), \u0275\u0275inject(NotificationService));
@@ -253,4 +296,4 @@ export {
   ExerciseTypesService,
   WorkoutsService
 };
-//# sourceMappingURL=chunk-3NMSYGKW.js.map
+//# sourceMappingURL=chunk-UGFWTRIG.js.map

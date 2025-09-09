@@ -9657,6 +9657,153 @@ var MatSnackBarModule = class _MatSnackBarModule {
   }], null, null);
 })();
 
+// node_modules/@angular/material/fesm2022/input-value-accessor.mjs
+var MAT_INPUT_VALUE_ACCESSOR = new InjectionToken("MAT_INPUT_VALUE_ACCESSOR");
+
+// node_modules/@angular/material/fesm2022/error-options.mjs
+var ShowOnDirtyErrorStateMatcher = class _ShowOnDirtyErrorStateMatcher {
+  isErrorState(control, form) {
+    return !!(control && control.invalid && (control.dirty || form && form.submitted));
+  }
+  static \u0275fac = function ShowOnDirtyErrorStateMatcher_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ShowOnDirtyErrorStateMatcher)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _ShowOnDirtyErrorStateMatcher,
+    factory: _ShowOnDirtyErrorStateMatcher.\u0275fac
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ShowOnDirtyErrorStateMatcher, [{
+    type: Injectable
+  }], null, null);
+})();
+var ErrorStateMatcher = class _ErrorStateMatcher {
+  isErrorState(control, form) {
+    return !!(control && control.invalid && (control.touched || form && form.submitted));
+  }
+  static \u0275fac = function ErrorStateMatcher_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ErrorStateMatcher)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
+    token: _ErrorStateMatcher,
+    factory: _ErrorStateMatcher.\u0275fac,
+    providedIn: "root"
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ErrorStateMatcher, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// node_modules/@angular/material/fesm2022/error-state.mjs
+var _ErrorStateTracker = class {
+  _defaultMatcher;
+  ngControl;
+  _parentFormGroup;
+  _parentForm;
+  _stateChanges;
+  /** Whether the tracker is currently in an error state. */
+  errorState = false;
+  /** User-defined matcher for the error state. */
+  matcher;
+  constructor(_defaultMatcher, ngControl, _parentFormGroup, _parentForm, _stateChanges) {
+    this._defaultMatcher = _defaultMatcher;
+    this.ngControl = ngControl;
+    this._parentFormGroup = _parentFormGroup;
+    this._parentForm = _parentForm;
+    this._stateChanges = _stateChanges;
+  }
+  /** Updates the error state based on the provided error state matcher. */
+  updateErrorState() {
+    const oldState = this.errorState;
+    const parent = this._parentFormGroup || this._parentForm;
+    const matcher = this.matcher || this._defaultMatcher;
+    const control = this.ngControl ? this.ngControl.control : null;
+    const newState = matcher?.isErrorState(control, parent) ?? false;
+    if (newState !== oldState) {
+      this.errorState = newState;
+      this._stateChanges.next();
+    }
+  }
+};
+
+// src/app/core/services/notification.service.ts
+var NotificationService = class _NotificationService {
+  snackBar = inject(MatSnackBar);
+  defaultConfig = {
+    action: "Close",
+    duration: 3e3
+  };
+  success(message, config) {
+    this.show(__spreadValues(__spreadValues({
+      message,
+      panelClass: ["success-snackbar"]
+    }, this.defaultConfig), config));
+  }
+  error(message, config) {
+    this.show(__spreadValues(__spreadProps(__spreadValues({
+      message,
+      panelClass: ["error-snackbar"]
+    }, this.defaultConfig), {
+      duration: 5e3
+    }), config));
+  }
+  info(message, config) {
+    this.show(__spreadValues(__spreadValues({
+      message,
+      panelClass: ["info-snackbar"]
+    }, this.defaultConfig), config));
+  }
+  warning(message, config) {
+    this.show(__spreadValues(__spreadValues({
+      message,
+      panelClass: ["warning-snackbar"]
+    }, this.defaultConfig), config));
+  }
+  show(config) {
+    this.snackBar.open(config.message, config.action, {
+      duration: config.duration,
+      panelClass: config.panelClass
+    });
+  }
+  static \u0275fac = function NotificationService_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _NotificationService)();
+  };
+  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _NotificationService, factory: _NotificationService.\u0275fac, providedIn: "root" });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NotificationService, [{
+    type: Injectable,
+    args: [{
+      providedIn: "root"
+    }]
+  }], null, null);
+})();
+
+// src/app/core/operators/notification.operators.ts
+function handleNotifications(config = {}) {
+  return (source) => {
+    const { successMessage, errorMessage = "Operation failed. Please try again.", showNotifications = true, extractErrorMessage = (error) => error.error?.message || errorMessage, notificationService } = config;
+    return source.pipe(tap((response) => {
+      if (showNotifications && successMessage && notificationService) {
+        notificationService.success(successMessage);
+      }
+    }), catchError((error) => {
+      console.error("API Error:", error);
+      if (showNotifications && notificationService) {
+        const message = extractErrorMessage(error);
+        notificationService.error(message);
+      }
+      throw error;
+    }));
+  };
+}
+
 // node_modules/@angular/cdk/fesm2022/dialog.mjs
 function CdkDialogContainer_ng_template_0_Template(rf, ctx) {
 }
@@ -11436,153 +11583,6 @@ var MatDialogModule = class _MatDialogModule {
   }], null, null);
 })();
 
-// node_modules/@angular/material/fesm2022/input-value-accessor.mjs
-var MAT_INPUT_VALUE_ACCESSOR = new InjectionToken("MAT_INPUT_VALUE_ACCESSOR");
-
-// node_modules/@angular/material/fesm2022/error-options.mjs
-var ShowOnDirtyErrorStateMatcher = class _ShowOnDirtyErrorStateMatcher {
-  isErrorState(control, form) {
-    return !!(control && control.invalid && (control.dirty || form && form.submitted));
-  }
-  static \u0275fac = function ShowOnDirtyErrorStateMatcher_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ShowOnDirtyErrorStateMatcher)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _ShowOnDirtyErrorStateMatcher,
-    factory: _ShowOnDirtyErrorStateMatcher.\u0275fac
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ShowOnDirtyErrorStateMatcher, [{
-    type: Injectable
-  }], null, null);
-})();
-var ErrorStateMatcher = class _ErrorStateMatcher {
-  isErrorState(control, form) {
-    return !!(control && control.invalid && (control.touched || form && form.submitted));
-  }
-  static \u0275fac = function ErrorStateMatcher_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _ErrorStateMatcher)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({
-    token: _ErrorStateMatcher,
-    factory: _ErrorStateMatcher.\u0275fac,
-    providedIn: "root"
-  });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ErrorStateMatcher, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
-// node_modules/@angular/material/fesm2022/error-state.mjs
-var _ErrorStateTracker = class {
-  _defaultMatcher;
-  ngControl;
-  _parentFormGroup;
-  _parentForm;
-  _stateChanges;
-  /** Whether the tracker is currently in an error state. */
-  errorState = false;
-  /** User-defined matcher for the error state. */
-  matcher;
-  constructor(_defaultMatcher, ngControl, _parentFormGroup, _parentForm, _stateChanges) {
-    this._defaultMatcher = _defaultMatcher;
-    this.ngControl = ngControl;
-    this._parentFormGroup = _parentFormGroup;
-    this._parentForm = _parentForm;
-    this._stateChanges = _stateChanges;
-  }
-  /** Updates the error state based on the provided error state matcher. */
-  updateErrorState() {
-    const oldState = this.errorState;
-    const parent = this._parentFormGroup || this._parentForm;
-    const matcher = this.matcher || this._defaultMatcher;
-    const control = this.ngControl ? this.ngControl.control : null;
-    const newState = matcher?.isErrorState(control, parent) ?? false;
-    if (newState !== oldState) {
-      this.errorState = newState;
-      this._stateChanges.next();
-    }
-  }
-};
-
-// src/app/core/services/notification.service.ts
-var NotificationService = class _NotificationService {
-  snackBar = inject(MatSnackBar);
-  defaultConfig = {
-    action: "Close",
-    duration: 3e3
-  };
-  success(message, config) {
-    this.show(__spreadValues(__spreadValues({
-      message,
-      panelClass: ["success-snackbar"]
-    }, this.defaultConfig), config));
-  }
-  error(message, config) {
-    this.show(__spreadValues(__spreadProps(__spreadValues({
-      message,
-      panelClass: ["error-snackbar"]
-    }, this.defaultConfig), {
-      duration: 5e3
-    }), config));
-  }
-  info(message, config) {
-    this.show(__spreadValues(__spreadValues({
-      message,
-      panelClass: ["info-snackbar"]
-    }, this.defaultConfig), config));
-  }
-  warning(message, config) {
-    this.show(__spreadValues(__spreadValues({
-      message,
-      panelClass: ["warning-snackbar"]
-    }, this.defaultConfig), config));
-  }
-  show(config) {
-    this.snackBar.open(config.message, config.action, {
-      duration: config.duration,
-      panelClass: config.panelClass
-    });
-  }
-  static \u0275fac = function NotificationService_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _NotificationService)();
-  };
-  static \u0275prov = /* @__PURE__ */ \u0275\u0275defineInjectable({ token: _NotificationService, factory: _NotificationService.\u0275fac, providedIn: "root" });
-};
-(() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(NotificationService, [{
-    type: Injectable,
-    args: [{
-      providedIn: "root"
-    }]
-  }], null, null);
-})();
-
-// src/app/core/operators/notification.operators.ts
-function handleNotifications(config = {}) {
-  return (source) => {
-    const { successMessage, errorMessage = "Operation failed. Please try again.", showNotifications = true, extractErrorMessage = (error) => error.error?.message || errorMessage, notificationService } = config;
-    return source.pipe(tap((response) => {
-      if (showNotifications && successMessage && notificationService) {
-        notificationService.success(successMessage);
-      }
-    }), catchError((error) => {
-      console.error("API Error:", error);
-      if (showNotifications && notificationService) {
-        const message = extractErrorMessage(error);
-        notificationService.error(message);
-      }
-      throw error;
-    }));
-  };
-}
-
 // src/app/shared/components/unsaved-changes-dialog.component.ts
 var UnsavedChangesDialogComponent = class _UnsavedChangesDialogComponent {
   dialogRef = inject(MatDialogRef);
@@ -11779,8 +11779,7 @@ export {
   NotificationService,
   handleNotifications,
   MatDialogRef,
-  MatDialog,
   MatDialogModule,
   CanDeactivateGuard
 };
-//# sourceMappingURL=chunk-X7YEJBQC.js.map
+//# sourceMappingURL=chunk-FWJQQGCN.js.map

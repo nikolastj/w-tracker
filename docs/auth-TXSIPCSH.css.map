@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/auth/auth.scss"],
+  "sourcesContent": [".auth-background {\n  background-color: light-dark(#f9fafb, #111827);\n}\n\n.auth-card {\n  background-color: light-dark(#ffffff, #1f2937);\n  box-shadow: light-dark(0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.5));\n}\n\n.auth-heading {\n  color: light-dark(#111827, #f9fafb);\n}\n\n.auth-text {\n  color: light-dark(#6b7280, #d1d5db);\n}\n"],
+  "mappings": ";AAAA,CAAA;AACE,oBAAA,WAAA,OAAA,EAAA;;AAGF,CAAA;AACE,oBAAA,WAAA,OAAA,EAAA;AACA,cAAA,WAAA,EAAA,KAAA,KAAA,KAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA,IAAA,EAAA,EAAA,KAAA,KAAA,KAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;;AAGF,CAAA;AACE,SAAA,WAAA,OAAA,EAAA;;AAGF,CAAA;AACE,SAAA,WAAA,OAAA,EAAA;;",
+  "names": []
+}

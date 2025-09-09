@@ -2,7 +2,7 @@ import {
   CacheResponseService,
   LoaderComponent,
   WorkoutsService
-} from "./chunk-3NMSYGKW.js";
+} from "./chunk-UGFWTRIG.js";
 import "./chunk-GXW27HL2.js";
 import {
   ControlContainer,
@@ -21,7 +21,7 @@ import {
   Validators,
   _ErrorStateTracker,
   handleNotifications
-} from "./chunk-X7YEJBQC.js";
+} from "./chunk-FWJQQGCN.js";
 import {
   MatCardModule,
   environment
@@ -7789,24 +7789,30 @@ function TimelineCalendarComponent_Conditional_1_Template(rf, ctx) {
 }
 function TimelineCalendarComponent_For_7_Template(rf, ctx) {
   if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 6)(1, "div", 7)(2, "span", 8);
     \u0275\u0275text(3);
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(4, "span", 9);
     \u0275\u0275text(5);
     \u0275\u0275elementEnd()();
-    \u0275\u0275element(6, "mat-calendar", 10);
-    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "mat-calendar", 10);
+    \u0275\u0275listener("selectedChange", function TimelineCalendarComponent_For_7_Template_mat_calendar_selectedChange_6_listener($event) {
+      \u0275\u0275restoreView(_r2);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onDateSelected($event));
+    });
+    \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const month_r2 = ctx.$implicit;
+    const month_r4 = ctx.$implicit;
     const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance(3);
-    \u0275\u0275textInterpolate1(" ", ctx_r2.getMonthName(month_r2).month, " ");
+    \u0275\u0275textInterpolate1(" ", ctx_r2.getMonthName(month_r4).month, " ");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1(" ", ctx_r2.getMonthName(month_r2).year, " ");
+    \u0275\u0275textInterpolate1(" ", ctx_r2.getMonthName(month_r4).year, " ");
     \u0275\u0275advance();
-    \u0275\u0275property("startAt", month_r2)("dateClass", ctx_r2.dateClass);
+    \u0275\u0275property("startAt", month_r4)("dateClass", ctx_r2.dateClass);
   }
 }
 var MondayFirstDateAdapter = class _MondayFirstDateAdapter extends NativeDateAdapter {
@@ -7834,6 +7840,7 @@ var TimelineCalendarComponent = class _TimelineCalendarComponent {
   dateFilter = input(...ngDevMode ? [void 0, { debugName: "dateFilter" }] : []);
   workoutDates = input([], ...ngDevMode ? [{ debugName: "workoutDates" }] : []);
   scrolledToTop = output();
+  workoutDateClicked = output();
   previousMonthCount = 0;
   constructor() {
     effect(() => {
@@ -7871,6 +7878,18 @@ var TimelineCalendarComponent = class _TimelineCalendarComponent {
     const isWorkoutDay = this.workoutDatesSet().has(dateStr);
     return isWorkoutDay ? "workout-day" : "";
   };
+  onDateSelected(date) {
+    if (!date)
+      return;
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const dateStr = `${year}-${month}-${day}`;
+    const workoutForDate = this.workoutDates().find((workout) => workout.dateCreated.split("T")[0] === dateStr);
+    if (workoutForDate) {
+      this.workoutDateClicked.emit(workoutForDate);
+    }
+  }
   onScrolledToTop() {
     if (!this.loading() && this.calendarMonths.length > 0) {
       this.scrolledToTop.emit();
@@ -7927,7 +7946,7 @@ var TimelineCalendarComponent = class _TimelineCalendarComponent {
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.timelineBody = _t.first);
       \u0275\u0275queryRefresh(_t = \u0275\u0275loadQuery()) && (ctx.calendars = _t);
     }
-  }, inputs: { loading: [1, "loading"], dateFilter: [1, "dateFilter"], workoutDates: [1, "workoutDates"] }, outputs: { scrolledToTop: "scrolledToTop" }, features: [\u0275\u0275ProvidersFeature([{ provide: DateAdapter, useClass: MondayFirstDateAdapter }])], decls: 8, vars: 1, consts: [["timelineBody", ""], [1, "relative", "flex", "h-full", "flex-col", "overflow-hidden"], [1, "absolute", "inset-0", "z-50"], [1, "timeline-header", "flex-shrink-0"], [1, "w-full"], ["appAutoScrollToBottom", "", "appScrollToTopDetector", "", 1, "timeline-body", "appear", "flex-1", "overflow-y-auto", 3, "scrolledToTop"], [1, "flex", "flex-col"], [1, "dashboard-card", "px-6", "py-4", "text-center"], [1, "dashboard-heading", "mr-2", "text-lg", "font-semibold"], [1, "dashboard-text", "text-base", "opacity-70"], [1, "w-full", 3, "startAt", "dateClass"]], template: function TimelineCalendarComponent_Template(rf, ctx) {
+  }, inputs: { loading: [1, "loading"], dateFilter: [1, "dateFilter"], workoutDates: [1, "workoutDates"] }, outputs: { scrolledToTop: "scrolledToTop", workoutDateClicked: "workoutDateClicked" }, features: [\u0275\u0275ProvidersFeature([{ provide: DateAdapter, useClass: MondayFirstDateAdapter }])], decls: 8, vars: 1, consts: [["timelineBody", ""], [1, "relative", "flex", "h-full", "flex-col", "overflow-hidden"], [1, "absolute", "inset-0", "z-50"], [1, "timeline-header", "flex-shrink-0"], [1, "w-full"], ["appAutoScrollToBottom", "", "appScrollToTopDetector", "", 1, "timeline-body", "appear", "flex-1", "overflow-y-auto", 3, "scrolledToTop"], [1, "flex", "flex-col"], [1, "dashboard-card", "px-6", "py-4", "text-center"], [1, "dashboard-heading", "mr-2", "text-lg", "font-semibold"], [1, "dashboard-text", "text-base", "opacity-70"], [1, "w-full", 3, "selectedChange", "startAt", "dateClass"]], template: function TimelineCalendarComponent_Template(rf, ctx) {
     if (rf & 1) {
       const _r1 = \u0275\u0275getCurrentView();
       \u0275\u0275elementStart(0, "div", 1);
@@ -7958,7 +7977,7 @@ var TimelineCalendarComponent = class _TimelineCalendarComponent {
     AutoScrollToBottomDirective,
     ScrollToTopDetectorDirective,
     LoaderComponent
-  ], styles: ["\n\n[_nghost-%COMP%]     .timeline-header mat-calendar table tbody {\n  display: none;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar th {\n  padding-top: 1rem;\n  padding-bottom: 8px;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar tr:first-child th {\n  width: 100%;\n  table-layout: fixed;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar tr:first-child th {\n  width: 14.2857142857%;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar tr:nth-child(2) {\n  display: none;\n}\n[_nghost-%COMP%]     .timeline-body mat-calendar table thead {\n  display: none;\n}\n[_nghost-%COMP%]     mat-calendar mat-calendar-header {\n  display: none;\n}\n[_nghost-%COMP%]     mat-calendar td.mat-calendar-body-label {\n  padding-top: 0px !important;\n  padding-right: 0px !important;\n  padding-bottom: 0px !important;\n  visibility: hidden;\n}\n[_nghost-%COMP%]     .mat-calendar-body-today {\n  border: none !important;\n  outline: none !important;\n}\n[_nghost-%COMP%]     .mat-calendar-content {\n  padding-bottom: 0 !important;\n}\n[_nghost-%COMP%]     .workout-day {\n  background-color: rgba(59, 130, 246, 0.3) !important;\n  border-radius: 50% !important;\n  font-weight: 600 !important;\n}\n[_nghost-%COMP%]     .workout-day:hover {\n  background-color: rgba(59, 130, 246, 0.5) !important;\n}\n/*# sourceMappingURL=timeline-calendar.component-Z6OOHD6S.css.map */"] });
+  ], styles: ["\n\n[_nghost-%COMP%]     .timeline-header mat-calendar table tbody {\n  display: none;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar th {\n  padding-top: 1rem;\n  padding-bottom: 8px;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar tr:first-child th {\n  width: 100%;\n  table-layout: fixed;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar tr:first-child th {\n  width: 14.2857142857%;\n}\n[_nghost-%COMP%]     .timeline-header mat-calendar tr:nth-child(2) {\n  display: none;\n}\n[_nghost-%COMP%]     .timeline-body mat-calendar table thead {\n  display: none;\n}\n[_nghost-%COMP%]     mat-calendar mat-calendar-header {\n  display: none;\n}\n[_nghost-%COMP%]     mat-calendar td.mat-calendar-body-label {\n  padding-top: 0px !important;\n  padding-right: 0px !important;\n  padding-bottom: 0px !important;\n  visibility: hidden;\n}\n[_nghost-%COMP%]     .mat-calendar-body-today {\n  border: none !important;\n  outline: none !important;\n}\n[_nghost-%COMP%]     .mat-calendar-content {\n  padding-bottom: 0 !important;\n}\n[_nghost-%COMP%]     .workout-day {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary) 0%,\n      var(--color-primary-gradient) 100%) !important;\n  border-radius: 50% !important;\n  font-weight: 600 !important;\n  opacity: 0.8 !important;\n}\n[_nghost-%COMP%]     .workout-day:hover {\n  opacity: 1 !important;\n}\n/*# sourceMappingURL=timeline-calendar.component-OYKCJ5PK.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TimelineCalendarComponent, [{
@@ -7971,7 +7990,7 @@ var TimelineCalendarComponent = class _TimelineCalendarComponent {
       AutoScrollToBottomDirective,
       ScrollToTopDetectorDirective,
       LoaderComponent
-    ], providers: [{ provide: DateAdapter, useClass: MondayFirstDateAdapter }], template: '<div class="relative flex h-full flex-col overflow-hidden">\n  <!-- Loader overlay -->\n  @if (loading()) {\n    <app-loader class="absolute inset-0 z-50"></app-loader>\n  }\n\n  <!-- Fixed top calendar days of the week -->\n  <div class="timeline-header flex-shrink-0">\n    <mat-calendar class="w-full"> </mat-calendar>\n  </div>\n\n  <!-- Scrollable calendars container -->\n  <div\n    #timelineBody\n    appAutoScrollToBottom\n    appScrollToTopDetector\n    (scrolledToTop)="onScrolledToTop()"\n    class="timeline-body appear flex-1 overflow-y-auto"\n  >\n    @for (month of calendarMonths; track trackByMonth($index, month)) {\n      <div class="flex flex-col">\n        <div class="dashboard-card px-6 py-4 text-center">\n          <span class="dashboard-heading mr-2 text-lg font-semibold">\n            {{ getMonthName(month).month }}\n          </span>\n          <span class="dashboard-text text-base opacity-70">\n            {{ getMonthName(month).year }}\n          </span>\n        </div>\n        <mat-calendar class="w-full" [startAt]="month" [dateClass]="dateClass"> </mat-calendar>\n      </div>\n    }\n  </div>\n</div>\n', styles: ["/* src/app/features/timeline/timeline-calendar/timeline-calendar.component.scss */\n:host ::ng-deep .timeline-header mat-calendar table tbody {\n  display: none;\n}\n:host ::ng-deep .timeline-header mat-calendar th {\n  padding-top: 1rem;\n  padding-bottom: 8px;\n}\n:host ::ng-deep .timeline-header mat-calendar tr:first-child th {\n  width: 100%;\n  table-layout: fixed;\n}\n:host ::ng-deep .timeline-header mat-calendar tr:first-child th {\n  width: 14.2857142857%;\n}\n:host ::ng-deep .timeline-header mat-calendar tr:nth-child(2) {\n  display: none;\n}\n:host ::ng-deep .timeline-body mat-calendar table thead {\n  display: none;\n}\n:host ::ng-deep mat-calendar mat-calendar-header {\n  display: none;\n}\n:host ::ng-deep mat-calendar td.mat-calendar-body-label {\n  padding-top: 0px !important;\n  padding-right: 0px !important;\n  padding-bottom: 0px !important;\n  visibility: hidden;\n}\n:host ::ng-deep .mat-calendar-body-today {\n  border: none !important;\n  outline: none !important;\n}\n:host ::ng-deep .mat-calendar-content {\n  padding-bottom: 0 !important;\n}\n:host ::ng-deep .workout-day {\n  background-color: rgba(59, 130, 246, 0.3) !important;\n  border-radius: 50% !important;\n  font-weight: 600 !important;\n}\n:host ::ng-deep .workout-day:hover {\n  background-color: rgba(59, 130, 246, 0.5) !important;\n}\n/*# sourceMappingURL=timeline-calendar.component-Z6OOHD6S.css.map */\n"] }]
+    ], providers: [{ provide: DateAdapter, useClass: MondayFirstDateAdapter }], template: '<div class="relative flex h-full flex-col overflow-hidden">\n  <!-- Loader overlay -->\n  @if (loading()) {\n    <app-loader class="absolute inset-0 z-50"></app-loader>\n  }\n\n  <!-- Fixed top calendar days of the week -->\n  <div class="timeline-header flex-shrink-0">\n    <mat-calendar class="w-full"> </mat-calendar>\n  </div>\n\n  <!-- Scrollable calendars container -->\n  <div\n    #timelineBody\n    appAutoScrollToBottom\n    appScrollToTopDetector\n    (scrolledToTop)="onScrolledToTop()"\n    class="timeline-body appear flex-1 overflow-y-auto"\n  >\n    @for (month of calendarMonths; track trackByMonth($index, month)) {\n      <div class="flex flex-col">\n        <div class="dashboard-card px-6 py-4 text-center">\n          <span class="dashboard-heading mr-2 text-lg font-semibold">\n            {{ getMonthName(month).month }}\n          </span>\n          <span class="dashboard-text text-base opacity-70">\n            {{ getMonthName(month).year }}\n          </span>\n        </div>\n        <mat-calendar\n          class="w-full"\n          [startAt]="month"\n          [dateClass]="dateClass"\n          (selectedChange)="onDateSelected($event)"\n        >\n        </mat-calendar>\n      </div>\n    }\n  </div>\n</div>\n', styles: ["/* src/app/features/timeline/timeline-calendar/timeline-calendar.component.scss */\n:host ::ng-deep .timeline-header mat-calendar table tbody {\n  display: none;\n}\n:host ::ng-deep .timeline-header mat-calendar th {\n  padding-top: 1rem;\n  padding-bottom: 8px;\n}\n:host ::ng-deep .timeline-header mat-calendar tr:first-child th {\n  width: 100%;\n  table-layout: fixed;\n}\n:host ::ng-deep .timeline-header mat-calendar tr:first-child th {\n  width: 14.2857142857%;\n}\n:host ::ng-deep .timeline-header mat-calendar tr:nth-child(2) {\n  display: none;\n}\n:host ::ng-deep .timeline-body mat-calendar table thead {\n  display: none;\n}\n:host ::ng-deep mat-calendar mat-calendar-header {\n  display: none;\n}\n:host ::ng-deep mat-calendar td.mat-calendar-body-label {\n  padding-top: 0px !important;\n  padding-right: 0px !important;\n  padding-bottom: 0px !important;\n  visibility: hidden;\n}\n:host ::ng-deep .mat-calendar-body-today {\n  border: none !important;\n  outline: none !important;\n}\n:host ::ng-deep .mat-calendar-content {\n  padding-bottom: 0 !important;\n}\n:host ::ng-deep .workout-day {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary) 0%,\n      var(--color-primary-gradient) 100%) !important;\n  border-radius: 50% !important;\n  font-weight: 600 !important;\n  opacity: 0.8 !important;\n}\n:host ::ng-deep .workout-day:hover {\n  opacity: 1 !important;\n}\n/*# sourceMappingURL=timeline-calendar.component-OYKCJ5PK.css.map */\n"] }]
   }], () => [], { timelineBody: [{
     type: ViewChild,
     args: ["timelineBody", { static: false }]
@@ -7989,6 +8008,7 @@ var WorkoutsTimelineComponent = class _WorkoutsTimelineComponent {
   workoutsService;
   workoutsData = [];
   loading = signal(true, ...ngDevMode ? [{ debugName: "loading" }] : []);
+  workoutSelected = output();
   // Single filter object with Date objects
   dateFilter = signal({
     fromDate: new Date((/* @__PURE__ */ new Date()).setMonth((/* @__PURE__ */ new Date()).getMonth() - 4)),
@@ -8011,6 +8031,12 @@ var WorkoutsTimelineComponent = class _WorkoutsTimelineComponent {
       toDate: prevFromDate
     });
     this.loadWorkouts(this.dateFilter(), true);
+  }
+  onWorkoutDateClicked(workoutDate) {
+    const workout = this.workoutsData.find((w) => w.id === workoutDate.id);
+    if (workout) {
+      this.workoutSelected.emit(workout);
+    }
   }
   loadInitData() {
     this.loadWorkouts(this.dateFilter());
@@ -8037,11 +8063,13 @@ var WorkoutsTimelineComponent = class _WorkoutsTimelineComponent {
   static \u0275fac = function WorkoutsTimelineComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _WorkoutsTimelineComponent)(\u0275\u0275directiveInject(WorkoutsService));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WorkoutsTimelineComponent, selectors: [["app-workouts-timeline"]], decls: 2, vars: 3, consts: [[1, "h-full", "w-full"], [3, "scrolledToTop", "loading", "dateFilter", "workoutDates"]], template: function WorkoutsTimelineComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WorkoutsTimelineComponent, selectors: [["app-workouts-timeline"]], outputs: { workoutSelected: "workoutSelected" }, decls: 2, vars: 3, consts: [[1, "h-full", "w-full"], [3, "scrolledToTop", "workoutDateClicked", "loading", "dateFilter", "workoutDates"]], template: function WorkoutsTimelineComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "app-timeline-calendar", 1);
       \u0275\u0275listener("scrolledToTop", function WorkoutsTimelineComponent_Template_app_timeline_calendar_scrolledToTop_1_listener() {
         return ctx.onScrolledToTop();
+      })("workoutDateClicked", function WorkoutsTimelineComponent_Template_app_timeline_calendar_workoutDateClicked_1_listener($event) {
+        return ctx.onWorkoutDateClicked($event);
       });
       \u0275\u0275elementEnd()();
     }
@@ -8065,6 +8093,7 @@ var WorkoutsTimelineComponent = class _WorkoutsTimelineComponent {
         [dateFilter]="dateFilter()"
         [workoutDates]="workoutDates()"
         (scrolledToTop)="onScrolledToTop()"
+        (workoutDateClicked)="onWorkoutDateClicked($event)"
       >
       </app-timeline-calendar>
     </div>
@@ -8073,14 +8102,103 @@ var WorkoutsTimelineComponent = class _WorkoutsTimelineComponent {
   }], () => [{ type: WorkoutsService }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WorkoutsTimelineComponent, { className: "WorkoutsTimelineComponent", filePath: "src/app/features/timeline/workouts-timeline.component.ts", lineNumber: 23 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WorkoutsTimelineComponent, { className: "WorkoutsTimelineComponent", filePath: "src/app/features/timeline/workouts-timeline.component.ts", lineNumber: 24 });
 })();
 
 // src/app/features/dashboard/feature-selection.component.ts
+function FeatureSelectionComponent_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 2)(1, "div", 3)(2, "button", 4);
+    \u0275\u0275listener("click", function FeatureSelectionComponent_Conditional_2_Template_button_click_2_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.clearSelection());
+    });
+    \u0275\u0275elementStart(3, "mat-icon", 5);
+    \u0275\u0275text(4, "close");
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275elementStart(5, "p", 6);
+    \u0275\u0275text(6);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(7, "p", 7);
+    \u0275\u0275text(8);
+    \u0275\u0275elementEnd()();
+    \u0275\u0275elementStart(9, "button", 8);
+    \u0275\u0275listener("click", function FeatureSelectionComponent_Conditional_2_Template_button_click_9_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onViewWorkout());
+    });
+    \u0275\u0275elementStart(10, "mat-icon");
+    \u0275\u0275text(11, "visibility");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(12, " View Workout ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "button", 9);
+    \u0275\u0275listener("click", function FeatureSelectionComponent_Conditional_2_Template_button_click_13_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onEditWorkout());
+    });
+    \u0275\u0275elementStart(14, "mat-icon");
+    \u0275\u0275text(15, "edit");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(16, " Edit Workout ");
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r1 = \u0275\u0275nextContext();
+    \u0275\u0275advance(6);
+    \u0275\u0275textInterpolate1(" ", ctx_r1.formatWorkoutDate(ctx_r1.selectedWorkout().dateCreated), " ");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("", ctx_r1.selectedWorkout().exercises.length, " exercises");
+  }
+}
+function FeatureSelectionComponent_Conditional_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "button", 8);
+    \u0275\u0275listener("click", function FeatureSelectionComponent_Conditional_3_Template_button_click_0_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onAddWorkout());
+    });
+    \u0275\u0275elementStart(1, "mat-icon");
+    \u0275\u0275text(2, "fitness_center");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(3, " Add Workout ");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "button", 9);
+    \u0275\u0275listener("click", function FeatureSelectionComponent_Conditional_3_Template_button_click_4_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r1 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r1.onViewStats());
+    });
+    \u0275\u0275elementStart(5, "mat-icon");
+    \u0275\u0275text(6, "bar_chart");
+    \u0275\u0275elementEnd();
+    \u0275\u0275text(7, " View Stats ");
+    \u0275\u0275elementEnd();
+  }
+}
 var FeatureSelectionComponent = class _FeatureSelectionComponent {
   router;
+  selectedWorkout = input(null, ...ngDevMode ? [{ debugName: "selectedWorkout" }] : []);
+  clearWorkoutSelection = output();
   constructor(router) {
     this.router = router;
+  }
+  formatWorkoutDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+  }
+  clearSelection() {
+    this.clearWorkoutSelection.emit();
   }
   onAddWorkout() {
     this.router.navigate(["/workout/create"]);
@@ -8088,43 +8206,33 @@ var FeatureSelectionComponent = class _FeatureSelectionComponent {
   onViewStats() {
     console.log("View Stats clicked");
   }
-  onEditWorkouts() {
-    console.log("Edit Workouts clicked");
+  onEditWorkout() {
+    const workout = this.selectedWorkout();
+    if (workout) {
+      console.log("Edit Workout clicked for workout:", workout);
+      this.router.navigate(["/workout/edit", workout.id]);
+    }
+  }
+  onViewWorkout() {
+    const workout = this.selectedWorkout();
+    if (workout) {
+      console.log("View Workout clicked for workout:", workout);
+    }
   }
   static \u0275fac = function FeatureSelectionComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _FeatureSelectionComponent)(\u0275\u0275directiveInject(Router));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FeatureSelectionComponent, selectors: [["app-feature-selection"]], decls: 14, vars: 0, consts: [[1, "flex", "h-full", "items-center", "justify-center"], [1, "grid", "w-full", "max-w-md", "gap-4", "p-6"], ["mat-raised-button", "", "color", "primary", 1, "flex", "h-16", "w-full", "items-center", "justify-center", "gap-3", "text-lg", "font-medium", 3, "click"], ["mat-raised-button", "", "color", "accent", 1, "flex", "h-16", "w-full", "items-center", "justify-center", "gap-3", "text-lg", "font-medium", 3, "click"], ["mat-raised-button", "", "color", "warn", 1, "flex", "h-16", "w-full", "items-center", "justify-center", "gap-3", "text-lg", "font-medium", 3, "click"]], template: function FeatureSelectionComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FeatureSelectionComponent, selectors: [["app-feature-selection"]], inputs: { selectedWorkout: [1, "selectedWorkout"] }, outputs: { clearWorkoutSelection: "clearWorkoutSelection" }, decls: 4, vars: 1, consts: [[1, "flex", "h-full", "items-center", "justify-center"], [1, "flex", "w-full", "max-w-md", "flex-col", "gap-4"], [1, "p-", "flex", "flex-col", "items-center", "gap-2", "rounded-md", "p-1", "pb-4"], [1, "flex", "h-0", "w-full", "overflow-visible"], ["mat-icon-button", "", "color", "primary", "aria-label", "Clear selection", 1, "!bg-primary", "!rounded-lg", "opacity-50", 3, "click"], [1, "text-textOnPrimary"], [1, "m-0", "text-lg"], [1, "m-0"], ["mat-raised-button", "", "color", "primary", 1, "flex", "h-16", "w-full", "items-center", "justify-center", "gap-3", "text-lg", "font-medium", 3, "click"], ["mat-raised-button", "", "color", "accent", 1, "flex", "h-16", "w-full", "items-center", "justify-center", "gap-3", "text-lg", "font-medium", 3, "click"]], template: function FeatureSelectionComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "button", 2);
-      \u0275\u0275listener("click", function FeatureSelectionComponent_Template_button_click_2_listener() {
-        return ctx.onAddWorkout();
-      });
-      \u0275\u0275elementStart(3, "mat-icon");
-      \u0275\u0275text(4, "fitness_center");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(5, " Add Workout ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(6, "button", 3);
-      \u0275\u0275listener("click", function FeatureSelectionComponent_Template_button_click_6_listener() {
-        return ctx.onViewStats();
-      });
-      \u0275\u0275elementStart(7, "mat-icon");
-      \u0275\u0275text(8, "bar_chart");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(9, " View Stats ");
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(10, "button", 4);
-      \u0275\u0275listener("click", function FeatureSelectionComponent_Template_button_click_10_listener() {
-        return ctx.onEditWorkouts();
-      });
-      \u0275\u0275elementStart(11, "mat-icon");
-      \u0275\u0275text(12, "edit");
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(13, " Edit Workout ");
-      \u0275\u0275elementEnd()()();
+      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
+      \u0275\u0275conditionalCreate(2, FeatureSelectionComponent_Conditional_2_Template, 17, 2)(3, FeatureSelectionComponent_Conditional_3_Template, 8, 0);
+      \u0275\u0275elementEnd()();
     }
-  }, dependencies: [CommonModule, MatButtonModule, MatButton, MatIconModule, MatIcon], encapsulation: 2 });
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275conditional(ctx.selectedWorkout() ? 2 : 3);
+    }
+  }, dependencies: [CommonModule, MatButtonModule, MatButton, MatIconButton, MatIconModule, MatIcon], encapsulation: 2 });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(FeatureSelectionComponent, [{
@@ -8135,39 +8243,74 @@ var FeatureSelectionComponent = class _FeatureSelectionComponent {
       imports: [CommonModule, MatButtonModule, MatIconModule],
       template: `
     <div class="flex h-full items-center justify-center">
-      <div class="grid w-full max-w-md gap-4 p-6">
-        <!-- Add Workout Button -->
-        <button
-          mat-raised-button
-          color="primary"
-          class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
-          (click)="onAddWorkout()"
-        >
-          <mat-icon>fitness_center</mat-icon>
-          Add Workout
-        </button>
+      <div class="flex w-full max-w-md flex-col gap-4">
+        @if (selectedWorkout()) {
+          <!-- Selected Workout Actions -->
+          <div class="p- flex flex-col items-center gap-2 rounded-md p-1 pb-4">
+            <!-- Clear Selection Icon Button -->
+            <div class="flex h-0 w-full overflow-visible">
+              <button
+                mat-icon-button
+                color="primary"
+                class="!bg-primary !rounded-lg opacity-50"
+                (click)="clearSelection()"
+                aria-label="Clear selection"
+              >
+                <mat-icon class="text-textOnPrimary">close</mat-icon>
+              </button>
+            </div>
 
-        <!-- View Stats Button -->
-        <button
-          mat-raised-button
-          color="accent"
-          class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
-          (click)="onViewStats()"
-        >
-          <mat-icon>bar_chart</mat-icon>
-          View Stats
-        </button>
+            <p class="m-0 text-lg">
+              {{ formatWorkoutDate(selectedWorkout()!.dateCreated) }}
+            </p>
+            <p class="m-0">{{ selectedWorkout()!.exercises.length }} exercises</p>
+          </div>
 
-        <!-- Edit Workouts Button -->
-        <button
-          mat-raised-button
-          color="warn"
-          class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
-          (click)="onEditWorkouts()"
-        >
-          <mat-icon>edit</mat-icon>
-          Edit Workout
-        </button>
+          <!-- View Workout Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
+            (click)="onViewWorkout()"
+          >
+            <mat-icon>visibility</mat-icon>
+            View Workout
+          </button>
+
+          <!-- Edit Workout Button -->
+          <button
+            mat-raised-button
+            color="accent"
+            class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
+            (click)="onEditWorkout()"
+          >
+            <mat-icon>edit</mat-icon>
+            Edit Workout
+          </button>
+        } @else {
+          <!-- Default Buttons -->
+          <!-- Add Workout Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
+            (click)="onAddWorkout()"
+          >
+            <mat-icon>fitness_center</mat-icon>
+            Add Workout
+          </button>
+
+          <!-- View Stats Button -->
+          <button
+            mat-raised-button
+            color="accent"
+            class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
+            (click)="onViewStats()"
+          >
+            <mat-icon>bar_chart</mat-icon>
+            View Stats
+          </button>
+        }
       </div>
     </div>
   `
@@ -8175,26 +8318,42 @@ var FeatureSelectionComponent = class _FeatureSelectionComponent {
   }], () => [{ type: Router }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FeatureSelectionComponent, { className: "FeatureSelectionComponent", filePath: "src/app/features/dashboard/feature-selection.component.ts", lineNumber: 50 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(FeatureSelectionComponent, { className: "FeatureSelectionComponent", filePath: "src/app/features/dashboard/feature-selection.component.ts", lineNumber: 86 });
 })();
 
 // src/app/features/dashboard/dashboard.component.ts
 var DashboardComponent = class _DashboardComponent {
   authStateService = inject(AuthStateService);
   currentUser$;
+  selectedWorkout = signal(null, ...ngDevMode ? [{ debugName: "selectedWorkout" }] : []);
   constructor() {
     this.currentUser$ = this.authStateService.authState$.pipe(map((authState) => authState.user));
+  }
+  onWorkoutSelected(workout) {
+    this.selectedWorkout.set(workout);
+  }
+  onClearWorkoutSelection() {
+    this.selectedWorkout.set(null);
   }
   static \u0275fac = function DashboardComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _DashboardComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DashboardComponent, selectors: [["app-dashboard"]], decls: 4, vars: 0, consts: [[1, "flex", "h-full", "w-full", "flex-col", "overflow-hidden", "lg:flex-row"], [1, "h-1/3", "border-b-2", "border-solid", "border-gray-500", "p-4", "lg:order-2", "lg:h-full", "lg:w-2/3", "lg:border-b-0", "lg:border-l-2"], [1, "h-2/3", "lg:order-1", "lg:h-full", "lg:w-1/3"]], template: function DashboardComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _DashboardComponent, selectors: [["app-dashboard"]], decls: 4, vars: 1, consts: [[1, "flex", "h-full", "w-full", "flex-col", "overflow-hidden", "lg:flex-row"], [1, "h-1/3", "border-b-2", "border-solid", "border-gray-500", "p-4", "lg:order-2", "lg:h-full", "lg:w-2/3", "lg:border-b-0", "lg:border-l-2"], [3, "clearWorkoutSelection", "selectedWorkout"], [1, "h-2/3", "lg:order-1", "lg:h-full", "lg:w-1/3", 3, "workoutSelected"]], template: function DashboardComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1);
-      \u0275\u0275element(2, "app-feature-selection");
-      \u0275\u0275elementEnd();
-      \u0275\u0275element(3, "app-workouts-timeline", 2);
-      \u0275\u0275elementEnd();
+      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "app-feature-selection", 2);
+      \u0275\u0275listener("clearWorkoutSelection", function DashboardComponent_Template_app_feature_selection_clearWorkoutSelection_2_listener() {
+        return ctx.onClearWorkoutSelection();
+      });
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(3, "app-workouts-timeline", 3);
+      \u0275\u0275listener("workoutSelected", function DashboardComponent_Template_app_workouts_timeline_workoutSelected_3_listener($event) {
+        return ctx.onWorkoutSelected($event);
+      });
+      \u0275\u0275elementEnd()();
+    }
+    if (rf & 2) {
+      \u0275\u0275advance(2);
+      \u0275\u0275property("selectedWorkout", ctx.selectedWorkout());
     }
   }, dependencies: [
     CommonModule,
@@ -8222,18 +8381,26 @@ var DashboardComponent = class _DashboardComponent {
       <div
         class="h-1/3 border-b-2 border-solid border-gray-500 p-4 lg:order-2 lg:h-full lg:w-2/3 lg:border-b-0 lg:border-l-2"
       >
-        <app-feature-selection></app-feature-selection>
+        <app-feature-selection
+          [selectedWorkout]="selectedWorkout()"
+          (clearWorkoutSelection)="onClearWorkoutSelection()"
+        >
+        </app-feature-selection>
       </div>
-      <app-workouts-timeline class="h-2/3 lg:order-1 lg:h-full lg:w-1/3"></app-workouts-timeline>
+      <app-workouts-timeline
+        class="h-2/3 lg:order-1 lg:h-full lg:w-1/3"
+        (workoutSelected)="onWorkoutSelected($event)"
+      >
+      </app-workouts-timeline>
     </div>
   `
     }]
   }], () => [], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DashboardComponent, { className: "DashboardComponent", filePath: "src/app/features/dashboard/dashboard.component.ts", lineNumber: 33 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(DashboardComponent, { className: "DashboardComponent", filePath: "src/app/features/dashboard/dashboard.component.ts", lineNumber: 42 });
 })();
 export {
   DashboardComponent
 };
-//# sourceMappingURL=dashboard.component-AUYHU25B.js.map
+//# sourceMappingURL=dashboard.component-AORQQO6K.js.map

@@ -72,7 +72,7 @@ var routes = [
   },
   {
     path: "auth",
-    loadChildren: () => import("./auth.module-YCXYJMUN.js").then((m) => m.AuthModule)
+    loadChildren: () => import("./auth.module-XKKAEE4A.js").then((m) => m.AuthModule)
   },
   // Protected routes with shared layout
   {
@@ -82,18 +82,18 @@ var routes = [
     children: [
       {
         path: "dashboard",
-        loadComponent: () => import("./dashboard.component-AUYHU25B.js").then((m) => m.DashboardComponent)
+        loadComponent: () => import("./dashboard.component-AORQQO6K.js").then((m) => m.DashboardComponent)
       },
       {
         path: "workout",
-        loadChildren: () => import("./workout-administration-XL2WCKQO.js").then((m) => m.workoutAdministrationRoutes)
+        loadChildren: () => import("./workout-administration-HJJVDL5C.js").then((m) => m.workoutAdministrationRoutes)
       }
     ]
   },
   // Wildcard route - should be last
   {
     path: "**",
-    redirectTo: "/auth/login"
+    redirectTo: "/dashboard"
   }
 ];
 
@@ -148,4 +148,4 @@ var App = class _App {
 
 // src/main.ts
 bootstrapApplication(App, appConfig).catch((err) => console.error(err));
-//# sourceMappingURL=main-4BXBXLET.js.map
+//# sourceMappingURL=main-GMLU5HT3.js.map

@@ -2,21 +2,19 @@ import {
   MatFormFieldModule,
   MatInput,
   MatInputModule
-} from "./chunk-I6GS4522.js";
+} from "./chunk-RDXPNGMW.js";
 import {
   ExerciseTypesService,
   LoaderComponent,
   WorkoutsService,
   _MatInternalFormField
-} from "./chunk-3NMSYGKW.js";
+} from "./chunk-UGFWTRIG.js";
 import {
   DefaultValueAccessor,
   FormArray,
   FormControl,
   FormControlDirective,
   FormGroup,
-  MatDialog,
-  MatDialogModule,
   MatError,
   MatFormField,
   MinValidator,
@@ -26,7 +24,7 @@ import {
   NumberValueAccessor,
   ReactiveFormsModule,
   Validators
-} from "./chunk-X7YEJBQC.js";
+} from "./chunk-FWJQQGCN.js";
 import {
   MatCard,
   MatCardModule
@@ -58,6 +56,7 @@ import {
   _IdGenerator,
   _StructuralStylesLoader,
   _animationsDisabled,
+  _getAnimationsState,
   hasModifierKey
 } from "./chunk-72WFIQJ2.js";
 import {
@@ -8440,7 +8439,7 @@ var ExerciseSetFormComponent = class _ExerciseSetFormComponent {
   static \u0275fac = function ExerciseSetFormComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ExerciseSetFormComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExerciseSetFormComponent, selectors: [["app-exercise-set-form"]], inputs: { setForm: "setForm", showRemoveButton: "showRemoveButton", isEditMode: "isEditMode", hasSelectedSet: "hasSelectedSet" }, outputs: { removeSet: "removeSet", addSet: "addSet" }, decls: 56, vars: 11, consts: [[1, "flex", "flex-col", "gap-2", "rounded-lg", "border", "p-2"], [1, "flex", "items-center", "gap-2"], [1, "min-w-0", "flex-1"], [1, "mb-1", "text-xs"], [1, "flex", "items-center", "gap-1"], ["appearance", "outline", 1, "min-w-0", "max-w-20", "flex-1"], ["matInput", "", "type", "number", "min", "1", "placeholder", "0", 1, "text-center", "text-sm", 3, "formControl"], [1, "flex", "flex-col", "gap-1"], ["mat-mini-fab", "", 1, "", 3, "click"], [1, "material-icons"], ["matInput", "", "type", "number", "min", "0", "step", "0.5", "placeholder", "0", 1, "text-center", "text-sm", 3, "formControl"], [1, "flex", "items-center", "justify-between", "gap-4"], ["mat-raised-button", "", "color", "primary", 1, "px-4", 3, "click", "disabled"], [1, "mr-1"], [1, "flex", "items-center", "gap-2", "pr-2"], [1, "text-xs", 3, "change", "formControl"]], template: function ExerciseSetFormComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExerciseSetFormComponent, selectors: [["app-exercise-set-form"]], inputs: { setForm: "setForm", showRemoveButton: "showRemoveButton", isEditMode: "isEditMode", hasSelectedSet: "hasSelectedSet" }, outputs: { removeSet: "removeSet", addSet: "addSet" }, decls: 56, vars: 11, consts: [[1, "flex", "flex-col", "gap-2", "rounded-lg", "border", "p-2"], [1, "flex", "items-center", "gap-2"], [1, "min-w-0", "flex-1"], [1, "mb-1", "text-xs"], [1, "flex", "items-center", "gap-1"], ["appearance", "outline", 1, "min-w-0", "max-w-20", "flex-1"], ["matInput", "", "type", "number", "min", "1", "placeholder", "0", 1, "text-center", "text-sm", 3, "formControl"], [1, "flex", "flex-col", "gap-1"], ["mat-mini-fab", "", 1, "", 3, "click"], [1, "material-icons"], ["matInput", "", "type", "number", "min", "0", "step", "0.5", "placeholder", "0", 1, "text-center", "text-sm", 3, "formControl"], [1, "flex", "items-center", "justify-between", "gap-4"], [1, "flex", "items-center", "gap-2", "pr-2"], [1, "text-xs", 3, "change", "formControl"], ["mat-raised-button", "", 1, "!bg-primary", "!text-textOnPrimary", "px-4", 3, "click", "disabled"], [1, "mr-1"]], template: function ExerciseSetFormComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
       \u0275\u0275text(4, "Reps");
@@ -8514,27 +8513,27 @@ var ExerciseSetFormComponent = class _ExerciseSetFormComponent {
       \u0275\u0275elementStart(44, "i", 9);
       \u0275\u0275text(45, "keyboard_double_arrow_down");
       \u0275\u0275elementEnd()()()()()();
-      \u0275\u0275elementStart(46, "div", 11)(47, "button", 12);
-      \u0275\u0275listener("click", function ExerciseSetFormComponent_Template_button_click_47_listener() {
-        return ctx.onAddSet();
-      });
-      \u0275\u0275elementStart(48, "mat-icon", 13);
-      \u0275\u0275text(49);
-      \u0275\u0275elementEnd();
-      \u0275\u0275text(50);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(51, "div", 14)(52, "mat-checkbox", 15);
-      \u0275\u0275listener("change", function ExerciseSetFormComponent_Template_mat_checkbox_change_52_listener($event) {
+      \u0275\u0275elementStart(46, "div", 11)(47, "div", 12)(48, "mat-checkbox", 13);
+      \u0275\u0275listener("change", function ExerciseSetFormComponent_Template_mat_checkbox_change_48_listener($event) {
         return ctx.onWarmupChange($event);
       });
-      \u0275\u0275text(53, " Warmup ");
+      \u0275\u0275text(49, " Warmup ");
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(54, "mat-checkbox", 15);
-      \u0275\u0275listener("change", function ExerciseSetFormComponent_Template_mat_checkbox_change_54_listener($event) {
+      \u0275\u0275elementStart(50, "mat-checkbox", 13);
+      \u0275\u0275listener("change", function ExerciseSetFormComponent_Template_mat_checkbox_change_50_listener($event) {
         return ctx.onDropSetChange($event);
       });
-      \u0275\u0275text(55, " Drop ");
-      \u0275\u0275elementEnd()()()();
+      \u0275\u0275text(51, " Drop ");
+      \u0275\u0275elementEnd()();
+      \u0275\u0275elementStart(52, "button", 14);
+      \u0275\u0275listener("click", function ExerciseSetFormComponent_Template_button_click_52_listener() {
+        return ctx.onAddSet();
+      });
+      \u0275\u0275elementStart(53, "mat-icon", 15);
+      \u0275\u0275text(54);
+      \u0275\u0275elementEnd();
+      \u0275\u0275text(55);
+      \u0275\u0275elementEnd()()();
     }
     if (rf & 2) {
       \u0275\u0275advance(7);
@@ -8549,16 +8548,16 @@ var ExerciseSetFormComponent = class _ExerciseSetFormComponent {
       \u0275\u0275conditional(ctx.setForm.controls.weight.touched && ctx.setForm.controls.weight.hasError("required") ? 30 : -1);
       \u0275\u0275advance();
       \u0275\u0275conditional(ctx.setForm.controls.weight.touched && ctx.setForm.controls.weight.hasError("min") ? 31 : -1);
-      \u0275\u0275advance(16);
+      \u0275\u0275advance(17);
+      \u0275\u0275property("formControl", ctx.setForm.controls.isWarmupSet);
+      \u0275\u0275advance(2);
+      \u0275\u0275property("formControl", ctx.setForm.controls.isDropSet);
+      \u0275\u0275advance(2);
       \u0275\u0275property("disabled", !ctx.isSetValid || ctx.isEditMode && !ctx.hasSelectedSet);
       \u0275\u0275advance(2);
       \u0275\u0275textInterpolate(ctx.addButtonIcon);
       \u0275\u0275advance();
       \u0275\u0275textInterpolate1(" ", ctx.addButtonText, " ");
-      \u0275\u0275advance(2);
-      \u0275\u0275property("formControl", ctx.setForm.controls.isWarmupSet);
-      \u0275\u0275advance(2);
-      \u0275\u0275property("formControl", ctx.setForm.controls.isDropSet);
     }
   }, dependencies: [
     CommonModule,
@@ -8693,17 +8692,6 @@ var ExerciseSetFormComponent = class _ExerciseSetFormComponent {
 
       <!-- Bottom row: Add Set Button and Checkboxes -->
       <div class="flex items-center justify-between gap-4">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="onAddSet()"
-          [disabled]="!isSetValid || (isEditMode && !hasSelectedSet)"
-          class="px-4"
-        >
-          <mat-icon class="mr-1">{{ addButtonIcon }}</mat-icon>
-          {{ addButtonText }}
-        </button>
-
         <div class="flex items-center gap-2 pr-2">
           <mat-checkbox
             [formControl]="setForm.controls.isWarmupSet"
@@ -8720,6 +8708,15 @@ var ExerciseSetFormComponent = class _ExerciseSetFormComponent {
             Drop
           </mat-checkbox>
         </div>
+        <button
+          mat-raised-button
+          (click)="onAddSet()"
+          [disabled]="!isSetValid || (isEditMode && !hasSelectedSet)"
+          class="!bg-primary !text-textOnPrimary px-4"
+        >
+          <mat-icon class="mr-1">{{ addButtonIcon }}</mat-icon>
+          {{ addButtonText }}
+        </button>
       </div>
     </div>
   `, styles: ["/* src/app/features/workout-administration/components/exercise-set-form/exercise-set-form.component.scss */\n:host ::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {\n  height: 84px;\n}\n:host ::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-form-field-infix {\n  padding-block: 4px;\n  min-height: 40px;\n  top: 24px;\n}\n:host ::ng-deep .mat-mdc-form-field .mat-mdc-form-field-subscript-wrapper {\n  display: none;\n}\n:host ::ng-deep .mat-mdc-form-field .mat-mdc-input-element {\n  font-size: 28px;\n}\n:host ::ng-deep button.mat-mdc-mini-fab {\n  box-shadow: none !important;\n}\n/*# sourceMappingURL=exercise-set-form.component-YFTCKOAW.css.map */\n"] }]
@@ -8739,7 +8736,7 @@ var ExerciseSetFormComponent = class _ExerciseSetFormComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExerciseSetFormComponent, { className: "ExerciseSetFormComponent", filePath: "src/app/features/workout-administration/components/exercise-set-form/exercise-set-form.component.ts", lineNumber: 155 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExerciseSetFormComponent, { className: "ExerciseSetFormComponent", filePath: "src/app/features/workout-administration/components/exercise-set-form/exercise-set-form.component.ts", lineNumber: 153 });
 })();
 
 // src/app/features/workout-administration/components/set-info/set-info.component.ts
@@ -8762,6 +8759,7 @@ var SetInfoComponent = class _SetInfoComponent {
   hasDropAfter = false;
   isClickable = false;
   isSelected = false;
+  isSmallView = false;
   get displayText() {
     const reps = this.setForm.controls.reps.value || 0;
     const weight = this.setForm.controls.weight.value || 0;
@@ -8792,7 +8790,7 @@ var SetInfoComponent = class _SetInfoComponent {
   static \u0275fac = function SetInfoComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _SetInfoComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetInfoComponent, selectors: [["app-set-info"]], inputs: { setForm: "setForm", hasDropAfter: "hasDropAfter", isClickable: "isClickable", isSelected: "isSelected" }, decls: 5, vars: 10, consts: [[1, "set-pill", "inline-flex", "items-center", "gap-1", "rounded-full", "bg-primary", "px-3", "py-1", "text-sm", "font-medium", "text-textOnPrimary", 3, "ngClass"], [1, "opacity-50"]], template: function SetInfoComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetInfoComponent, selectors: [["app-set-info"]], inputs: { setForm: "setForm", hasDropAfter: "hasDropAfter", isClickable: "isClickable", isSelected: "isSelected", isSmallView: "isSmallView" }, decls: 5, vars: 12, consts: [[1, "set-pill", "bg-primary", "text-textOnPrimary", "inline-flex", "items-center", "gap-1", "rounded-full", "px-3", "py-1", "text-sm", "font-medium", 3, "ngClass"], [1, "opacity-50"]], template: function SetInfoComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "div", 0);
       \u0275\u0275conditionalCreate(1, SetInfoComponent_Conditional_1_Template, 2, 0, "mat-icon", 1);
@@ -8802,27 +8800,28 @@ var SetInfoComponent = class _SetInfoComponent {
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275classProp("cursor-pointer", ctx.isClickable)("ring-2", ctx.isSelected)("ring-blue-400", ctx.isSelected);
+      \u0275\u0275classProp("cursor-pointer", ctx.isClickable)("ring-2", ctx.isSelected)("ring-blue-400", ctx.isSelected)("small-layout", ctx.isSmallView);
       \u0275\u0275property("ngClass", ctx.pillClasses);
       \u0275\u0275advance();
       \u0275\u0275conditional(ctx.setForm.controls.isWarmupSet.value ? 1 : -1);
       \u0275\u0275advance();
-      \u0275\u0275conditional(ctx.setForm.controls.isDropSet.value ? 2 : -1);
+      \u0275\u0275conditional(ctx.setForm.controls.isDropSet.value && !ctx.isSmallView ? 2 : -1);
       \u0275\u0275advance(2);
       \u0275\u0275textInterpolate1(" ", ctx.displayText, " ");
     }
-  }, dependencies: [CommonModule, NgClass, MatIconModule, MatIcon], styles: ["\n\n.pill-drop[_ngcontent-%COMP%] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-secondary)) !important;\n}\n.set-pill[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-secondary),\n      var(--color-primary)) !important;\n}\n.set-pill[_ngcontent-%COMP%] {\n  min-height: 32px;\n}\n.set-pill.has-drop-after[_ngcontent-%COMP%] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n/*# sourceMappingURL=set-info-264OAXMO.css.map */"] });
+  }, dependencies: [CommonModule, NgClass, MatIconModule, MatIcon], styles: ["\n\n.pill-drop[_ngcontent-%COMP%] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-primary-gradient)) !important;\n}\n.set-pill[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary-gradient),\n      var(--color-primary)) !important;\n  min-height: 32px;\n}\n.set-pill.has-drop-after[_ngcontent-%COMP%] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.set-info-container.small-layout[_ngcontent-%COMP%] {\n  transform-origin: left;\n  --tw-scale-x: .75;\n  --tw-scale-y: .75;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n  width: 133.33%;\n}\n.set-info-container.small-layout[_ngcontent-%COMP%]   .set-pill[_ngcontent-%COMP%] {\n  padding-left: 0.25rem;\n  padding-right: 0.25rem;\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n/*# sourceMappingURL=set-info-424W3Z76.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SetInfoComponent, [{
     type: Component,
     args: [{ selector: "app-set-info", standalone: true, imports: [CommonModule, MatIconModule], template: `
     <div
-      class="set-pill inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-sm font-medium text-textOnPrimary"
+      class="set-pill bg-primary text-textOnPrimary inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium"
       [ngClass]="pillClasses"
       [class.cursor-pointer]="isClickable"
       [class.ring-2]="isSelected"
       [class.ring-blue-400]="isSelected"
+      [class.small-layout]="isSmallView"
     >
       <!-- Warmup icon -->
       @if (setForm.controls.isWarmupSet.value) {
@@ -8830,7 +8829,7 @@ var SetInfoComponent = class _SetInfoComponent {
       }
 
       <!-- Drop set icon -->
-      @if (setForm.controls.isDropSet.value) {
+      @if (setForm.controls.isDropSet.value && !isSmallView) {
         <mat-icon>trending_down</mat-icon>
       }
 
@@ -8839,7 +8838,7 @@ var SetInfoComponent = class _SetInfoComponent {
         {{ displayText }}
       </span>
     </div>
-  `, styles: ["/* src/app/features/workout-administration/components/set-info/set-info.scss */\n.pill-drop {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-secondary)) !important;\n}\n.set-pill {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-secondary),\n      var(--color-primary)) !important;\n}\n.set-pill {\n  min-height: 32px;\n}\n.set-pill.has-drop-after {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n/*# sourceMappingURL=set-info-264OAXMO.css.map */\n"] }]
+  `, styles: ["/* src/app/features/workout-administration/components/set-info/set-info.scss */\n.pill-drop {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-primary-gradient)) !important;\n}\n.set-pill {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary-gradient),\n      var(--color-primary)) !important;\n  min-height: 32px;\n}\n.set-pill.has-drop-after {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.set-info-container.small-layout {\n  transform-origin: left;\n  --tw-scale-x: .75;\n  --tw-scale-y: .75;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n  width: 133.33%;\n}\n.set-info-container.small-layout .set-pill {\n  padding-left: 0.25rem;\n  padding-right: 0.25rem;\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n/*# sourceMappingURL=set-info-424W3Z76.css.map */\n"] }]
   }], null, { setForm: [{
     type: Input,
     args: [{ required: true }]
@@ -8849,34 +8848,49 @@ var SetInfoComponent = class _SetInfoComponent {
     type: Input
   }], isSelected: [{
     type: Input
+  }], isSmallView: [{
+    type: Input
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetInfoComponent, { className: "SetInfoComponent", filePath: "src/app/features/workout-administration/components/set-info/set-info.component.ts", lineNumber: 36 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetInfoComponent, { className: "SetInfoComponent", filePath: "src/app/features/workout-administration/components/set-info/set-info.component.ts", lineNumber: 37 });
 })();
 
 // src/app/features/workout-administration/components/set-info/set-info-container.component.ts
-function SetInfoContainerComponent_For_5_Template(rf, ctx) {
+function SetInfoContainerComponent_Conditional_1_Template(rf, ctx) {
   if (rf & 1) {
-    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "h3", 1);
+    \u0275\u0275text(1);
+    \u0275\u0275elementEnd();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1("Sets (", ctx_r0.setsArray.controls.length, ")");
+  }
+}
+function SetInfoContainerComponent_For_4_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r2 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "app-set-info", 4);
-    \u0275\u0275listener("click", function SetInfoContainerComponent_For_5_Template_app_set_info_click_0_listener() {
-      const $index_r2 = \u0275\u0275restoreView(_r1).$index;
-      const ctx_r2 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r2.onSetClick($index_r2));
+    \u0275\u0275listener("click", function SetInfoContainerComponent_For_4_Template_app_set_info_click_0_listener() {
+      const $index_r3 = \u0275\u0275restoreView(_r2).$index;
+      const ctx_r0 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r0.onSetClick($index_r3));
     });
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
     const setForm_r4 = ctx.$implicit;
-    const $index_r2 = ctx.$index;
-    const ctx_r2 = \u0275\u0275nextContext();
-    \u0275\u0275property("setForm", setForm_r4)("hasDropAfter", ctx_r2.hasDropSetAfter($index_r2))("isClickable", ctx_r2.isEditMode)("isSelected", ctx_r2.selectedSetIndex === $index_r2);
+    const $index_r3 = ctx.$index;
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275property("setForm", setForm_r4)("hasDropAfter", ctx_r0.hasDropSetAfter($index_r3))("isClickable", ctx_r0.isEditMode)("isSelected", ctx_r0.selectedSetIndex === $index_r3)("isSmallView", ctx_r0.isSmallView);
   }
 }
 var SetInfoContainerComponent = class _SetInfoContainerComponent {
   setsArray;
   isEditMode = false;
+  isSmallView = false;
   selectedSetIndex = null;
   setSelected = new EventEmitter();
   hasDropSetAfter(index) {
@@ -8895,46 +8909,52 @@ var SetInfoContainerComponent = class _SetInfoContainerComponent {
   static \u0275fac = function SetInfoContainerComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _SetInfoContainerComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetInfoContainerComponent, selectors: [["app-set-info-container"]], inputs: { setsArray: "setsArray", isEditMode: "isEditMode", selectedSetIndex: "selectedSetIndex" }, outputs: { setSelected: "setSelected" }, decls: 6, vars: 1, consts: [[1, "flex", "flex-col", "gap-1"], [1, "m-0", "text-sm", "font-medium"], [1, "flex", "flex-wrap", "gap-2"], [3, "setForm", "hasDropAfter", "isClickable", "isSelected"], [3, "click", "setForm", "hasDropAfter", "isClickable", "isSelected"]], template: function SetInfoContainerComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _SetInfoContainerComponent, selectors: [["app-set-info-container"]], inputs: { setsArray: "setsArray", isEditMode: "isEditMode", isSmallView: "isSmallView", selectedSetIndex: "selectedSetIndex" }, outputs: { setSelected: "setSelected" }, decls: 5, vars: 3, consts: [[1, "flex", "flex-col", "gap-1"], [1, "m-0", "text-sm", "font-medium"], [1, "set-info-container", "flex", "flex-wrap", "gap-2"], [3, "setForm", "hasDropAfter", "isClickable", "isSelected", "isSmallView"], [3, "click", "setForm", "hasDropAfter", "isClickable", "isSelected", "isSmallView"]], template: function SetInfoContainerComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0)(1, "h3", 1);
-      \u0275\u0275text(2);
-      \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(3, "div", 2);
-      \u0275\u0275repeaterCreate(4, SetInfoContainerComponent_For_5_Template, 1, 4, "app-set-info", 3, \u0275\u0275repeaterTrackByIndex);
+      \u0275\u0275elementStart(0, "div", 0);
+      \u0275\u0275conditionalCreate(1, SetInfoContainerComponent_Conditional_1_Template, 2, 1, "h3", 1);
+      \u0275\u0275elementStart(2, "div", 2);
+      \u0275\u0275repeaterCreate(3, SetInfoContainerComponent_For_4_Template, 1, 5, "app-set-info", 3, \u0275\u0275repeaterTrackByIndex);
       \u0275\u0275elementEnd()();
     }
     if (rf & 2) {
-      \u0275\u0275advance(2);
-      \u0275\u0275textInterpolate1("Sets (", ctx.setsArray.controls.length, ")");
-      \u0275\u0275advance(2);
+      \u0275\u0275advance();
+      \u0275\u0275conditional(!ctx.isSmallView ? 1 : -1);
+      \u0275\u0275advance();
+      \u0275\u0275classProp("small-layout", ctx.isSmallView);
+      \u0275\u0275advance();
       \u0275\u0275repeater(ctx.setsArray.controls);
     }
-  }, dependencies: [CommonModule, SetInfoComponent], styles: ["\n\n.pill-drop[_ngcontent-%COMP%] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-secondary)) !important;\n}\n.set-pill[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-secondary),\n      var(--color-primary)) !important;\n}\n.set-pill[_ngcontent-%COMP%] {\n  min-height: 32px;\n}\n.set-pill.has-drop-after[_ngcontent-%COMP%] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n/*# sourceMappingURL=set-info-264OAXMO.css.map */"] });
+  }, dependencies: [CommonModule, SetInfoComponent], styles: ["\n\n.pill-drop[_ngcontent-%COMP%] {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-primary-gradient)) !important;\n}\n.set-pill[_ngcontent-%COMP%] {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary-gradient),\n      var(--color-primary)) !important;\n  min-height: 32px;\n}\n.set-pill.has-drop-after[_ngcontent-%COMP%] {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.set-info-container.small-layout[_ngcontent-%COMP%] {\n  transform-origin: left;\n  --tw-scale-x: .75;\n  --tw-scale-y: .75;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n  width: 133.33%;\n}\n.set-info-container.small-layout[_ngcontent-%COMP%]   .set-pill[_ngcontent-%COMP%] {\n  padding-left: 0.25rem;\n  padding-right: 0.25rem;\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n/*# sourceMappingURL=set-info-424W3Z76.css.map */"] });
 };
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(SetInfoContainerComponent, [{
     type: Component,
     args: [{ selector: "app-set-info-container", standalone: true, imports: [CommonModule, SetInfoComponent], template: `
     <div class="flex flex-col gap-1">
-      <h3 class="m-0 text-sm font-medium">Sets ({{ setsArray.controls.length }})</h3>
-      <div class="flex flex-wrap gap-2">
+      @if (!isSmallView) {
+        <h3 class="m-0 text-sm font-medium">Sets ({{ setsArray.controls.length }})</h3>
+      }
+      <div class="set-info-container flex flex-wrap gap-2" [class.small-layout]="isSmallView">
         @for (setForm of setsArray.controls; track $index) {
           <app-set-info
             [setForm]="setForm"
             [hasDropAfter]="hasDropSetAfter($index)"
             [isClickable]="isEditMode"
             [isSelected]="selectedSetIndex === $index"
+            [isSmallView]="isSmallView"
             (click)="onSetClick($index)"
           />
         }
       </div>
     </div>
-  `, styles: ["/* src/app/features/workout-administration/components/set-info/set-info.scss */\n.pill-drop {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-secondary)) !important;\n}\n.set-pill {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-secondary),\n      var(--color-primary)) !important;\n}\n.set-pill {\n  min-height: 32px;\n}\n.set-pill.has-drop-after {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n/*# sourceMappingURL=set-info-264OAXMO.css.map */\n"] }]
+  `, styles: ["/* src/app/features/workout-administration/components/set-info/set-info.scss */\n.pill-drop {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  margin-left: -6px;\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary),\n      var(--color-primary-gradient)) !important;\n}\n.set-pill {\n  background:\n    linear-gradient(\n      135deg,\n      var(--color-primary-gradient),\n      var(--color-primary)) !important;\n  min-height: 32px;\n}\n.set-pill.has-drop-after {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n}\n.set-info-container.small-layout {\n  transform-origin: left;\n  --tw-scale-x: .75;\n  --tw-scale-y: .75;\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n  width: 133.33%;\n}\n.set-info-container.small-layout .set-pill {\n  padding-left: 0.25rem;\n  padding-right: 0.25rem;\n  padding-top: 0.125rem;\n  padding-bottom: 0.125rem;\n}\n/*# sourceMappingURL=set-info-424W3Z76.css.map */\n"] }]
   }], null, { setsArray: [{
     type: Input,
     args: [{ required: true }]
   }], isEditMode: [{
+    type: Input
+  }], isSmallView: [{
     type: Input
   }], selectedSetIndex: [{
     type: Input
@@ -8943,36 +8963,512 @@ var SetInfoContainerComponent = class _SetInfoContainerComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetInfoContainerComponent, { className: "SetInfoContainerComponent", filePath: "src/app/features/workout-administration/components/set-info/set-info-container.component.ts", lineNumber: 29 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(SetInfoContainerComponent, { className: "SetInfoContainerComponent", filePath: "src/app/features/workout-administration/components/set-info/set-info-container.component.ts", lineNumber: 32 });
+})();
+
+// node_modules/@angular/material/fesm2022/progress-bar.mjs
+function MatProgressBar_Conditional_2_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275domElement(0, "div", 2);
+  }
+}
+var MAT_PROGRESS_BAR_DEFAULT_OPTIONS = new InjectionToken("MAT_PROGRESS_BAR_DEFAULT_OPTIONS");
+var MAT_PROGRESS_BAR_LOCATION = new InjectionToken("mat-progress-bar-location", {
+  providedIn: "root",
+  factory: MAT_PROGRESS_BAR_LOCATION_FACTORY
+});
+function MAT_PROGRESS_BAR_LOCATION_FACTORY() {
+  const _document = inject(DOCUMENT);
+  const _location = _document ? _document.location : null;
+  return {
+    // Note that this needs to be a function, rather than a property, because Angular
+    // will only resolve it once, but we want the current path on each call.
+    getPathname: () => _location ? _location.pathname + _location.search : ""
+  };
+}
+var MatProgressBar = class _MatProgressBar {
+  _elementRef = inject(ElementRef);
+  _ngZone = inject(NgZone);
+  _changeDetectorRef = inject(ChangeDetectorRef);
+  _renderer = inject(Renderer2);
+  _cleanupTransitionEnd;
+  constructor() {
+    const animationsState = _getAnimationsState();
+    const defaults2 = inject(MAT_PROGRESS_BAR_DEFAULT_OPTIONS, {
+      optional: true
+    });
+    this._isNoopAnimation = animationsState === "di-disabled";
+    if (animationsState === "reduced-motion") {
+      this._elementRef.nativeElement.classList.add("mat-progress-bar-reduced-motion");
+    }
+    if (defaults2) {
+      if (defaults2.color) {
+        this.color = this._defaultColor = defaults2.color;
+      }
+      this.mode = defaults2.mode || this.mode;
+    }
+  }
+  /** Flag that indicates whether NoopAnimations mode is set to true. */
+  _isNoopAnimation;
+  // TODO: should be typed as `ThemePalette` but internal apps pass in arbitrary strings.
+  /**
+   * Theme color of the progress bar. This API is supported in M2 themes only, it
+   * has no effect in M3 themes. For color customization in M3, see https://material.angular.dev/components/progress-bar/styling.
+   *
+   * For information on applying color variants in M3, see
+   * https://material.angular.dev/guide/material-2-theming#optional-add-backwards-compatibility-styles-for-color-variants
+   */
+  get color() {
+    return this._color || this._defaultColor;
+  }
+  set color(value) {
+    this._color = value;
+  }
+  _color;
+  _defaultColor = "primary";
+  /** Value of the progress bar. Defaults to zero. Mirrored to aria-valuenow. */
+  get value() {
+    return this._value;
+  }
+  set value(v) {
+    this._value = clamp(v || 0);
+    this._changeDetectorRef.markForCheck();
+  }
+  _value = 0;
+  /** Buffer value of the progress bar. Defaults to zero. */
+  get bufferValue() {
+    return this._bufferValue || 0;
+  }
+  set bufferValue(v) {
+    this._bufferValue = clamp(v || 0);
+    this._changeDetectorRef.markForCheck();
+  }
+  _bufferValue = 0;
+  /**
+   * Event emitted when animation of the primary progress bar completes. This event will not
+   * be emitted when animations are disabled, nor will it be emitted for modes with continuous
+   * animations (indeterminate and query).
+   */
+  animationEnd = new EventEmitter();
+  /**
+   * Mode of the progress bar.
+   *
+   * Input must be one of these values: determinate, indeterminate, buffer, query, defaults to
+   * 'determinate'.
+   * Mirrored to mode attribute.
+   */
+  get mode() {
+    return this._mode;
+  }
+  set mode(value) {
+    this._mode = value;
+    this._changeDetectorRef.markForCheck();
+  }
+  _mode = "determinate";
+  ngAfterViewInit() {
+    this._ngZone.runOutsideAngular(() => {
+      this._cleanupTransitionEnd = this._renderer.listen(this._elementRef.nativeElement, "transitionend", this._transitionendHandler);
+    });
+  }
+  ngOnDestroy() {
+    this._cleanupTransitionEnd?.();
+  }
+  /** Gets the transform style that should be applied to the primary bar. */
+  _getPrimaryBarTransform() {
+    return `scaleX(${this._isIndeterminate() ? 1 : this.value / 100})`;
+  }
+  /** Gets the `flex-basis` value that should be applied to the buffer bar. */
+  _getBufferBarFlexBasis() {
+    return `${this.mode === "buffer" ? this.bufferValue : 100}%`;
+  }
+  /** Returns whether the progress bar is indeterminate. */
+  _isIndeterminate() {
+    return this.mode === "indeterminate" || this.mode === "query";
+  }
+  /** Event handler for `transitionend` events. */
+  _transitionendHandler = (event) => {
+    if (this.animationEnd.observers.length === 0 || !event.target || !event.target.classList.contains("mdc-linear-progress__primary-bar")) {
+      return;
+    }
+    if (this.mode === "determinate" || this.mode === "buffer") {
+      this._ngZone.run(() => this.animationEnd.next({
+        value: this.value
+      }));
+    }
+  };
+  static \u0275fac = function MatProgressBar_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatProgressBar)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({
+    type: _MatProgressBar,
+    selectors: [["mat-progress-bar"]],
+    hostAttrs: ["role", "progressbar", "aria-valuemin", "0", "aria-valuemax", "100", "tabindex", "-1", 1, "mat-mdc-progress-bar", "mdc-linear-progress"],
+    hostVars: 10,
+    hostBindings: function MatProgressBar_HostBindings(rf, ctx) {
+      if (rf & 2) {
+        \u0275\u0275attribute("aria-valuenow", ctx._isIndeterminate() ? null : ctx.value)("mode", ctx.mode);
+        \u0275\u0275classMap("mat-" + ctx.color);
+        \u0275\u0275classProp("_mat-animation-noopable", ctx._isNoopAnimation)("mdc-linear-progress--animation-ready", !ctx._isNoopAnimation)("mdc-linear-progress--indeterminate", ctx._isIndeterminate());
+      }
+    },
+    inputs: {
+      color: "color",
+      value: [2, "value", "value", numberAttribute],
+      bufferValue: [2, "bufferValue", "bufferValue", numberAttribute],
+      mode: "mode"
+    },
+    outputs: {
+      animationEnd: "animationEnd"
+    },
+    exportAs: ["matProgressBar"],
+    decls: 7,
+    vars: 5,
+    consts: [["aria-hidden", "true", 1, "mdc-linear-progress__buffer"], [1, "mdc-linear-progress__buffer-bar"], [1, "mdc-linear-progress__buffer-dots"], ["aria-hidden", "true", 1, "mdc-linear-progress__bar", "mdc-linear-progress__primary-bar"], [1, "mdc-linear-progress__bar-inner"], ["aria-hidden", "true", 1, "mdc-linear-progress__bar", "mdc-linear-progress__secondary-bar"]],
+    template: function MatProgressBar_Template(rf, ctx) {
+      if (rf & 1) {
+        \u0275\u0275domElementStart(0, "div", 0);
+        \u0275\u0275domElement(1, "div", 1);
+        \u0275\u0275conditionalCreate(2, MatProgressBar_Conditional_2_Template, 1, 0, "div", 2);
+        \u0275\u0275domElementEnd();
+        \u0275\u0275domElementStart(3, "div", 3);
+        \u0275\u0275domElement(4, "span", 4);
+        \u0275\u0275domElementEnd();
+        \u0275\u0275domElementStart(5, "div", 5);
+        \u0275\u0275domElement(6, "span", 4);
+        \u0275\u0275domElementEnd();
+      }
+      if (rf & 2) {
+        \u0275\u0275advance();
+        \u0275\u0275styleProp("flex-basis", ctx._getBufferBarFlexBasis());
+        \u0275\u0275advance();
+        \u0275\u0275conditional(ctx.mode === "buffer" ? 2 : -1);
+        \u0275\u0275advance();
+        \u0275\u0275styleProp("transform", ctx._getPrimaryBarTransform());
+      }
+    },
+    styles: [`.mat-mdc-progress-bar{--mat-progress-bar-animation-multiplier: 1;display:block;text-align:start}.mat-mdc-progress-bar[mode=query]{transform:scaleX(-1)}.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__buffer-dots,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__primary-bar,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__secondary-bar,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__bar-inner.mdc-linear-progress__bar-inner{animation:none}.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__primary-bar,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__buffer-bar{transition:transform 1ms}.mat-progress-bar-reduced-motion{--mat-progress-bar-animation-multiplier: 2}.mdc-linear-progress{position:relative;width:100%;transform:translateZ(0);outline:1px solid rgba(0,0,0,0);overflow-x:hidden;transition:opacity 250ms 0ms cubic-bezier(0.4, 0, 0.6, 1);height:max(var(--mat-progress-bar-track-height, 4px),var(--mat-progress-bar-active-indicator-height, 4px))}@media(forced-colors: active){.mdc-linear-progress{outline-color:CanvasText}}.mdc-linear-progress__bar{position:absolute;top:0;bottom:0;margin:auto 0;width:100%;animation:none;transform-origin:top left;transition:transform 250ms 0ms cubic-bezier(0.4, 0, 0.6, 1);height:var(--mat-progress-bar-active-indicator-height, 4px)}.mdc-linear-progress--indeterminate .mdc-linear-progress__bar{transition:none}[dir=rtl] .mdc-linear-progress__bar{right:0;transform-origin:center right}.mdc-linear-progress__bar-inner{display:inline-block;position:absolute;width:100%;animation:none;border-top-style:solid;border-color:var(--mat-progress-bar-active-indicator-color, var(--mat-sys-primary));border-top-width:var(--mat-progress-bar-active-indicator-height, 4px)}.mdc-linear-progress__buffer{display:flex;position:absolute;top:0;bottom:0;margin:auto 0;width:100%;overflow:hidden;height:var(--mat-progress-bar-track-height, 4px);border-radius:var(--mat-progress-bar-track-shape, var(--mat-sys-corner-none))}.mdc-linear-progress__buffer-dots{-webkit-mask-image:url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' enable-background='new 0 0 5 2' xml:space='preserve' viewBox='0 0 5 2' preserveAspectRatio='xMinYMin slice'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' enable-background='new 0 0 5 2' xml:space='preserve' viewBox='0 0 5 2' preserveAspectRatio='xMinYMin slice'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/svg%3E");background-repeat:repeat-x;flex:auto;transform:rotate(180deg);animation:mdc-linear-progress-buffering calc(250ms*var(--mat-progress-bar-animation-multiplier)) infinite linear;background-color:var(--mat-progress-bar-track-color, var(--mat-sys-surface-variant))}@media(forced-colors: active){.mdc-linear-progress__buffer-dots{background-color:ButtonBorder}}[dir=rtl] .mdc-linear-progress__buffer-dots{animation:mdc-linear-progress-buffering-reverse calc(250ms*var(--mat-progress-bar-animation-multiplier)) infinite linear;transform:rotate(0)}.mdc-linear-progress__buffer-bar{flex:0 1 100%;transition:flex-basis 250ms 0ms cubic-bezier(0.4, 0, 0.6, 1);background-color:var(--mat-progress-bar-track-color, var(--mat-sys-surface-variant))}.mdc-linear-progress__primary-bar{transform:scaleX(0)}.mdc-linear-progress--indeterminate .mdc-linear-progress__primary-bar{left:-145.166611%}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__primary-bar{animation:mdc-linear-progress-primary-indeterminate-translate calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__primary-bar>.mdc-linear-progress__bar-inner{animation:mdc-linear-progress-primary-indeterminate-scale calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--animation-ready .mdc-linear-progress__primary-bar{animation-name:mdc-linear-progress-primary-indeterminate-translate-reverse}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__primary-bar{right:-145.166611%;left:auto}.mdc-linear-progress__secondary-bar{display:none}.mdc-linear-progress--indeterminate .mdc-linear-progress__secondary-bar{left:-54.888891%;display:block}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__secondary-bar{animation:mdc-linear-progress-secondary-indeterminate-translate calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__secondary-bar>.mdc-linear-progress__bar-inner{animation:mdc-linear-progress-secondary-indeterminate-scale calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--animation-ready .mdc-linear-progress__secondary-bar{animation-name:mdc-linear-progress-secondary-indeterminate-translate-reverse}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__secondary-bar{right:-54.888891%;left:auto}@keyframes mdc-linear-progress-buffering{from{transform:rotate(180deg) translateX(calc(var(--mat-progress-bar-track-height, 4px) * -2.5))}}@keyframes mdc-linear-progress-primary-indeterminate-translate{0%{transform:translateX(0)}20%{animation-timing-function:cubic-bezier(0.5, 0, 0.701732, 0.495819);transform:translateX(0)}59.15%{animation-timing-function:cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);transform:translateX(83.67142%)}100%{transform:translateX(200.611057%)}}@keyframes mdc-linear-progress-primary-indeterminate-scale{0%{transform:scaleX(0.08)}36.65%{animation-timing-function:cubic-bezier(0.334731, 0.12482, 0.785844, 1);transform:scaleX(0.08)}69.15%{animation-timing-function:cubic-bezier(0.06, 0.11, 0.6, 1);transform:scaleX(0.661479)}100%{transform:scaleX(0.08)}}@keyframes mdc-linear-progress-secondary-indeterminate-translate{0%{animation-timing-function:cubic-bezier(0.15, 0, 0.515058, 0.409685);transform:translateX(0)}25%{animation-timing-function:cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);transform:translateX(37.651913%)}48.35%{animation-timing-function:cubic-bezier(0.4, 0.627035, 0.6, 0.902026);transform:translateX(84.386165%)}100%{transform:translateX(160.277782%)}}@keyframes mdc-linear-progress-secondary-indeterminate-scale{0%{animation-timing-function:cubic-bezier(0.205028, 0.057051, 0.57661, 0.453971);transform:scaleX(0.08)}19.15%{animation-timing-function:cubic-bezier(0.152313, 0.196432, 0.648374, 1.004315);transform:scaleX(0.457104)}44.15%{animation-timing-function:cubic-bezier(0.257759, -0.003163, 0.211762, 1.38179);transform:scaleX(0.72796)}100%{transform:scaleX(0.08)}}@keyframes mdc-linear-progress-primary-indeterminate-translate-reverse{0%{transform:translateX(0)}20%{animation-timing-function:cubic-bezier(0.5, 0, 0.701732, 0.495819);transform:translateX(0)}59.15%{animation-timing-function:cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);transform:translateX(-83.67142%)}100%{transform:translateX(-200.611057%)}}@keyframes mdc-linear-progress-secondary-indeterminate-translate-reverse{0%{animation-timing-function:cubic-bezier(0.15, 0, 0.515058, 0.409685);transform:translateX(0)}25%{animation-timing-function:cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);transform:translateX(-37.651913%)}48.35%{animation-timing-function:cubic-bezier(0.4, 0.627035, 0.6, 0.902026);transform:translateX(-84.386165%)}100%{transform:translateX(-160.277782%)}}@keyframes mdc-linear-progress-buffering-reverse{from{transform:translateX(-10px)}}
+`],
+    encapsulation: 2,
+    changeDetection: 0
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatProgressBar, [{
+    type: Component,
+    args: [{
+      selector: "mat-progress-bar",
+      exportAs: "matProgressBar",
+      host: {
+        "role": "progressbar",
+        "aria-valuemin": "0",
+        "aria-valuemax": "100",
+        // set tab index to -1 so screen readers will read the aria-label
+        // Note: there is a known issue with JAWS that does not read progressbar aria labels on FireFox
+        "tabindex": "-1",
+        "[attr.aria-valuenow]": "_isIndeterminate() ? null : value",
+        "[attr.mode]": "mode",
+        "class": "mat-mdc-progress-bar mdc-linear-progress",
+        "[class]": '"mat-" + color',
+        "[class._mat-animation-noopable]": "_isNoopAnimation",
+        "[class.mdc-linear-progress--animation-ready]": "!_isNoopAnimation",
+        "[class.mdc-linear-progress--indeterminate]": "_isIndeterminate()"
+      },
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      encapsulation: ViewEncapsulation.None,
+      template: `<!--
+  All children need to be hidden for screen readers in order to support ChromeVox.
+  More context in the issue: https://github.com/angular/components/issues/22165.
+-->
+<div class="mdc-linear-progress__buffer" aria-hidden="true">
+  <div
+    class="mdc-linear-progress__buffer-bar"
+    [style.flex-basis]="_getBufferBarFlexBasis()"></div>
+  <!-- Remove the dots outside of buffer mode since they can cause CSP issues (see #28938) -->
+  @if (mode === 'buffer') {
+    <div class="mdc-linear-progress__buffer-dots"></div>
+  }
+</div>
+<div
+  class="mdc-linear-progress__bar mdc-linear-progress__primary-bar"
+  aria-hidden="true"
+  [style.transform]="_getPrimaryBarTransform()">
+  <span class="mdc-linear-progress__bar-inner"></span>
+</div>
+<div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar" aria-hidden="true">
+  <span class="mdc-linear-progress__bar-inner"></span>
+</div>
+`,
+      styles: [`.mat-mdc-progress-bar{--mat-progress-bar-animation-multiplier: 1;display:block;text-align:start}.mat-mdc-progress-bar[mode=query]{transform:scaleX(-1)}.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__buffer-dots,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__primary-bar,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__secondary-bar,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__bar-inner.mdc-linear-progress__bar-inner{animation:none}.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__primary-bar,.mat-mdc-progress-bar._mat-animation-noopable .mdc-linear-progress__buffer-bar{transition:transform 1ms}.mat-progress-bar-reduced-motion{--mat-progress-bar-animation-multiplier: 2}.mdc-linear-progress{position:relative;width:100%;transform:translateZ(0);outline:1px solid rgba(0,0,0,0);overflow-x:hidden;transition:opacity 250ms 0ms cubic-bezier(0.4, 0, 0.6, 1);height:max(var(--mat-progress-bar-track-height, 4px),var(--mat-progress-bar-active-indicator-height, 4px))}@media(forced-colors: active){.mdc-linear-progress{outline-color:CanvasText}}.mdc-linear-progress__bar{position:absolute;top:0;bottom:0;margin:auto 0;width:100%;animation:none;transform-origin:top left;transition:transform 250ms 0ms cubic-bezier(0.4, 0, 0.6, 1);height:var(--mat-progress-bar-active-indicator-height, 4px)}.mdc-linear-progress--indeterminate .mdc-linear-progress__bar{transition:none}[dir=rtl] .mdc-linear-progress__bar{right:0;transform-origin:center right}.mdc-linear-progress__bar-inner{display:inline-block;position:absolute;width:100%;animation:none;border-top-style:solid;border-color:var(--mat-progress-bar-active-indicator-color, var(--mat-sys-primary));border-top-width:var(--mat-progress-bar-active-indicator-height, 4px)}.mdc-linear-progress__buffer{display:flex;position:absolute;top:0;bottom:0;margin:auto 0;width:100%;overflow:hidden;height:var(--mat-progress-bar-track-height, 4px);border-radius:var(--mat-progress-bar-track-shape, var(--mat-sys-corner-none))}.mdc-linear-progress__buffer-dots{-webkit-mask-image:url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' enable-background='new 0 0 5 2' xml:space='preserve' viewBox='0 0 5 2' preserveAspectRatio='xMinYMin slice'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' enable-background='new 0 0 5 2' xml:space='preserve' viewBox='0 0 5 2' preserveAspectRatio='xMinYMin slice'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/svg%3E");background-repeat:repeat-x;flex:auto;transform:rotate(180deg);animation:mdc-linear-progress-buffering calc(250ms*var(--mat-progress-bar-animation-multiplier)) infinite linear;background-color:var(--mat-progress-bar-track-color, var(--mat-sys-surface-variant))}@media(forced-colors: active){.mdc-linear-progress__buffer-dots{background-color:ButtonBorder}}[dir=rtl] .mdc-linear-progress__buffer-dots{animation:mdc-linear-progress-buffering-reverse calc(250ms*var(--mat-progress-bar-animation-multiplier)) infinite linear;transform:rotate(0)}.mdc-linear-progress__buffer-bar{flex:0 1 100%;transition:flex-basis 250ms 0ms cubic-bezier(0.4, 0, 0.6, 1);background-color:var(--mat-progress-bar-track-color, var(--mat-sys-surface-variant))}.mdc-linear-progress__primary-bar{transform:scaleX(0)}.mdc-linear-progress--indeterminate .mdc-linear-progress__primary-bar{left:-145.166611%}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__primary-bar{animation:mdc-linear-progress-primary-indeterminate-translate calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__primary-bar>.mdc-linear-progress__bar-inner{animation:mdc-linear-progress-primary-indeterminate-scale calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--animation-ready .mdc-linear-progress__primary-bar{animation-name:mdc-linear-progress-primary-indeterminate-translate-reverse}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__primary-bar{right:-145.166611%;left:auto}.mdc-linear-progress__secondary-bar{display:none}.mdc-linear-progress--indeterminate .mdc-linear-progress__secondary-bar{left:-54.888891%;display:block}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__secondary-bar{animation:mdc-linear-progress-secondary-indeterminate-translate calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}.mdc-linear-progress--indeterminate.mdc-linear-progress--animation-ready .mdc-linear-progress__secondary-bar>.mdc-linear-progress__bar-inner{animation:mdc-linear-progress-secondary-indeterminate-scale calc(2s*var(--mat-progress-bar-animation-multiplier)) infinite linear}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--animation-ready .mdc-linear-progress__secondary-bar{animation-name:mdc-linear-progress-secondary-indeterminate-translate-reverse}[dir=rtl] .mdc-linear-progress.mdc-linear-progress--indeterminate .mdc-linear-progress__secondary-bar{right:-54.888891%;left:auto}@keyframes mdc-linear-progress-buffering{from{transform:rotate(180deg) translateX(calc(var(--mat-progress-bar-track-height, 4px) * -2.5))}}@keyframes mdc-linear-progress-primary-indeterminate-translate{0%{transform:translateX(0)}20%{animation-timing-function:cubic-bezier(0.5, 0, 0.701732, 0.495819);transform:translateX(0)}59.15%{animation-timing-function:cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);transform:translateX(83.67142%)}100%{transform:translateX(200.611057%)}}@keyframes mdc-linear-progress-primary-indeterminate-scale{0%{transform:scaleX(0.08)}36.65%{animation-timing-function:cubic-bezier(0.334731, 0.12482, 0.785844, 1);transform:scaleX(0.08)}69.15%{animation-timing-function:cubic-bezier(0.06, 0.11, 0.6, 1);transform:scaleX(0.661479)}100%{transform:scaleX(0.08)}}@keyframes mdc-linear-progress-secondary-indeterminate-translate{0%{animation-timing-function:cubic-bezier(0.15, 0, 0.515058, 0.409685);transform:translateX(0)}25%{animation-timing-function:cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);transform:translateX(37.651913%)}48.35%{animation-timing-function:cubic-bezier(0.4, 0.627035, 0.6, 0.902026);transform:translateX(84.386165%)}100%{transform:translateX(160.277782%)}}@keyframes mdc-linear-progress-secondary-indeterminate-scale{0%{animation-timing-function:cubic-bezier(0.205028, 0.057051, 0.57661, 0.453971);transform:scaleX(0.08)}19.15%{animation-timing-function:cubic-bezier(0.152313, 0.196432, 0.648374, 1.004315);transform:scaleX(0.457104)}44.15%{animation-timing-function:cubic-bezier(0.257759, -0.003163, 0.211762, 1.38179);transform:scaleX(0.72796)}100%{transform:scaleX(0.08)}}@keyframes mdc-linear-progress-primary-indeterminate-translate-reverse{0%{transform:translateX(0)}20%{animation-timing-function:cubic-bezier(0.5, 0, 0.701732, 0.495819);transform:translateX(0)}59.15%{animation-timing-function:cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);transform:translateX(-83.67142%)}100%{transform:translateX(-200.611057%)}}@keyframes mdc-linear-progress-secondary-indeterminate-translate-reverse{0%{animation-timing-function:cubic-bezier(0.15, 0, 0.515058, 0.409685);transform:translateX(0)}25%{animation-timing-function:cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);transform:translateX(-37.651913%)}48.35%{animation-timing-function:cubic-bezier(0.4, 0.627035, 0.6, 0.902026);transform:translateX(-84.386165%)}100%{transform:translateX(-160.277782%)}}@keyframes mdc-linear-progress-buffering-reverse{from{transform:translateX(-10px)}}
+`]
+    }]
+  }], () => [], {
+    color: [{
+      type: Input
+    }],
+    value: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    bufferValue: [{
+      type: Input,
+      args: [{
+        transform: numberAttribute
+      }]
+    }],
+    animationEnd: [{
+      type: Output
+    }],
+    mode: [{
+      type: Input
+    }]
+  });
+})();
+function clamp(v, min = 0, max = 100) {
+  return Math.max(min, Math.min(max, v));
+}
+var MatProgressBarModule = class _MatProgressBarModule {
+  static \u0275fac = function MatProgressBarModule_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _MatProgressBarModule)();
+  };
+  static \u0275mod = /* @__PURE__ */ \u0275\u0275defineNgModule({
+    type: _MatProgressBarModule,
+    imports: [MatProgressBar],
+    exports: [MatProgressBar, MatCommonModule]
+  });
+  static \u0275inj = /* @__PURE__ */ \u0275\u0275defineInjector({
+    imports: [MatCommonModule]
+  });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatProgressBarModule, [{
+    type: NgModule,
+    args: [{
+      imports: [MatProgressBar],
+      exports: [MatProgressBar, MatCommonModule]
+    }]
+  }], null, null);
+})();
+
+// src/app/features/workout-administration/components/exercise-progress-bar/exercise-progress-bar.component.ts
+function ExerciseProgressBarComponent_Conditional_0_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 0)(1, "div", 2)(2, "span", 3);
+    \u0275\u0275text(3);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(4, "span", 4);
+    \u0275\u0275text(5);
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(6, "span");
+    \u0275\u0275text(7);
+    \u0275\u0275elementStart(8, "span", 3);
+    \u0275\u0275text(9);
+    \u0275\u0275elementEnd()()();
+    \u0275\u0275element(10, "mat-progress-bar", 5);
+    \u0275\u0275elementStart(11, "div", 6);
+    \u0275\u0275text(12, "100%");
+    \u0275\u0275elementEnd();
+    \u0275\u0275elementStart(13, "div", 7)(14, "div", 8);
+    \u0275\u0275element(15, "app-set-info-container", 9);
+    \u0275\u0275elementEnd()()();
+  }
+  if (rf & 2) {
+    const ctx_r0 = \u0275\u0275nextContext();
+    \u0275\u0275advance(3);
+    \u0275\u0275textInterpolate1("Last time:\xA0", ctx_r0.previousWorkoutDate);
+    \u0275\u0275advance();
+    \u0275\u0275property("ngClass", ctx_r0.progressColorClass);
+    \u0275\u0275advance();
+    \u0275\u0275textInterpolate1("", ctx_r0.progressPercentage.toFixed(1), "%");
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate(ctx_r0.currentTotalWeight);
+    \u0275\u0275advance(2);
+    \u0275\u0275textInterpolate1("/", ctx_r0.previousTotalWeight, " (kg)");
+    \u0275\u0275advance();
+    \u0275\u0275styleProp("opacity", ctx_r0.progressOpacity);
+    \u0275\u0275property("value", ctx_r0.progressPercentage);
+    \u0275\u0275advance();
+    \u0275\u0275classProp("show", ctx_r0.showCelebration);
+    \u0275\u0275advance(4);
+    \u0275\u0275property("setsArray", ctx_r0.previousSetsArray)("isEditMode", false)("isSmallView", true);
+  }
+}
+function ExerciseProgressBarComponent_Conditional_1_Template(rf, ctx) {
+  if (rf & 1) {
+    \u0275\u0275elementStart(0, "div", 1)(1, "div", 10);
+    \u0275\u0275text(2, " No exercise record in the last month ");
+    \u0275\u0275elementEnd()();
+  }
+}
+var ExerciseProgressBarComponent = class _ExerciseProgressBarComponent {
+  exerciseForm;
+  currentTotalWeight = 0;
+  previousTotalWeight = 0;
+  progressPercentage = 0;
+  showProgress = false;
+  previousWorkoutDate = "";
+  previousSetsArray = new FormArray([]);
+  showCelebration = false;
+  hasReached100 = false;
+  destroy$ = new Subject();
+  get progressColorClass() {
+    if (this.progressPercentage >= 95)
+      return "text-green-600 dark:text-green-400";
+    if (this.progressPercentage >= 55)
+      return "text-blue-600 dark:text-blue-400";
+    return "text-orange-600 dark:text-orange-400";
+  }
+  get progressOpacity() {
+    return Math.max(0.2, this.progressPercentage / 100);
+  }
+  ngOnInit() {
+    this.setupProgressTracking();
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+  setupProgressTracking() {
+    this.calculateTotalWeights();
+    this.exerciseForm.setsArray.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.calculateTotalWeights();
+    });
+    this.exerciseForm.setsArray.controls.forEach((setForm, index) => {
+      setForm.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+        this.calculateTotalWeights();
+      });
+    });
+    this.watchForNewSets();
+  }
+  watchForNewSets() {
+    let previousSetCount = this.exerciseForm.setsArray.length;
+    this.exerciseForm.setsArray.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      const currentSetCount = this.exerciseForm.setsArray.length;
+      if (currentSetCount > previousSetCount) {
+        for (let i = previousSetCount; i < currentSetCount; i++) {
+          const newSetForm = this.exerciseForm.setsArray.at(i);
+          newSetForm.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+            this.calculateTotalWeights();
+          });
+        }
+      }
+      previousSetCount = currentSetCount;
+    });
+  }
+  calculateTotalWeights() {
+    const previousPercentage = this.progressPercentage;
+    this.currentTotalWeight = this.calculateCurrentWeight();
+    this.previousTotalWeight = this.calculatePreviousWeight();
+    this.setPreviousWorkoutInfo();
+    if (this.previousTotalWeight > 0) {
+      this.progressPercentage = this.currentTotalWeight / this.previousTotalWeight * 100;
+      this.showProgress = true;
+      if (this.progressPercentage >= 100 && !this.hasReached100 && previousPercentage < 100) {
+        this.triggerCelebration();
+        this.hasReached100 = true;
+      }
+    } else {
+      this.progressPercentage = 0;
+      this.showProgress = false;
+    }
+  }
+  triggerCelebration() {
+    this.showCelebration = true;
+  }
+  calculateCurrentWeight() {
+    const sets = this.exerciseForm.setsArray.value;
+    return sets.filter((set) => !set.isWarmupSet).reduce((total, set) => {
+      const weight = set.weight || 0;
+      const reps = set.reps || 0;
+      return total + weight * reps;
+    }, 0);
+  }
+  calculatePreviousWeight() {
+    const previousExercises = this.exerciseForm.previousExercises;
+    if (!previousExercises || previousExercises.length === 0) {
+      return 0;
+    }
+    const latestPreviousExercise = previousExercises[0];
+    return latestPreviousExercise.sets.filter((set) => !set.isWarmupSet).reduce((total, set) => {
+      const weight = set.weight || 0;
+      const reps = set.reps || 0;
+      return total + weight * reps;
+    }, 0);
+  }
+  setPreviousWorkoutInfo() {
+    const previousExercises = this.exerciseForm.previousExercises;
+    if (!previousExercises || previousExercises.length === 0) {
+      this.previousWorkoutDate = "";
+      this.previousSetsArray.clear();
+      return;
+    }
+    const latestPreviousExercise = previousExercises[0];
+    const date = new Date(latestPreviousExercise.lastWorkoutDate);
+    this.previousWorkoutDate = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric"
+    });
+    this.previousSetsArray.clear();
+    const sortedSets = latestPreviousExercise.sets.sort((a, b) => a.order - b.order);
+    sortedSets.forEach((set) => {
+      this.previousSetsArray.push(new ExerciseSetForm(set));
+    });
+  }
+  static \u0275fac = function ExerciseProgressBarComponent_Factory(__ngFactoryType__) {
+    return new (__ngFactoryType__ || _ExerciseProgressBarComponent)();
+  };
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExerciseProgressBarComponent, selectors: [["app-exercise-progress-bar"]], inputs: { exerciseForm: "exerciseForm" }, decls: 2, vars: 1, consts: [[1, "relative", "my-2"], [1, "my-2"], [1, "mt-1", "flex", "items-center", "justify-between", "text-xs"], [1, "text-gray-600", "dark:text-gray-400"], [3, "ngClass"], ["mode", "determinate", 1, "h-2", "overflow-hidden", "rounded-md", 3, "value"], [1, "celebration-overlay"], [1, "mb-1", "flex", "flex-col", "gap-1"], [1, "origin-left", "opacity-60"], [3, "setsArray", "isEditMode", "isSmallView"], [1, "text-center", "text-xs", "text-gray-600", "dark:text-gray-400"]], template: function ExerciseProgressBarComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      \u0275\u0275conditionalCreate(0, ExerciseProgressBarComponent_Conditional_0_Template, 16, 13, "div", 0)(1, ExerciseProgressBarComponent_Conditional_1_Template, 3, 0, "div", 1);
+    }
+    if (rf & 2) {
+      \u0275\u0275conditional(ctx.showProgress ? 0 : 1);
+    }
+  }, dependencies: [CommonModule, NgClass, MatProgressBarModule, MatProgressBar, SetInfoContainerComponent], styles: ["\n\n  mat-progress-bar .mat-progress-bar-fill::after {\n  border-radius: 0.375rem;\n}\n  mat-progress-bar .mat-progress-bar-buffer {\n  border-radius: 0.375rem;\n}\n.celebration-overlay[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  font-size: 3rem;\n  font-weight: bold;\n  color: #22c55e;\n  text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);\n  pointer-events: none;\n  z-index: 10;\n  display: none;\n}\n.celebration-overlay.show[_ngcontent-%COMP%] {\n  display: block;\n  animation: _ngcontent-%COMP%_celebrate100 2s ease-in-out forwards;\n}\n@keyframes _ngcontent-%COMP%_celebrate100 {\n  0% {\n    transform: translate(-50%, -50%) scale(0.5);\n    opacity: 0;\n  }\n  25% {\n    transform: translate(-50%, -50%) scale(1.2);\n    opacity: 1;\n  }\n  50% {\n    transform: translate(-50%, -50%) scale(1.4);\n    opacity: 1;\n  }\n  75% {\n    transform: translate(-50%, -50%) scale(1.2);\n    opacity: 1;\n  }\n  100% {\n    transform: translate(-50%, -50%) scale(0.8);\n    opacity: 0;\n    display: none;\n  }\n}\n/*# sourceMappingURL=exercise-progress-bar.component-LMKCZZJL.css.map */"] });
+};
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(ExerciseProgressBarComponent, [{
+    type: Component,
+    args: [{ selector: "app-exercise-progress-bar", standalone: true, imports: [CommonModule, MatProgressBarModule, SetInfoContainerComponent], template: '@if (showProgress) {\n  <div class="relative my-2">\n    <div class="mt-1 flex items-center justify-between text-xs">\n      <span class="text-gray-600 dark:text-gray-400"\n        >Last time:&nbsp;{{ previousWorkoutDate }}</span\n      >\n      <span [ngClass]="progressColorClass">{{ progressPercentage.toFixed(1) }}%</span>\n      <span\n        >{{ currentTotalWeight\n        }}<span class="text-gray-600 dark:text-gray-400"\n          >/{{ previousTotalWeight }} (kg)</span\n        ></span\n      >\n    </div>\n    <mat-progress-bar\n      mode="determinate"\n      [value]="progressPercentage"\n      class="h-2 overflow-hidden rounded-md"\n      [style.opacity]="progressOpacity"\n    >\n    </mat-progress-bar>\n\n    <div class="celebration-overlay" [class.show]="showCelebration">100%</div>\n\n    <div class="mb-1 flex flex-col gap-1">\n      <div class="origin-left opacity-60">\n        <app-set-info-container\n          [setsArray]="previousSetsArray"\n          [isEditMode]="false"\n          [isSmallView]="true"\n        >\n        </app-set-info-container>\n      </div>\n    </div>\n  </div>\n} @else {\n  <div class="my-2">\n    <div class="text-center text-xs text-gray-600 dark:text-gray-400">\n      No exercise record in the last month\n    </div>\n  </div>\n}\n', styles: ["/* src/app/features/workout-administration/components/exercise-progress-bar/exercise-progress-bar.component.scss */\n::ng-deep mat-progress-bar .mat-progress-bar-fill::after {\n  border-radius: 0.375rem;\n}\n::ng-deep mat-progress-bar .mat-progress-bar-buffer {\n  border-radius: 0.375rem;\n}\n.celebration-overlay {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  font-size: 3rem;\n  font-weight: bold;\n  color: #22c55e;\n  text-shadow: 0 0 10px rgba(34, 197, 94, 0.8);\n  pointer-events: none;\n  z-index: 10;\n  display: none;\n}\n.celebration-overlay.show {\n  display: block;\n  animation: celebrate100 2s ease-in-out forwards;\n}\n@keyframes celebrate100 {\n  0% {\n    transform: translate(-50%, -50%) scale(0.5);\n    opacity: 0;\n  }\n  25% {\n    transform: translate(-50%, -50%) scale(1.2);\n    opacity: 1;\n  }\n  50% {\n    transform: translate(-50%, -50%) scale(1.4);\n    opacity: 1;\n  }\n  75% {\n    transform: translate(-50%, -50%) scale(1.2);\n    opacity: 1;\n  }\n  100% {\n    transform: translate(-50%, -50%) scale(0.8);\n    opacity: 0;\n    display: none;\n  }\n}\n/*# sourceMappingURL=exercise-progress-bar.component-LMKCZZJL.css.map */\n"] }]
+  }], null, { exerciseForm: [{
+    type: Input
+  }] });
+})();
+(() => {
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExerciseProgressBarComponent, { className: "ExerciseProgressBarComponent", filePath: "src/app/features/workout-administration/components/exercise-progress-bar/exercise-progress-bar.component.ts", lineNumber: 17 });
 })();
 
 // src/app/features/workout-administration/components/exercise-instance-form/exercise-instance-form.component.ts
 function ExerciseInstanceFormComponent_Conditional_4_Template(rf, ctx) {
   if (rf & 1) {
     const _r1 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "app-set-info-container", 9);
+    \u0275\u0275elementStart(0, "app-set-info-container", 7);
     \u0275\u0275listener("setSelected", function ExerciseInstanceFormComponent_Conditional_4_Template_app_set_info_container_setSelected_0_listener($event) {
       \u0275\u0275restoreView(_r1);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onSetSelected($event));
     });
     \u0275\u0275elementEnd();
+    \u0275\u0275element(1, "app-exercise-progress-bar", 8);
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275property("setsArray", ctx_r1.exerciseForm.setsArray)("isEditMode", ctx_r1.isEditMode)("selectedSetIndex", ctx_r1.selectedSetIndex);
+    \u0275\u0275advance();
+    \u0275\u0275property("exerciseForm", ctx_r1.exerciseForm);
   }
 }
 function ExerciseInstanceFormComponent_Conditional_6_Template(rf, ctx) {
   if (rf & 1) {
     const _r3 = \u0275\u0275getCurrentView();
-    \u0275\u0275elementStart(0, "button", 10);
+    \u0275\u0275elementStart(0, "button", 9);
     \u0275\u0275listener("click", function ExerciseInstanceFormComponent_Conditional_6_Template_button_click_0_listener() {
       \u0275\u0275restoreView(_r3);
       const ctx_r1 = \u0275\u0275nextContext();
       return \u0275\u0275resetView(ctx_r1.onEditAction());
     });
-    \u0275\u0275elementStart(1, "mat-icon", 8);
+    \u0275\u0275elementStart(1, "mat-icon", 6);
     \u0275\u0275text(2);
     \u0275\u0275elementEnd();
     \u0275\u0275text(3);
@@ -9202,22 +9698,22 @@ var ExerciseInstanceFormComponent = class _ExerciseInstanceFormComponent {
   static \u0275fac = function ExerciseInstanceFormComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ExerciseInstanceFormComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExerciseInstanceFormComponent, selectors: [["app-exercise-instance-form"]], inputs: { exerciseForm: "exerciseForm" }, outputs: { removeExercise: "removeExercise" }, features: [\u0275\u0275NgOnChangesFeature], decls: 11, vars: 9, consts: [[1, "flex", "flex-col", "gap-4"], [1, "flex", "flex-col", "gap-1"], [1, "flex", "flex-col", "gap-2"], [3, "addSet", "setForm", "showRemoveButton", "isEditMode", "hasSelectedSet"], [3, "setsArray", "isEditMode", "selectedSetIndex"], [1, "flex", "justify-between"], ["mat-stroked-button", "", "color", "primary", 1, "px-4"], ["mat-stroked-button", "", "color", "warn", 1, "px-4", 3, "click", "disabled"], [1, "mr-1"], [3, "setSelected", "setsArray", "isEditMode", "selectedSetIndex"], ["mat-stroked-button", "", "color", "primary", 1, "px-4", 3, "click"]], template: function ExerciseInstanceFormComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ExerciseInstanceFormComponent, selectors: [["app-exercise-instance-form"]], inputs: { exerciseForm: "exerciseForm" }, outputs: { removeExercise: "removeExercise" }, features: [\u0275\u0275NgOnChangesFeature], decls: 11, vars: 9, consts: [[1, "flex", "flex-col", "gap-2"], [1, "flex", "flex-col", "gap-1"], [3, "addSet", "setForm", "showRemoveButton", "isEditMode", "hasSelectedSet"], [1, "flex", "justify-between"], ["mat-stroked-button", "", "color", "primary", 1, "px-4"], ["mat-stroked-button", "", "color", "warn", 1, "px-4", 3, "click", "disabled"], [1, "mr-1"], [3, "setSelected", "setsArray", "isEditMode", "selectedSetIndex"], [3, "exerciseForm"], ["mat-stroked-button", "", "color", "primary", 1, "px-4", 3, "click"]], template: function ExerciseInstanceFormComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 2)(3, "app-exercise-set-form", 3);
+      \u0275\u0275elementStart(0, "div", 0)(1, "div", 1)(2, "div", 0)(3, "app-exercise-set-form", 2);
       \u0275\u0275listener("addSet", function ExerciseInstanceFormComponent_Template_app_exercise_set_form_addSet_3_listener($event) {
         return ctx.addSet($event);
       });
       \u0275\u0275elementEnd()();
-      \u0275\u0275conditionalCreate(4, ExerciseInstanceFormComponent_Conditional_4_Template, 1, 3, "app-set-info-container", 4);
+      \u0275\u0275conditionalCreate(4, ExerciseInstanceFormComponent_Conditional_4_Template, 2, 4);
       \u0275\u0275elementEnd();
-      \u0275\u0275elementStart(5, "div", 5);
-      \u0275\u0275conditionalCreate(6, ExerciseInstanceFormComponent_Conditional_6_Template, 4, 2, "button", 6);
-      \u0275\u0275elementStart(7, "button", 7);
+      \u0275\u0275elementStart(5, "div", 3);
+      \u0275\u0275conditionalCreate(6, ExerciseInstanceFormComponent_Conditional_6_Template, 4, 2, "button", 4);
+      \u0275\u0275elementStart(7, "button", 5);
       \u0275\u0275listener("click", function ExerciseInstanceFormComponent_Template_button_click_7_listener() {
         return ctx.onRemoveAction();
       });
-      \u0275\u0275elementStart(8, "mat-icon", 8);
+      \u0275\u0275elementStart(8, "mat-icon", 6);
       \u0275\u0275text(9);
       \u0275\u0275elementEnd();
       \u0275\u0275text(10);
@@ -9249,7 +9745,8 @@ var ExerciseInstanceFormComponent = class _ExerciseInstanceFormComponent {
     MatSliderModule,
     MatCardModule,
     ExerciseSetFormComponent,
-    SetInfoContainerComponent
+    SetInfoContainerComponent,
+    ExerciseProgressBarComponent
   ], encapsulation: 2 });
 };
 (() => {
@@ -9265,8 +9762,9 @@ var ExerciseInstanceFormComponent = class _ExerciseInstanceFormComponent {
       MatSliderModule,
       MatCardModule,
       ExerciseSetFormComponent,
-      SetInfoContainerComponent
-    ], template: '<div class="flex flex-col gap-4">\n  <!-- Exercise Info Card -->\n\n  <!-- Sets Section -->\n  <div class="flex flex-col gap-1">\n    <!-- Add Set Form -->\n    <div class="flex flex-col gap-2">\n      <app-exercise-set-form\n        [setForm]="newSetForm"\n        [showRemoveButton]="false"\n        [isEditMode]="isEditMode"\n        [hasSelectedSet]="selectedSetIndex !== null"\n        (addSet)="addSet($event)"\n      />\n    </div>\n\n    <!-- Existing Sets Pills -->\n    @if (exerciseForm.setsArray.controls.length > 0) {\n      <app-set-info-container\n        [setsArray]="exerciseForm.setsArray"\n        [isEditMode]="isEditMode"\n        [selectedSetIndex]="selectedSetIndex"\n        (setSelected)="onSetSelected($event)"\n      />\n    }\n  </div>\n\n  <!-- Exercise Comments -->\n  <!-- <div class="flex flex-col gap-4">\n    <h3 class="text-lg font-medium">Comments & Notes</h3>\n    <mat-form-field appearance="outline" class="w-full">\n      <mat-label>Exercise Comments</mat-label>\n      <textarea\n        matInput\n        rows="3"\n        placeholder="Add any notes about this exercise..."\n        [formControl]="exerciseForm.controls.comment"\n      ></textarea>\n    </mat-form-field>\n  </div> -->\n\n  <!-- Energy Level -->\n  <!-- <div class="flex flex-col gap-4">\n    <h3 class="text-lg font-medium">Energy Level</h3>\n    <div class="px-4">\n      <mat-slider\n        [min]="1"\n        [max]="10"\n        [step]="1"\n        [discrete]="true"\n        [showTickMarks]="true"\n        class="w-full"\n      >\n        <input matSliderThumb [formControl]="exerciseForm.controls.energyLevel" />\n      </mat-slider>\n      <div class="mt-1 flex justify-between text-xs text-gray-500">\n        <span>Low Energy (1)</span>\n        <span>High Energy (10)</span>\n      </div>\n      @if (exerciseForm.controls.energyLevel.value) {\n        <div class="mt-2 text-center">\n          <span class="text-sm font-medium">\n            Energy Level: {{ exerciseForm.controls.energyLevel.value }}\n          </span>\n        </div>\n      }\n    </div>\n  </div> -->\n\n  <!-- Action Buttons -->\n  <div class="flex justify-between">\n    <!-- Edit/Unselect Button (visible only when there are sets) -->\n    @if (exerciseForm.setsArray.controls.length > 0) {\n      <button mat-stroked-button color="primary" (click)="onEditAction()" class="px-4">\n        <mat-icon class="mr-1">{{ editButtonIcon }}</mat-icon>\n        {{ editButtonText }}\n      </button>\n    }\n\n    <!-- Remove Button (Dynamic) -->\n    <button\n      mat-stroked-button\n      color="warn"\n      (click)="onRemoveAction()"\n      [disabled]="isRemoveButtonDisabled"\n      class="px-4"\n    >\n      <mat-icon class="mr-1">{{ removeButtonIcon }}</mat-icon>\n      {{ removeButtonText }}\n    </button>\n  </div>\n</div>\n' }]
+      SetInfoContainerComponent,
+      ExerciseProgressBarComponent
+    ], template: '<div class="flex flex-col gap-2">\n  <!-- Exercise Info Card -->\n\n  <!-- Sets Section -->\n  <div class="flex flex-col gap-1">\n    <!-- Add Set Form -->\n    <div class="flex flex-col gap-2">\n      <app-exercise-set-form\n        [setForm]="newSetForm"\n        [showRemoveButton]="false"\n        [isEditMode]="isEditMode"\n        [hasSelectedSet]="selectedSetIndex !== null"\n        (addSet)="addSet($event)"\n      />\n    </div>\n\n    <!-- Existing Sets Pills -->\n    @if (exerciseForm.setsArray.controls.length > 0) {\n      <app-set-info-container\n        [setsArray]="exerciseForm.setsArray"\n        [isEditMode]="isEditMode"\n        [selectedSetIndex]="selectedSetIndex"\n        (setSelected)="onSetSelected($event)"\n      />\n      <app-exercise-progress-bar [exerciseForm]="exerciseForm"></app-exercise-progress-bar>\n    }\n  </div>\n\n  <!-- Exercise Comments -->\n  <!-- <div class="flex flex-col gap-4">\n    <h3 class="text-lg font-medium">Comments & Notes</h3>\n    <mat-form-field appearance="outline" class="w-full">\n      <mat-label>Exercise Comments</mat-label>\n      <textarea\n        matInput\n        rows="3"\n        placeholder="Add any notes about this exercise..."\n        [formControl]="exerciseForm.controls.comment"\n      ></textarea>\n    </mat-form-field>\n  </div> -->\n\n  <!-- Energy Level -->\n  <!-- <div class="flex flex-col gap-4">\n    <h3 class="text-lg font-medium">Energy Level</h3>\n    <div class="px-4">\n      <mat-slider\n        [min]="1"\n        [max]="10"\n        [step]="1"\n        [discrete]="true"\n        [showTickMarks]="true"\n        class="w-full"\n      >\n        <input matSliderThumb [formControl]="exerciseForm.controls.energyLevel" />\n      </mat-slider>\n      <div class="mt-1 flex justify-between text-xs text-gray-500">\n        <span>Low Energy (1)</span>\n        <span>High Energy (10)</span>\n      </div>\n      @if (exerciseForm.controls.energyLevel.value) {\n        <div class="mt-2 text-center">\n          <span class="text-sm font-medium">\n            Energy Level: {{ exerciseForm.controls.energyLevel.value }}\n          </span>\n        </div>\n      }\n    </div>\n  </div> -->\n\n  <!-- Action Buttons -->\n  <div class="flex justify-between">\n    <!-- Edit/Unselect Button (visible only when there are sets) -->\n    @if (exerciseForm.setsArray.controls.length > 0) {\n      <button mat-stroked-button color="primary" (click)="onEditAction()" class="px-4">\n        <mat-icon class="mr-1">{{ editButtonIcon }}</mat-icon>\n        {{ editButtonText }}\n      </button>\n    }\n\n    <!-- Remove Button (Dynamic) -->\n    <button\n      mat-stroked-button\n      color="warn"\n      (click)="onRemoveAction()"\n      [disabled]="isRemoveButtonDisabled"\n      class="px-4"\n    >\n      <mat-icon class="mr-1">{{ removeButtonIcon }}</mat-icon>\n      {{ removeButtonText }}\n    </button>\n  </div>\n</div>\n' }]
   }], null, { exerciseForm: [{
     type: Input,
     args: [{ required: true }]
@@ -9275,7 +9773,7 @@ var ExerciseInstanceFormComponent = class _ExerciseInstanceFormComponent {
   }] });
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExerciseInstanceFormComponent, { className: "ExerciseInstanceFormComponent", filePath: "src/app/features/workout-administration/components/exercise-instance-form/exercise-instance-form.component.ts", lineNumber: 40 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ExerciseInstanceFormComponent, { className: "ExerciseInstanceFormComponent", filePath: "src/app/features/workout-administration/components/exercise-instance-form/exercise-instance-form.component.ts", lineNumber: 42 });
 })();
 
 // src/app/features/workout-administration/models/exercise-instance.form.ts
@@ -9292,6 +9790,10 @@ var ExerciseInstanceForm = class _ExerciseInstanceForm extends FormGroup {
         Validators.max(10)
       ])
     });
+  }
+  previousExercises = [];
+  get typeId() {
+    return this.controls.exerciseType.value?.id || null;
   }
   get setsArray() {
     return this.controls.sets;
@@ -9355,6 +9857,7 @@ var WorkoutForm = class _WorkoutForm extends FormGroup {
     newExercise.patchValue({ order: nextOrder });
     this.exercisesArray.push(newExercise);
     this.markAsDirty();
+    return newExercise;
   }
   removeExercise(index) {
     this.exercisesArray.removeAt(index);
@@ -9579,7 +10082,6 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
   route;
   exerciseTypesService;
   workoutsService;
-  dialog;
   exerciseTypes = [];
   isLoading = false;
   isApiLoading = signal(false, ...ngDevMode ? [{ debugName: "isApiLoading" }] : []);
@@ -9587,21 +10089,24 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
   showExerciseSelect = false;
   expandedPanelIndex = null;
   isEditMode = false;
-  constructor(router, route, exerciseTypesService, workoutsService, dialog) {
+  previousExercisesMap = /* @__PURE__ */ new Map();
+  constructor(router, route, exerciseTypesService, workoutsService) {
     this.router = router;
     this.route = route;
     this.exerciseTypesService = exerciseTypesService;
     this.workoutsService = workoutsService;
-    this.dialog = dialog;
   }
   ngOnInit() {
-    this.isEditMode = !!this.workoutForm.value.id;
     this.loadExerciseTypes();
     const workoutId = this.route.snapshot.paramMap.get("id");
+    this.isEditMode = !!workoutId;
     if (workoutId) {
       this.loadWorkoutById(+workoutId);
     } else {
       this.loadTodaysWorkouts();
+      this.workoutsService.readCachedLastMonthWorkouts().subscribe((workouts) => {
+        this.populatePreviousExercisesMap(workouts);
+      });
     }
   }
   /**
@@ -9619,12 +10124,17 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
   }
   onExerciseTypeSelected(exerciseType) {
     if (exerciseType) {
-      this.workoutForm.addExercise();
+      const newExercise = this.workoutForm.addExercise();
+      newExercise.previousExercises = this.previousExercisesMap.get(exerciseType.id) || [];
       const newExerciseIndex = this.workoutForm.exercisesArray.length - 1;
       const newExerciseForm = this.workoutForm.exercisesArray.at(newExerciseIndex);
       newExerciseForm.patchValue({
         exerciseType
       });
+      if (this.previousExercisesMap.has(exerciseType.id)) {
+        const previousExercises = this.previousExercisesMap.get(exerciseType.id);
+        newExerciseForm.previousExercises = previousExercises;
+      }
       this.expandedPanelIndex = newExerciseIndex;
       this.showExerciseSelect = false;
     }
@@ -9662,19 +10172,10 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
     this.workoutsService.getTodaysWorkout().subscribe({
       next: (todaysWorkout) => {
         if (todaysWorkout) {
-          const workoutToClone = __spreadProps(__spreadValues({}, todaysWorkout), {
-            id: 0,
-            // Clear ID so it creates a new workout
-            dateCreated: (/* @__PURE__ */ new Date()).toISOString()
-            // Set to current time
-          });
-          this.workoutForm = new WorkoutForm(workoutToClone);
+          this.workoutForm = new WorkoutForm(todaysWorkout);
           this.isEditMode = true;
-          this.isApiLoading.set(false);
-        } else {
-          this.isEditMode = false;
-          this.isApiLoading.set(false);
         }
+        this.isApiLoading.set(false);
       },
       error: (error) => {
         console.error("Failed to load today's workout:", error);
@@ -9689,13 +10190,51 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
       next: (workout) => {
         this.workoutForm = new WorkoutForm(workout);
         this.isEditMode = true;
-        this.isApiLoading.set(false);
+        this.workoutsService.readCachedLastMonthWorkouts(workout.dateCreated).subscribe({
+          next: (workouts) => {
+            this.populatePreviousExercisesMap(workouts);
+            this.isApiLoading.set(false);
+          },
+          error: () => {
+            this.isApiLoading.set(false);
+          }
+        });
       },
       error: (error) => {
         console.error("Failed to load workout:", error);
         this.isEditMode = false;
         this.isApiLoading.set(false);
-        this.router.navigate(["/dashboard"]);
+      }
+    });
+  }
+  populatePreviousExercisesMap(workouts) {
+    this.previousExercisesMap.clear();
+    workouts.forEach((workout) => {
+      workout.exercises.forEach((exercise) => {
+        const exerciseTypeId = exercise.exerciseType.id;
+        const previousExercise = __spreadProps(__spreadValues({}, exercise), {
+          lastWorkoutDate: workout.dateCreated
+        });
+        if (this.previousExercisesMap.has(exerciseTypeId)) {
+          this.previousExercisesMap.get(exerciseTypeId).push(previousExercise);
+        } else {
+          this.previousExercisesMap.set(exerciseTypeId, [previousExercise]);
+        }
+      });
+    });
+    this.previousExercisesMap.forEach((exercises, exerciseTypeId) => {
+      exercises.sort((a, b) => new Date(b.lastWorkoutDate).getTime() - new Date(a.lastWorkoutDate).getTime());
+    });
+    this.addPreviousExerciseDataToInstanceForms();
+  }
+  addPreviousExerciseDataToInstanceForms() {
+    this.workoutForm.exercisesArray.controls.forEach((exerciseForm) => {
+      const exerciseTypeId = exerciseForm.typeId;
+      if (exerciseTypeId && this.previousExercisesMap.has(exerciseTypeId)) {
+        const previousExercises = this.previousExercisesMap.get(exerciseTypeId);
+        exerciseForm.previousExercises = previousExercises;
+      } else {
+        exerciseForm.previousExercises = [];
       }
     });
   }
@@ -9740,7 +10279,7 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
     });
   }
   static \u0275fac = function WorkoutCreateComponent_Factory(__ngFactoryType__) {
-    return new (__ngFactoryType__ || _WorkoutCreateComponent)(\u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(ExerciseTypesService), \u0275\u0275directiveInject(WorkoutsService), \u0275\u0275directiveInject(MatDialog));
+    return new (__ngFactoryType__ || _WorkoutCreateComponent)(\u0275\u0275directiveInject(Router), \u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(ExerciseTypesService), \u0275\u0275directiveInject(WorkoutsService));
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _WorkoutCreateComponent, selectors: [["app-workout-create"]], decls: 13, vars: 4, consts: [[1, "container", "relative", "mx-auto", "h-full", "max-w-4xl", "md:p-6"], [1, "absolute", "inset-0", "z-50", "h-screen", "w-screen"], [1, "mb-8", "hidden", "md:block"], [1, "mb-4", "flex", "items-center", "gap-4"], ["mat-icon-button", "", 3, "click"], [1, "text-3xl", "font-bold"], [1, "opacity-70"], [1, "grid", "h-full", "gap-6"], [1, "flex", "h-full", "flex-col", "p-3", "md:p-6"], [1, "flex", "h-full", "w-full", 3, "opacity"], [1, "flex-1"], [1, "flex", "flex-col", "gap-2"], [1, "flex", "items-center", "gap-4"], ["mat-raised-button", "", "color", "primary", 1, "px-6", 3, "disabled"], [1, "flex", "w-full", "max-w-md", "items-center", "gap-2"], ["multi", "false"], [1, "mt-6", "flex", "justify-between", "pt-4"], ["mat-stroked-button", "", "color", "warn", 1, "px-6", 3, "click"], [1, "mr-2"], ["mat-stroked-button", "", "color", "accent", 1, "px-6", 3, "click", "disabled"], ["mat-raised-button", "", "color", "primary", 1, "px-6", 3, "click", "disabled"], ["bindLabel", "name", "placeholder", "Select an exercise type...", 1, "flex-1", 3, "change", "items", "loading", "isOpen"], ["ng-option-tmp", ""], [1, "flex"], [1, "font-medium"], [1, "text-sm", "opacity-70"], [3, "expanded"], [3, "expandedChange", "expanded"], [1, "ml-2", "opacity-70"], [3, "removeExercise", "exerciseForm"]], template: function WorkoutCreateComponent_Template(rf, ctx) {
     if (rf & 1) {
@@ -9788,7 +10327,6 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
     MatExpansionPanel,
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
-    MatDialogModule,
     NgSelectModule,
     NgSelectComponent,
     NgOptionTemplateDirective,
@@ -9806,7 +10344,6 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
       MatIconModule,
       MatCardModule,
       MatExpansionModule,
-      MatDialogModule,
       NgSelectModule,
       ExerciseInstanceFormComponent,
       LoaderComponent
@@ -9945,10 +10482,10 @@ var WorkoutCreateComponent = class _WorkoutCreateComponent {
   </div>
 </div>
 `, styles: ["/* src/app/features/workout-administration/workout-create.component.scss */\n:host ::ng-deep .mat-expansion-panel-spacing {\n  margin: 0 0;\n}\n:host ::ng-deep .mat-accordion .mat-expansion-panel:not(:first-of-type):not(:last-of-type) {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n:host ::ng-deep .mat-accordion .mat-expansion-panel:last-of-type {\n  border-top-right-radius: 0;\n  border-top-left-radius: 0;\n}\n:host ::ng-deep .mat-accordion .mat-expansion-panel:first-of-type {\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n:host ::ng-deep .mat-expansion-panel-body {\n  padding: 0 8px 10px;\n}\n/*# sourceMappingURL=workout-create.component-CVRDD3WZ.css.map */\n"] }]
-  }], () => [{ type: Router }, { type: ActivatedRoute }, { type: ExerciseTypesService }, { type: WorkoutsService }, { type: MatDialog }], null);
+  }], () => [{ type: Router }, { type: ActivatedRoute }, { type: ExerciseTypesService }, { type: WorkoutsService }], null);
 })();
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WorkoutCreateComponent, { className: "WorkoutCreateComponent", filePath: "src/app/features/workout-administration/workout-create.component.ts", lineNumber: 44 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(WorkoutCreateComponent, { className: "WorkoutCreateComponent", filePath: "src/app/features/workout-administration/workout-create.component.ts", lineNumber: 38 });
 })();
 
 export {
@@ -9961,4 +10498,4 @@ export {
   WorkoutForm,
   WorkoutCreateComponent
 };
-//# sourceMappingURL=chunk-6OYBDDSY.js.map
+//# sourceMappingURL=chunk-ZLCJWBZK.js.map
