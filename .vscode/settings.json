@@ -38,5 +38,11 @@
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "search.exclude": {
+    "docs/**": true
+  },
+  "files.exclude": {
+    "docs/**": true
   }
 }
