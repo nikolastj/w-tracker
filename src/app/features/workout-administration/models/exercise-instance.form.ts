@@ -52,6 +52,14 @@ export class ExerciseInstanceForm extends FormGroup<ExerciseInstanceFormControls
     return this.controls.exerciseType.value?.id || null;
   }
 
+  get isCore(): boolean {
+    return this.controls.exerciseType.value?.isCore || false;
+  }
+
+  get usesNegativeWeight(): boolean {
+    return this.controls.exerciseType.value?.usesNegativeWeight || false;
+  }
+
   get setsArray(): FormArray<ExerciseSetForm> {
     return this.controls.sets;
   }
