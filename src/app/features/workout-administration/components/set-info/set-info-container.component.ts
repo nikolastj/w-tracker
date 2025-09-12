@@ -13,7 +13,7 @@ import { SetInfoComponent } from './set-info.component';
       @if (!isSmallView) {
         <h3 class="m-0 text-sm font-medium">Sets ({{ setsArray.controls.length }})</h3>
       }
-      <div class="set-info-container flex flex-wrap gap-2" [class.small-layout]="isSmallView">
+      <div class="set-info-container flex flex-wrap gap-1" [class.small-layout]="isSmallView">
         @for (setForm of setsArray.controls; track $index) {
           <app-set-info
             [setForm]="setForm"

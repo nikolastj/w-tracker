@@ -9,7 +9,7 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
   imports: [CommonModule, MatIconModule],
   template: `
     <div
-      class="set-pill bg-primary text-textOnPrimary inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium"
+      class="set-pill inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-sm font-medium text-textOnPrimary"
       [ngClass]="pillClasses"
       [class.cursor-pointer]="isClickable"
       [class.ring-2]="isSelected"
@@ -71,6 +71,10 @@ export class SetInfoComponent {
 
     if (this.isSelected) {
       classes += ' ring-offset-2';
+    }
+
+    if (isDrop && !this.isSmallView) {
+      classes += ' pl-0.5';
     }
 
     return classes;
