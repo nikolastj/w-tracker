@@ -9,7 +9,7 @@ import { PublicHeaderComponent } from './public-header.component';
   standalone: true,
   imports: [CommonModule, RouterOutlet, PublicHeaderComponent],
   template: `
-    <div class="auth-background flex h-screen flex-col">
+    <div class="flex h-screen flex-col">
       <app-public-header></app-public-header>
       <div
         class="flex flex-1 items-center justify-center overflow-y-auto px-4 py-12 sm:px-6 lg:px-8"
