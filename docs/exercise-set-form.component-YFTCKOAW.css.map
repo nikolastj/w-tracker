@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/features/workout-administration/components/exercise-set-form/exercise-set-form.component.scss"],
-  "sourcesContent": [":host ::ng-deep {\n  .mat-mdc-form-field {\n    .mat-mdc-text-field-wrapper {\n      height: 84px;\n      .mat-mdc-form-field-flex {\n        .mat-mdc-form-field-infix {\n          padding-block: 4px;\n          min-height: 40px;\n          top: 24px;\n        }\n      }\n    }\n    .mat-mdc-form-field-subscript-wrapper {\n      display: none;\n    }\n    .mat-mdc-input-element {\n      font-size: 28px;\n    }\n  }\n\n  button.mat-mdc-mini-fab {\n    box-shadow: none !important;\n  }\n}\n"],
-  "mappings": ";AAEI,MAAA,UAAA,CAAA,mBAAA,CAAA;AACE,UAAA;;AAEE,MAAA,UAAA,CAHJ,mBAGI,CAHJ,2BAGI,CAAA,wBAAA,CAAA;AACE,iBAAA;AACA,cAAA;AACA,OAAA;;AAIN,MAAA,UAAA,CAVA,mBAUA,CAAA;AACE,WAAA;;AAEF,MAAA,UAAA,CAbA,mBAaA,CAAA;AACE,aAAA;;AAIJ,MAAA,UAAA,MAAA,CAAA;AACE,cAAA;;",
-  "names": []
-}

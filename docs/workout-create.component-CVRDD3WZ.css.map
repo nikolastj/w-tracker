@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/features/workout-administration/workout-create.component.scss"],
-  "sourcesContent": [":host ::ng-deep {\n  .mat-expansion-panel-spacing {\n    margin: 0 0;\n  }\n\n  .mat-accordion .mat-expansion-panel {\n    &:not(:first-of-type):not(:last-of-type) {\n      border-top-right-radius: 0;\n      border-top-left-radius: 0;\n      border-bottom-right-radius: 0;\n      border-bottom-left-radius: 0;\n    }\n    &:last-of-type {\n      border-top-right-radius: 0;\n      border-top-left-radius: 0;\n    }\n    &:first-of-type {\n      border-bottom-right-radius: 0;\n      border-bottom-left-radius: 0;\n    }\n  }\n\n  .mat-expansion-panel-body {\n    padding: 0 8px 10px;\n  }\n}\n"],
-  "mappings": ";AACE,MAAA,UAAA,CAAA;AACE,UAAA,EAAA;;AAIA,MAAA,UAAA,CAAA,cAAA,CAAA,mBAAA,KAAA,eAAA,KAAA;AACE,2BAAA;AACA,0BAAA;AACA,8BAAA;AACA,6BAAA;;AAEF,MAAA,UAAA,CANA,cAMA,CANA,mBAMA;AACE,2BAAA;AACA,0BAAA;;AAEF,MAAA,UAAA,CAVA,cAUA,CAVA,mBAUA;AACE,8BAAA;AACA,6BAAA;;AAIJ,MAAA,UAAA,CAAA;AACE,WAAA,EAAA,IAAA;;",
-  "names": []
-}
