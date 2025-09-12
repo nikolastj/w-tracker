@@ -7,7 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NgSelectModule, NgSelectComponent } from '@ng-select/ng-select';
 import { ExerciseInstanceFormComponent } from '../exercise-instance-form/exercise-instance-form.component';
-import { LoaderComponent } from '../../../../shared/components/loader.component';
+import { LoaderComponent } from '../../../../shared/components';
+import { DeactivateProtectComponent } from '../../../../core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ExerciseTypesService } from '../../../../shared/services/exercise-types.service';
@@ -16,7 +17,6 @@ import { ExerciseType } from '../../../../shared/models/exercise-type.model';
 import { ExerciseInstancePrevious, Workout } from '../../../../shared/models/workout.model';
 import { WorkoutForm } from '../../models/workout.form';
 import { ExerciseInstanceForm } from '../../models/exercise-instance.form';
-import { CanComponentDeactivate, CanDeactivateResult } from '../../../../core';
 
 @Component({
   selector: 'app-workout-create',
@@ -35,7 +35,7 @@ import { CanComponentDeactivate, CanDeactivateResult } from '../../../../core';
   templateUrl: './workout-create.component.html',
   styleUrl: './workout-create.component.scss',
 })
-export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
+export class WorkoutCreateComponent extends DeactivateProtectComponent implements OnInit {
   @ViewChild('exerciseSelect') exerciseSelect!: NgSelectComponent;
 
   exerciseTypes: ExerciseType[] = [];
@@ -52,7 +52,9 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     private route: ActivatedRoute,
     private exerciseTypesService: ExerciseTypesService,
     private workoutsService: WorkoutsService,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.loadExerciseTypes();
@@ -269,19 +271,18 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   discardWorkout(): void {
-    //canDeactivate will handle the confirmation
     this.router.navigate(['/dashboard']);
   }
 
-  canDeactivate(): CanDeactivateResult {
+  protected override hasUnsavedChanges(): boolean {
+    return this.workoutForm.dirty;
+  }
+
+  protected override getConfirmationDialogData() {
     return {
-      canDeactivate: !this.workoutForm.dirty,
-      modalData: {
-        title: 'Discard Workout?',
-        message: 'You have unsaved changes to your workout.',
-        confirmText: 'Discard',
-        cancelText: 'Cancel',
-      },
+      title: 'Discard Workout?',
+      message: 'You have unsaved changes to your workout. Are you sure you want to leave?',
+      confirmText: 'Discard',
     };
   }
 
