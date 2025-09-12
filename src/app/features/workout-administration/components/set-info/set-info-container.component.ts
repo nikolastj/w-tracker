@@ -15,14 +15,30 @@ import { SetInfoComponent } from './set-info.component';
       }
       <div class="set-info-container flex flex-wrap gap-1" [class.small-layout]="isSmallView">
         @for (setForm of setsArray.controls; track $index) {
-          <app-set-info
-            [setForm]="setForm"
-            [hasDropAfter]="hasDropSetAfter($index)"
-            [isClickable]="isEditMode"
-            [isSelected]="selectedSetIndex === $index"
-            [isSmallView]="isSmallView"
-            (click)="onSetClick($index)"
-          />
+          <div class="flex gap-0.5">
+            @if (!setForm.controls.isDropSet.value) {
+              <app-set-info
+                [setForm]="setForm"
+                [hasDropAfter]="hasDropSetAfter($index)"
+                [isClickable]="isEditMode"
+                [isSelected]="selectedSetIndex === $index"
+                [isSmallView]="isSmallView"
+                (click)="onSetClick($index)"
+              />
+              @if (hasDropSetAfter($index)) {
+                @for (dropSetForm of getFollowingDropSets($index); track dropSetForm.index) {
+                  <app-set-info
+                    [setForm]="dropSetForm.form"
+                    [hasDropAfter]="hasDropSetAfter(dropSetForm.index)"
+                    [isClickable]="isEditMode"
+                    [isSelected]="selectedSetIndex === dropSetForm.index"
+                    [isSmallView]="isSmallView"
+                    (click)="onSetClick(dropSetForm.index)"
+                  />
+                }
+              }
+            }
+          </div>
         }
       </div>
     </div>
@@ -44,6 +60,21 @@ export class SetInfoContainerComponent {
 
     const nextSet = this.setsArray.controls[nextIndex];
     return nextSet.controls.isDropSet.value === true;
+  }
+
+  getFollowingDropSets(index: number): Array<{ index: number; form: ExerciseSetForm }> {
+    const result: Array<{ index: number; form: ExerciseSetForm }> = [];
+
+    for (let i = index + 1; i < this.setsArray.controls.length; i++) {
+      const form = this.setsArray.controls[i];
+      if (form.controls.isDropSet.value) {
+        result.push({ index: i, form });
+      } else {
+        break; // Stop at first non-drop set
+      }
+    }
+
+    return result;
   }
 
   onSetClick(index: number): void {
