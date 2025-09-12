@@ -54,11 +54,11 @@ div {
 }
 /* You can add global styles to this file, and also import other style files */
 
-@import 'animations.scss';
-
-/* Import ng-select theme for consistent styling */
 @import '@ng-select/ng-select/themes/default.theme.css';
+@import './styles/animations.scss';
+@import './styles/components/ng-select.scss';
 
+/* Import theme definitions */
 @import './themes/theme-light.scss';
 @import './themes/theme-dark.scss';
 
