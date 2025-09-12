@@ -53,6 +53,7 @@
               @if (showExerciseSelect) {
                 <div class="flex w-full max-w-md items-center gap-2">
                   <ng-select
+                    #exerciseSelect
                     [items]="availableExerciseTypes"
                     bindLabel="name"
                     placeholder="Select an exercise type..."

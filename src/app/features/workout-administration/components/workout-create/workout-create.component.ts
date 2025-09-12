@@ -1,11 +1,11 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectModule, NgSelectComponent } from '@ng-select/ng-select';
 import { ExerciseInstanceFormComponent } from '../exercise-instance-form/exercise-instance-form.component';
 import { LoaderComponent } from '../../../../shared/components/loader.component';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -36,6 +36,8 @@ import { CanComponentDeactivate, CanDeactivateResult } from '../../../../core';
   styleUrl: './workout-create.component.scss',
 })
 export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
+  @ViewChild('exerciseSelect') exerciseSelect!: NgSelectComponent;
+
   exerciseTypes: ExerciseType[] = [];
   isLoading = false;
   isApiLoading = signal(false);
@@ -88,6 +90,11 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
 
   showAddExerciseDropdown(): void {
     this.showExerciseSelect = true;
+    setTimeout(() => {
+      if (this.exerciseSelect) {
+        this.exerciseSelect.focus();
+      }
+    }, 0);
   }
 
   onExerciseTypeSelected(exerciseType: ExerciseType): void {
