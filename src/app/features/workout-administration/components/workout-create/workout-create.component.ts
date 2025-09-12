@@ -88,6 +88,21 @@ export class WorkoutCreateComponent implements OnInit, CanComponentDeactivate {
     return this.workoutForm.exercisesArray.controls.every((exerciseForm) => exerciseForm.valid);
   }
 
+  exerciseSearchFn = (term: string, item: ExerciseType): boolean => {
+    if (!term) return true;
+
+    const searchTerm = term.toLowerCase();
+    const exerciseName = item.name.toLowerCase();
+    const muscleGroup = item.primaryMuscleTargeted.group.toLowerCase();
+    const requisiteUsed = item.requisiteUsed?.toLowerCase() || '';
+
+    return (
+      exerciseName.includes(searchTerm) ||
+      muscleGroup.includes(searchTerm) ||
+      requisiteUsed.includes(searchTerm)
+    );
+  };
+
   showAddExerciseDropdown(): void {
     this.showExerciseSelect = true;
     setTimeout(() => {
