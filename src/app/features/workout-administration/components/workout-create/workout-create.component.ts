@@ -6,17 +6,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { ExerciseInstanceFormComponent } from './components/exercise-instance-form/exercise-instance-form.component';
-import { LoaderComponent } from '../../shared/components/loader.component';
+import { ExerciseInstanceFormComponent } from '../exercise-instance-form/exercise-instance-form.component';
+import { LoaderComponent } from '../../../../shared/components/loader.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { ExerciseTypesService } from '../../shared/services/exercise-types.service';
-import { WorkoutsService } from '../../shared/services/workouts.service';
-import { ExerciseType } from '../../shared/models/exercise-type.model';
-import { ExerciseInstancePrevious, Workout } from '../../shared/models/workout.model';
-import { WorkoutForm } from './models/workout.form';
-import { ExerciseInstanceForm } from './models/exercise-instance.form';
-import { CanComponentDeactivate, CanDeactivateResult } from '../../core';
+import { ExerciseTypesService } from '../../../../shared/services/exercise-types.service';
+import { WorkoutsService } from '../../../../shared/services/workouts.service';
+import { ExerciseType } from '../../../../shared/models/exercise-type.model';
+import { ExerciseInstancePrevious, Workout } from '../../../../shared/models/workout.model';
+import { WorkoutForm } from '../../models/workout.form';
+import { ExerciseInstanceForm } from '../../models/exercise-instance.form';
+import { CanComponentDeactivate, CanDeactivateResult } from '../../../../core';
 
 @Component({
   selector: 'app-workout-create',
