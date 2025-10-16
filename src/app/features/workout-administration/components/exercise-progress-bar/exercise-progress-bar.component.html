@@ -6,9 +6,9 @@
       >
       <span [ngClass]="progressColorClass">{{ progressPercentage.toFixed(1) }}%</span>
       <span
-        >{{ currentTotalWeight
+        >{{ currentTotalProgress
         }}<span class="text-gray-600 dark:text-gray-400"
-          >/{{ previousTotalWeight }} (kg)</span
+          >/{{ previousTotalProgress }} ({{ progressUnit }})</span
         ></span
       >
     </div>

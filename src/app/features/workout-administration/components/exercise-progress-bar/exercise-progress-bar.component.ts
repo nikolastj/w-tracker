@@ -17,8 +17,9 @@ import { ExerciseSetForm } from '../../models/exercise-set.form';
 export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
   @Input() exerciseForm!: ExerciseInstanceForm;
 
-  currentTotalWeight = 0;
-  previousTotalWeight = 0;
+  currentTotalProgress = 0;
+  previousTotalProgress = 0;
+  progressUnit = 'kg';
   progressPercentage = 0;
   showProgress = false;
   previousWorkoutDate = '';
@@ -90,18 +91,21 @@ export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
   private calculateTotalWeights(): void {
     const previousPercentage = this.progressPercentage;
 
-    // Calculate current total weight (excluding warmup sets)
-    this.currentTotalWeight = this.calculateCurrentWeight();
+    // Set the progress unit based on exercise type
+    this.progressUnit = this.exerciseForm.isCore ? 'reps' : 'kg';
 
-    // Calculate previous total weight from the latest previous exercise
-    this.previousTotalWeight = this.calculatePreviousWeight();
+    // Calculate current total progress (weight or reps based on exercise type)
+    this.currentTotalProgress = this.calculateCurrentProgress();
+
+    // Calculate previous total progress from the latest previous exercise
+    this.previousTotalProgress = this.calculatePreviousProgress();
 
     // Set previous workout date and sets
     this.setPreviousWorkoutInfo();
 
     // Calculate progress percentage
-    if (this.previousTotalWeight > 0) {
-      this.progressPercentage = (this.currentTotalWeight / this.previousTotalWeight) * 100;
+    if (this.previousTotalProgress > 0) {
+      this.progressPercentage = (this.currentTotalProgress / this.previousTotalProgress) * 100;
       this.showProgress = true;
 
       // Check if we reached 100% for the first time
@@ -119,18 +123,27 @@ export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
     this.showCelebration = true;
   }
 
-  private calculateCurrentWeight(): number {
+  private calculateCurrentProgress(): number {
     const sets = this.exerciseForm.setsArray.value;
+    const isCore = this.exerciseForm.isCore;
+
     return sets
       .filter((set) => !set.isWarmupSet) // Exclude warmup sets
       .reduce((total, set) => {
         const weight = set.weight || 0;
         const reps = set.reps || 0;
-        return total + weight * reps;
+
+        if (isCore) {
+          // For core exercises, track total reps
+          return total + reps;
+        } else {
+          // For non-core exercises, track total weight (weight * reps)
+          return total + weight * reps;
+        }
       }, 0);
   }
 
-  private calculatePreviousWeight(): number {
+  private calculatePreviousProgress(): number {
     const previousExercises = this.exerciseForm.previousExercises;
 
     if (!previousExercises || previousExercises.length === 0) {
@@ -139,13 +152,21 @@ export class ExerciseProgressBarComponent implements OnInit, OnDestroy {
 
     // Get the most recent previous exercise (first in the sorted array)
     const latestPreviousExercise = previousExercises[0];
+    const isCore = this.exerciseForm.isCore;
 
     return latestPreviousExercise.sets
       .filter((set) => !set.isWarmupSet) // Exclude warmup sets
       .reduce((total, set) => {
         const weight = set.weight || 0;
         const reps = set.reps || 0;
-        return total + weight * reps;
+
+        if (isCore) {
+          // For core exercises, track total reps
+          return total + reps;
+        } else {
+          // For non-core exercises, track total weight (weight * reps)
+          return total + weight * reps;
+        }
       }, 0);
   }
 
