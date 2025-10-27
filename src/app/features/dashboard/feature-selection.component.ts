@@ -20,7 +20,7 @@ import { Workout } from '../../shared';
               <button
                 mat-icon-button
                 color="primary"
-                class="!bg-primary !rounded-lg opacity-50"
+                class="!rounded-lg !bg-primary opacity-50"
                 (click)="clearSelection()"
                 aria-label="Clear selection"
               >
@@ -68,6 +68,17 @@ import { Workout } from '../../shared';
             Add Workout
           </button>
 
+          <!-- Add Running Workout Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
+            (click)="onAddRunningWorkout()"
+          >
+            <mat-icon>directions_run</mat-icon>
+            Add Running Workout
+          </button>
+
           <!-- View Stats Button -->
           <button
             mat-raised-button
@@ -104,6 +115,10 @@ export class FeatureSelectionComponent {
 
   onAddWorkout(): void {
     this.router.navigate(['/workout/create']);
+  }
+
+  onAddRunningWorkout(): void {
+    this.router.navigate(['/running-workout/create']);
   }
 
   onViewStats(): void {

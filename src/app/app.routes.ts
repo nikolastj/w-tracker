@@ -31,6 +31,13 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/workout-administration').then((m) => m.workoutAdministrationRoutes),
       },
+      {
+        path: 'running-workout',
+        loadChildren: () =>
+          import('./features/running-workout-administration').then(
+            (m) => m.runningWorkoutAdministrationRoutes,
+          ),
+      },
     ],
   },
 

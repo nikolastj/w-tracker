@@ -1,0 +1,22 @@
+.form-field {
+  margin-bottom: 1rem;
+}
+
+::ng-deep {
+  .ng-select {
+    .ng-select-container {
+      min-height: 56px;
+      border: 1px solid rgba(0, 0, 0, 0.23);
+      border-radius: 4px;
+
+      &:hover {
+        border-color: rgba(0, 0, 0, 0.87);
+      }
+    }
+
+    &.ng-select-focused .ng-select-container {
+      border-color: var(--color-primary);
+      border-width: 2px;
+    }
+  }
+}
