@@ -16,6 +16,7 @@ import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar
         [loading]="loading()"
         [dateFilter]="dateFilter()"
         [workoutDates]="workoutDates()"
+        [runningWorkoutDates]="runningWorkoutDates()"
         (scrolledToTop)="onScrolledToTop()"
         (workoutDateClicked)="onWorkoutDateClicked($event)"
       >
@@ -37,6 +38,7 @@ export class WorkoutsTimelineComponent implements OnInit {
 
   // Workout dates for calendar highlighting
   workoutDates = signal<{ id: number; dateCreated: string }[]>([]);
+  runningWorkoutDates = signal<{ id: number; dateCreated: string }[]>([]);
 
   constructor(
     private workoutsService: WorkoutsService,
@@ -90,6 +92,14 @@ export class WorkoutsTimelineComponent implements OnInit {
         // Create workout dates array for calendar highlighting
         this.workoutDates.set(
           this.workoutsData.map((workout) => ({
+            id: workout.id,
+            dateCreated: workout.dateCreated,
+          })),
+        );
+
+        // Create running workout dates array for calendar highlighting
+        this.runningWorkoutDates.set(
+          this.runningWorkoutsData.map((workout) => ({
             id: workout.id,
             dateCreated: workout.dateCreated,
           })),

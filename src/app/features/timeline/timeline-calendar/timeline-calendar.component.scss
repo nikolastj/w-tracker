@@ -66,4 +66,23 @@
   .workout-day:hover {
     opacity: 1 !important;
   }
+
+  // Running workout day - green circle
+  .running-workout-day {
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%) !important;
+    border-radius: 50% !important;
+    font-weight: 600 !important;
+    opacity: 0.8 !important;
+  }
+
+  .running-workout-day:hover {
+    opacity: 1 !important;
+  }
+
+  // Workout day with running workout - purple circle with thick green border
+  .workout-day-with-running {
+    span.mat-calendar-body-cell-content {
+      box-shadow: inset 0 0 0 7px #10b981 !important;
+    }
+  }
 }

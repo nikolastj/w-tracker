@@ -52,6 +52,7 @@ export class TimelineCalendarComponent {
   loading = input<boolean>(false);
   dateFilter = input<{ fromDate: Date; toDate: Date }>();
   workoutDates = input<{ id: number; dateCreated: string }[]>([]);
+  runningWorkoutDates = input<{ id: number; dateCreated: string }[]>([]);
   scrolledToTop = output<void>();
   workoutDateClicked = output<{ id: number; dateCreated: string }>();
 
@@ -67,6 +68,7 @@ export class TimelineCalendarComponent {
 
     effect(() => {
       this.workoutDatesSet();
+      this.runningWorkoutDatesSet();
       this.calendars?.forEach((calendar) => {
         calendar.updateTodaysDate();
       });
@@ -80,13 +82,23 @@ export class TimelineCalendarComponent {
   }
 
   trackByMonth = (index: number, month: Date): string => {
-    return `${month.getFullYear()}-${month.getMonth()}-${this.workoutDates().length}`;
+    return `${month.getFullYear()}-${month.getMonth()}-${this.workoutDates().length}-${this.runningWorkoutDates().length}`;
   };
 
   private workoutDatesSet = computed(() => {
     const workouts = this.workoutDates();
     return new Set(
       workouts.map((workout) => {
+        // Extract date part directly from ISO string to avoid timezone issues
+        return workout.dateCreated.split('T')[0];
+      }),
+    );
+  });
+
+  private runningWorkoutDatesSet = computed(() => {
+    const runningWorkouts = this.runningWorkoutDates();
+    return new Set(
+      runningWorkouts.map((workout) => {
         // Extract date part directly from ISO string to avoid timezone issues
         return workout.dateCreated.split('T')[0];
       }),
@@ -100,8 +112,17 @@ export class TimelineCalendarComponent {
     const day = String(date.getDate()).padStart(2, '0');
     const dateStr = `${year}-${month}-${day}`;
 
-    const isWorkoutDay = this.workoutDatesSet().has(dateStr);
-    return isWorkoutDay ? 'workout-day' : '';
+    const hasWorkout = this.workoutDatesSet().has(dateStr);
+    const hasRunningWorkout = this.runningWorkoutDatesSet().has(dateStr);
+
+    if (hasWorkout && hasRunningWorkout) {
+      return 'workout-day workout-day-with-running';
+    } else if (hasRunningWorkout) {
+      return 'running-workout-day';
+    } else if (hasWorkout) {
+      return 'workout-day';
+    }
+    return '';
   };
 
   onDateSelected(date: Date | null): void {
