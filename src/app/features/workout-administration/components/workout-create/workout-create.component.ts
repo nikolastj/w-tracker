@@ -11,6 +11,7 @@ import { LoaderComponent } from '../../../../shared/components';
 import { DeactivateProtectComponent } from '../../../../core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { interval } from 'rxjs';
 import { ExerciseTypesService } from '../../../../shared/services/exercise-types.service';
 import { WorkoutsService } from '../../../../shared/services/workouts.service';
 import { ExerciseType } from '../../../../shared/models/exercise-type.model';
@@ -71,6 +72,7 @@ export class WorkoutCreateComponent extends DeactivateProtectComponent implement
         this.populatePreviousExercisesMap(workouts);
       });
     }
+    this.pingBE();
   }
 
   /**
@@ -321,5 +323,14 @@ export class WorkoutCreateComponent extends DeactivateProtectComponent implement
         this.router.navigate(['/dashboard']);
       },
     });
+  }
+
+  private pingBE(): void {
+    // Ping backend every 20 seconds while component is alive
+    interval(20000)
+      .pipe(this.takeUntilDestroyed)
+      .subscribe(() => {
+        this.workoutsService.getTodaysWorkout().subscribe();
+      });
   }
 }

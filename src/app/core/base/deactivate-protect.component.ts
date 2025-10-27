@@ -1,6 +1,10 @@
 import { HostListener, Directive } from '@angular/core';
-import { CanComponentDeactivate, CanDeactivateResult } from '../interfaces/can-component-deactivate.interface';
+import {
+  CanComponentDeactivate,
+  CanDeactivateResult,
+} from '../interfaces/can-component-deactivate.interface';
 import { UnsavedChangesDialogData } from '../../shared/components/unsaved-changes-dialog.component';
+import { DestroyableDirective } from '../../shared/directives/destroyable.directive';
 
 /**
  * Base component that provides CanDeactivate functionality with page reload protection.
@@ -12,7 +16,10 @@ import { UnsavedChangesDialogData } from '../../shared/components/unsaved-change
  * 3. Optionally override getBeforeUnloadMessage() and getConfirmationDialogData()
  */
 @Directive()
-export abstract class DeactivateProtectComponent implements CanComponentDeactivate {
+export abstract class DeactivateProtectComponent
+  extends DestroyableDirective
+  implements CanComponentDeactivate
+{
   @HostListener('window:beforeunload', ['$event'])
   onBeforeUnload(event: BeforeUnloadEvent): string | void {
     if (this.hasUnsavedChanges()) {
