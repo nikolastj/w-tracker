@@ -1,7 +1,9 @@
 import { Component, OnInit, signal, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WorkoutsService, Page, Workout } from '../../shared';
-import { delay } from 'rxjs';
+import { RunningWorkoutsService } from '../../shared/services/running-workouts.service';
+import { RunningWorkout } from '../../shared/models/running-workout.model';
+import { forkJoin } from 'rxjs';
 import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
 
 @Component({
@@ -23,6 +25,7 @@ import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar
 })
 export class WorkoutsTimelineComponent implements OnInit {
   workoutsData: Workout[] = [];
+  runningWorkoutsData: RunningWorkout[] = [];
   loading = signal(true);
   workoutSelected = output<Workout>();
 
@@ -35,7 +38,10 @@ export class WorkoutsTimelineComponent implements OnInit {
   // Workout dates for calendar highlighting
   workoutDates = signal<{ id: number; dateCreated: string }[]>([]);
 
-  constructor(private workoutsService: WorkoutsService) {}
+  constructor(
+    private workoutsService: WorkoutsService,
+    private runningWorkoutsService: RunningWorkoutsService,
+  ) {}
 
   ngOnInit() {
     this.loadInitData();
@@ -51,7 +57,7 @@ export class WorkoutsTimelineComponent implements OnInit {
       toDate: prevFromDate,
     });
 
-    this.loadWorkouts(this.dateFilter(), true);
+    this.loadWorkouts(this.dateFilter());
   }
 
   onWorkoutDateClicked(workoutDate: { id: number; dateCreated: string }) {
@@ -66,31 +72,35 @@ export class WorkoutsTimelineComponent implements OnInit {
     this.loadWorkouts(this.dateFilter());
   }
 
-  private loadWorkouts(filter: Page, isPrevious = false) {
+  private loadWorkouts(filter: Page) {
     this.loading.set(true);
     filter.pageSize = 120;
-    this.workoutsService
-      .getPaginatedWorkouts(filter)
-      .pipe(delay(isPrevious ? 500 : 1000))
-      .subscribe({
-        next: (data) => {
-          const workouts = data.data || [];
-          this.workoutsData = [...this.workoutsData, ...workouts];
 
-          // Create workout dates array for calendar highlighting
-          this.workoutDates.set(
-            this.workoutsData.map((workout) => ({
-              id: workout.id,
-              dateCreated: workout.dateCreated,
-            })),
-          );
+    forkJoin({
+      workouts: this.workoutsService.getPaginatedWorkouts(filter),
+      runningWorkouts: this.runningWorkoutsService.getPaginatedRunningWorkouts(filter),
+    }).subscribe({
+      next: ({ workouts, runningWorkouts }) => {
+        const workoutsData = workouts.data || [];
+        const runningWorkoutsData = runningWorkouts.data || [];
 
-          this.loading.set(false);
-        },
-        error: (error) => {
-          console.error('Failed to load workouts:', error);
-          this.loading.set(false);
-        },
-      });
+        this.workoutsData = [...this.workoutsData, ...workoutsData];
+        this.runningWorkoutsData = [...this.runningWorkoutsData, ...runningWorkoutsData];
+
+        // Create workout dates array for calendar highlighting
+        this.workoutDates.set(
+          this.workoutsData.map((workout) => ({
+            id: workout.id,
+            dateCreated: workout.dateCreated,
+          })),
+        );
+
+        this.loading.set(false);
+      },
+      error: (error) => {
+        console.error('Failed to load workouts:', error);
+        this.loading.set(false);
+      },
+    });
   }
 }
