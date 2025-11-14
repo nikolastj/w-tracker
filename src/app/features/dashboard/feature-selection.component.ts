@@ -79,6 +79,17 @@ import { Workout } from '../../shared';
             Add Running Workout
           </button>
 
+          <!-- Add Stretch Workout Button -->
+          <button
+            mat-raised-button
+            color="primary"
+            class="flex h-16 w-full items-center justify-center gap-3 text-lg font-medium"
+            (click)="onAddStretchWorkout()"
+          >
+            <mat-icon>accessibility_new</mat-icon>
+            Add Stretch Workout
+          </button>
+
           <!-- View Stats Button -->
           <button
             mat-raised-button
@@ -119,6 +130,10 @@ export class FeatureSelectionComponent {
 
   onAddRunningWorkout(): void {
     this.router.navigate(['/running-workout/create']);
+  }
+
+  onAddStretchWorkout(): void {
+    this.router.navigate(['/stretch-workout/create']);
   }
 
   onViewStats(): void {

@@ -38,6 +38,13 @@ export const routes: Routes = [
             (m) => m.runningWorkoutAdministrationRoutes,
           ),
       },
+      {
+        path: 'stretch-workout',
+        loadChildren: () =>
+          import('./features/stretch-workout-administration').then(
+            (m) => m.stretchWorkoutAdministrationRoutes,
+          ),
+      },
     ],
   },
 
