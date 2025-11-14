@@ -12,14 +12,14 @@
       <button mat-icon-button (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <h1 class="text-3xl font-bold stretch-workout-title">Add Stretch Workout</h1>
+      <h1 class="stretch-workout-title text-3xl font-bold">Add Stretch Workout</h1>
     </div>
     <p class="opacity-70">Track your stretching sessions and flexibility progress</p>
   </div>
 
   <!-- Form -->
   <form [formGroup]="stretchWorkoutForm" (ngSubmit)="saveWorkout()">
-    <mat-card class="flex h-full flex-col p-3 md:p-6 stretch-workout-card">
+    <mat-card class="stretch-workout-card flex h-full flex-col p-3 md:p-6">
       <mat-card-content class="flex-1">
         <!-- Intensity -->
         <div class="form-field">
@@ -44,13 +44,7 @@
         <!-- Duration -->
         <mat-form-field appearance="outline" class="w-full">
           <mat-label>Duration (minutes) *</mat-label>
-          <input
-            matInput
-            type="number"
-            formControlName="duration"
-            placeholder="e.g., 30"
-            min="1"
-          />
+          <input matInput type="number" formControlName="duration" placeholder="e.g., 30" min="1" />
           @if (stretchWorkoutForm.controls.duration.hasError('required')) {
             <mat-error>Duration is required</mat-error>
           }
@@ -97,7 +91,7 @@
           color="accent"
           type="submit"
           [disabled]="isApiLoading() || stretchWorkoutForm.invalid"
-          class="px-6 stretch-save-button"
+          class="stretch-save-button px-6"
         >
           <mat-icon class="mr-2">save</mat-icon>
           Save Workout

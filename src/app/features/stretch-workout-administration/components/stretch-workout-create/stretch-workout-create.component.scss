@@ -10,7 +10,7 @@
 .stretch-save-button {
   border-color: light-dark(#db2777, #f9a8d4) !important;
   color: light-dark(#db2777, #f9a8d4) !important;
-  
+
   &:hover:not(:disabled) {
     background-color: light-dark(rgba(219, 39, 119, 0.04), rgba(249, 168, 212, 0.04));
   }
