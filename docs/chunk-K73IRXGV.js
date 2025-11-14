@@ -1,0 +1,1 @@
+import{e as t}from"./chunk-Z65JGT6J.js";import"./chunk-AT2W5Z2E.js";import"./chunk-75SVKVAW.js";import"./chunk-HQPJQNUQ.js";import"./chunk-GZYQEBDM.js";var r=[{path:"create",canDeactivate:[t],loadComponent:()=>import("./chunk-VV2RGLIM.js").then(o=>o.StretchWorkoutCreateComponent)}];export{r as stretchWorkoutAdministrationRoutes};

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { WorkoutsService, Page, Workout } from '../../shared';
 import { RunningWorkoutsService } from '../../shared/services/running-workouts.service';
 import { RunningWorkout } from '../../shared/models/running-workout.model';
+import { StretchWorkoutsService } from '../../shared/services/stretch-workouts.service';
+import { StretchWorkout } from '../../shared/models/stretch-workout.model';
 import { forkJoin } from 'rxjs';
 import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar.component';
 
@@ -17,6 +19,7 @@ import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar
         [dateFilter]="dateFilter()"
         [workoutDates]="workoutDates()"
         [runningWorkoutDates]="runningWorkoutDates()"
+        [stretchWorkoutDates]="stretchWorkoutDates()"
         (scrolledToTop)="onScrolledToTop()"
         (workoutDateClicked)="onWorkoutDateClicked($event)"
       >
@@ -27,6 +30,7 @@ import { TimelineCalendarComponent } from './timeline-calendar/timeline-calendar
 export class WorkoutsTimelineComponent implements OnInit {
   workoutsData: Workout[] = [];
   runningWorkoutsData: RunningWorkout[] = [];
+  stretchWorkoutsData: StretchWorkout[] = [];
   loading = signal(true);
   workoutSelected = output<Workout>();
 
@@ -39,10 +43,12 @@ export class WorkoutsTimelineComponent implements OnInit {
   // Workout dates for calendar highlighting
   workoutDates = signal<{ id: number; dateCreated: string }[]>([]);
   runningWorkoutDates = signal<{ id: number; dateCreated: string }[]>([]);
+  stretchWorkoutDates = signal<{ id: number; dateCreated: string }[]>([]);
 
   constructor(
     private workoutsService: WorkoutsService,
     private runningWorkoutsService: RunningWorkoutsService,
+    private stretchWorkoutsService: StretchWorkoutsService,
   ) {}
 
   ngOnInit() {
@@ -81,13 +87,16 @@ export class WorkoutsTimelineComponent implements OnInit {
     forkJoin({
       workouts: this.workoutsService.getPaginatedWorkouts(filter),
       runningWorkouts: this.runningWorkoutsService.getPaginatedRunningWorkouts(filter),
+      stretchWorkouts: this.stretchWorkoutsService.getPaginatedStretchWorkouts(filter),
     }).subscribe({
-      next: ({ workouts, runningWorkouts }) => {
+      next: ({ workouts, runningWorkouts, stretchWorkouts }) => {
         const workoutsData = workouts.data || [];
         const runningWorkoutsData = runningWorkouts.data || [];
+        const stretchWorkoutsData = stretchWorkouts.data || [];
 
         this.workoutsData = [...this.workoutsData, ...workoutsData];
         this.runningWorkoutsData = [...this.runningWorkoutsData, ...runningWorkoutsData];
+        this.stretchWorkoutsData = [...this.stretchWorkoutsData, ...stretchWorkoutsData];
 
         // Create workout dates array for calendar highlighting
         this.workoutDates.set(
@@ -100,6 +109,14 @@ export class WorkoutsTimelineComponent implements OnInit {
         // Create running workout dates array for calendar highlighting
         this.runningWorkoutDates.set(
           this.runningWorkoutsData.map((workout) => ({
+            id: workout.id,
+            dateCreated: workout.dateCreated,
+          })),
+        );
+
+        // Create stretch workout dates array for calendar highlighting
+        this.stretchWorkoutDates.set(
+          this.stretchWorkoutsData.map((workout) => ({
             id: workout.id,
             dateCreated: workout.dateCreated,
           })),

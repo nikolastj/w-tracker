@@ -1,0 +1,1 @@
+var c=(t,o)=>{let n=localStorage.getItem("auth_token"),e=t.url.includes("/login")||t.url.includes("/forgot-password");if(n&&!e){let r=t.clone({setHeaders:{Authorization:`Token ${n}`}});return o(r)}return o(t)};export{c as a};

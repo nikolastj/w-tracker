@@ -53,6 +53,7 @@ export class TimelineCalendarComponent {
   dateFilter = input<{ fromDate: Date; toDate: Date }>();
   workoutDates = input<{ id: number; dateCreated: string }[]>([]);
   runningWorkoutDates = input<{ id: number; dateCreated: string }[]>([]);
+  stretchWorkoutDates = input<{ id: number; dateCreated: string }[]>([]);
   scrolledToTop = output<void>();
   workoutDateClicked = output<{ id: number; dateCreated: string }>();
 
@@ -69,6 +70,7 @@ export class TimelineCalendarComponent {
     effect(() => {
       this.workoutDatesSet();
       this.runningWorkoutDatesSet();
+      this.stretchWorkoutDatesSet();
       this.calendars?.forEach((calendar) => {
         calendar.updateTodaysDate();
       });
@@ -82,7 +84,7 @@ export class TimelineCalendarComponent {
   }
 
   trackByMonth = (index: number, month: Date): string => {
-    return `${month.getFullYear()}-${month.getMonth()}-${this.workoutDates().length}-${this.runningWorkoutDates().length}`;
+    return `${month.getFullYear()}-${month.getMonth()}-${this.workoutDates().length}-${this.runningWorkoutDates().length}-${this.stretchWorkoutDates().length}`;
   };
 
   private workoutDatesSet = computed(() => {
@@ -105,6 +107,16 @@ export class TimelineCalendarComponent {
     );
   });
 
+  private stretchWorkoutDatesSet = computed(() => {
+    const stretchWorkouts = this.stretchWorkoutDates();
+    return new Set(
+      stretchWorkouts.map((workout) => {
+        // Extract date part directly from ISO string to avoid timezone issues
+        return workout.dateCreated.split('T')[0];
+      }),
+    );
+  });
+
   dateClass = (date: Date): string => {
     // Format the date as YYYY-MM-DD in local timezone to match workout dates
     const year = date.getFullYear();
@@ -114,14 +126,40 @@ export class TimelineCalendarComponent {
 
     const hasWorkout = this.workoutDatesSet().has(dateStr);
     const hasRunningWorkout = this.runningWorkoutDatesSet().has(dateStr);
+    const hasStretchWorkout = this.stretchWorkoutDatesSet().has(dateStr);
 
-    if (hasWorkout && hasRunningWorkout) {
+    // Priority rules:
+    // 1. If all 3 exist (workout + running + stretch): show only workout + running (no stretch color)
+    // 2. If workout + running: show workout with running box-shadow
+    // 3. If workout + stretch: show workout with stretch box-shadow
+    // 4. If running + stretch: show running with stretch box-shadow
+    // 5. If only workout: show workout circle
+    // 6. If only running: show running circle
+    // 7. If only stretch: show stretch circle
+
+    if (hasWorkout && hasRunningWorkout && hasStretchWorkout) {
+      // All 3: show only workout + running (stretch is hidden)
       return 'workout-day workout-day-with-running';
-    } else if (hasRunningWorkout) {
-      return 'running-workout-day';
+    } else if (hasWorkout && hasRunningWorkout) {
+      // Workout + running
+      return 'workout-day workout-day-with-running';
+    } else if (hasWorkout && hasStretchWorkout) {
+      // Workout + stretch
+      return 'workout-day workout-day-with-stretch';
+    } else if (hasRunningWorkout && hasStretchWorkout) {
+      // Running + stretch
+      return 'running-workout-day running-workout-day-with-stretch';
     } else if (hasWorkout) {
+      // Only workout
       return 'workout-day';
+    } else if (hasRunningWorkout) {
+      // Only running
+      return 'running-workout-day';
+    } else if (hasStretchWorkout) {
+      // Only stretch
+      return 'stretch-workout-day';
     }
+
     return '';
   };
 
